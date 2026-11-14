@@ -1,0 +1,1528 @@
+TAP version 13
+# Subtest: Battle length is 120 seconds; supplies spawn at 0, 30, 60 and 90
+ok 1 - Battle length is 120 seconds; supplies spawn at 0, 30, 60 and 90
+  ---
+  duration_ms: 7.209386
+  type: 'test'
+  ...
+# Subtest: Every pulsed trap is ignored when off, including its visual warning
+ok 2 - Every pulsed trap is ignored when off, including its visual warning
+  ---
+  duration_ms: 2.731996
+  type: 'test'
+  ...
+# Subtest: Inactive closer trap cannot mask a farther active trap
+ok 3 - Inactive closer trap cannot mask a farther active trap
+  ---
+  duration_ms: 0.744624
+  type: 'test'
+  ...
+# Subtest: Permanent grinder and acid hazards remain detectable
+ok 4 - Permanent grinder and acid hazards remain detectable
+  ---
+  duration_ms: 1.577272
+  type: 'test'
+  ...
+# Subtest: Hazard rules fall through and switch immediately at both activation edges
+ok 5 - Hazard rules fall through and switch immediately at both activation edges
+  ---
+  duration_ms: 4.259662
+  type: 'test'
+  ...
+# Subtest: Unconditional avoidance also falls through if every trap is inactive
+ok 6 - Unconditional avoidance also falls through if every trap is inactive
+  ---
+  duration_ms: 0.883374
+  type: 'test'
+  ...
+# Subtest: Inactive traps do not inflict damage or drain energy
+ok 7 - Inactive traps do not inflict damage or drain energy
+  ---
+  duration_ms: 2.04625
+  type: 'test'
+  ...
+# Subtest: Highest surviving exact HP wins a timed match, not an automatic draw
+ok 8 - Highest surviving exact HP wins a timed match, not an automatic draw
+  ---
+  duration_ms: 0.99361
+  type: 'test'
+  ...
+# Subtest: HP differences smaller than the visible rounded number do not draw
+ok 9 - HP differences smaller than the visible rounded number do not draw
+  ---
+  duration_ms: 1.952038
+  type: 'test'
+  ...
+# Subtest: Exact first-place ties share the winning rank; lower ties do not make a draw
+ok 10 - Exact first-place ties share the winning rank; lower ties do not make a draw
+  ---
+  duration_ms: 0.92073
+  type: 'test'
+  ...
+# Subtest: All four equal survivors can share first place
+ok 11 - All four equal survivors can share first place
+  ---
+  duration_ms: 0.494647
+  type: 'test'
+  ...
+# Subtest: Ring-outs cannot outrank surviving robots even with more remaining HP
+ok 12 - Ring-outs cannot outrank surviving robots even with more remaining HP
+  ---
+  duration_ms: 0.375858
+  type: 'test'
+  ...
+# Subtest: Victory before time includes every contestant and precise elimination time
+ok 13 - Victory before time includes every contestant and precise elimination time
+  ---
+  duration_ms: 0.650312
+  type: 'test'
+  ...
+# Subtest: Simultaneous final elimination ties only on exactly equal HP
+ok 14 - Simultaneous final elimination ties only on exactly equal HP
+  ---
+  duration_ms: 0.808611
+  type: 'test'
+  ...
+# Subtest: The clock stops exactly at 120 seconds and no later tick changes result or health
+ok 15 - The clock stops exactly at 120 seconds and no later tick changes result or health
+  ---
+  duration_ms: 0.490791
+  type: 'test'
+  ...
+# Subtest: Timed results are identical after serializing a live match
+ok 16 - Timed results are identical after serializing a live match
+  ---
+  duration_ms: 1.963465
+  type: 'test'
+  ...
+# Subtest: Requested balance: 120 seconds, 250 chassis HP, 180 wall HP, unchanged 200-point budget
+ok 17 - Requested balance: 120 seconds, 250 chassis HP, 180 wall HP, unchanged 200-point budget
+  ---
+  duration_ms: 12.201034
+  type: 'test'
+  ...
+# Subtest: Flamethrower streams last 1.6, 1.8 and 2.0 seconds with lower total damage and unchanged cooldown
+ok 18 - Flamethrower streams last 1.6, 1.8 and 2.0 seconds with lower total damage and unchanged cooldown
+  ---
+  duration_ms: 0.91422
+  type: 'test'
+  ...
+# Subtest: Twelve-round machine-gun activation spans 1.1 seconds and conserves total damage at every power
+ok 19 - Twelve-round machine-gun activation spans 1.1 seconds and conserves total damage at every power
+  ---
+  duration_ms: 4.514457
+  type: 'test'
+  ...
+# Subtest: Bullets and rockets travel their full tier range beyond a broken boundary, without early world culling
+ok 20 - Bullets and rockets travel their full tier range beyond a broken boundary, without early world culling
+  ---
+  duration_ms: 20.065269
+  type: 'test'
+  ...
+# Subtest: Changing orders or destroying the shooter cannot delete an airborne bullet or rocket
+ok 21 - Changing orders or destroying the shooter cannot delete an airborne bullet or rocket
+  ---
+  duration_ms: 1.892377
+  type: 'test'
+  ...
+# Subtest: Last-survivor finish waits for launched shots, then includes their real damage
+ok 22 - Last-survivor finish waits for launched shots, then includes their real damage
+  ---
+  duration_ms: 6.06574
+  type: 'test'
+  ...
+# Subtest: Shots fired before the timeout can decide the winner; clock stays at 120 with no new firing
+ok 23 - Shots fired before the timeout can decide the winner; clock stays at 120 with no new firing
+  ---
+  duration_ms: 1.360644
+  type: 'test'
+  ...
+# Subtest: End signal cancels only unlaunched queued rounds, not the first launched bullet
+ok 24 - End signal cancels only unlaunched queued rounds, not the first launched bullet
+  ---
+  duration_ms: 0.824345
+  type: 'test'
+  ...
+# Subtest: Settling projectile impacts stop at intact walls and apply exact wall damage once
+ok 25 - Settling projectile impacts stop at intact walls and apply exact wall damage once
+  ---
+  duration_ms: 3.717674
+  type: 'test'
+  ...
+# Subtest: A settled rocket can eliminate the final robot without locking the game or losing standings
+ok 26 - A settled rocket can eliminate the final robot without locking the game or losing standings
+  ---
+  duration_ms: 1.46395
+  type: 'test'
+  ...
+# Subtest: Pending-flight resolution stays deterministic across server/client JSON snapshots
+ok 27 - Pending-flight resolution stays deterministic across server/client JSON snapshots
+  ---
+  duration_ms: 2.353734
+  type: 'test'
+  ...
+# Subtest: Wall and chassis balance match v0.5.6; build budget remains unchanged
+ok 28 - Wall and chassis balance match v0.5.6; build budget remains unchanged
+  ---
+  duration_ms: 1.994532
+  type: 'test'
+  ...
+# Subtest: machinegun power 1: exact wall damage on every side, once per projectile
+ok 29 - machinegun power 1: exact wall damage on every side, once per projectile
+  ---
+  duration_ms: 42.040642
+  type: 'test'
+  ...
+# Subtest: machinegun power 2: exact wall damage on every side, once per projectile
+ok 30 - machinegun power 2: exact wall damage on every side, once per projectile
+  ---
+  duration_ms: 17.736182
+  type: 'test'
+  ...
+# Subtest: machinegun power 3: exact wall damage on every side, once per projectile
+ok 31 - machinegun power 3: exact wall damage on every side, once per projectile
+  ---
+  duration_ms: 7.273753
+  type: 'test'
+  ...
+# Subtest: rocket power 1: exact wall damage on every side, once per projectile
+ok 32 - rocket power 1: exact wall damage on every side, once per projectile
+  ---
+  duration_ms: 10.033581
+  type: 'test'
+  ...
+# Subtest: rocket power 2: exact wall damage on every side, once per projectile
+ok 33 - rocket power 2: exact wall damage on every side, once per projectile
+  ---
+  duration_ms: 7.056736
+  type: 'test'
+  ...
+# Subtest: rocket power 3: exact wall damage on every side, once per projectile
+ok 34 - rocket power 3: exact wall damage on every side, once per projectile
+  ---
+  duration_ms: 5.931176
+  type: 'test'
+  ...
+# Subtest: Bullet burst crossing a seam does not double-hit adjacent wall segments
+ok 35 - Bullet burst crossing a seam does not double-hit adjacent wall segments
+  ---
+  duration_ms: 10.984557
+  type: 'test'
+  ...
+# Subtest: A diagonal mount cannot spawn bullets or rockets through a solid wall
+ok 36 - A diagonal mount cannot spawn bullets or rockets through a solid wall
+  ---
+  duration_ms: 6.114753
+  type: 'test'
+  ...
+# Subtest: Swept collisions still hit a wall when a projectile crosses it in a long step
+ok 37 - Swept collisions still hit a wall when a projectile crosses it in a long step
+  ---
+  duration_ms: 2.732536
+  type: 'test'
+  ...
+# Subtest: Walls absorb an incoming rocket from outside too
+ok 38 - Walls absorb an incoming rocket from outside too
+  ---
+  duration_ms: 0.939038
+  type: 'test'
+  ...
+# Subtest: Projectiles pass through a breached segment without damaging invisible walls
+ok 39 - Projectiles pass through a breached segment without damaging invisible walls
+  ---
+  duration_ms: 21.281425
+  type: 'test'
+  ...
+# Subtest: Projectiles above the wall height do not inflict phantom wall damage
+ok 40 - Projectiles above the wall height do not inflict phantom wall damage
+  ---
+  duration_ms: 1.520075
+  type: 'test'
+  ...
+# Subtest: Four base rockets breach one wall, and the last hit is capped at remaining HP
+ok 41 - Four base rockets breach one wall, and the last hit is capped at remaining HP
+  ---
+  duration_ms: 3.600647
+  type: 'test'
+  ...
+# Subtest: Every tool applies its own wall coefficient at all three power levels
+ok 42 - Every tool applies its own wall coefficient at all three power levels
+  ---
+  duration_ms: 39.448308
+  type: 'test'
+  ...
+# Subtest: Ranged robots recover from each corner with every chassis, including damaged drives
+ok 43 - Ranged robots recover from each corner with every chassis, including damaged drives
+  ---
+  duration_ms: 804.661569
+  type: 'test'
+  ...
+# Subtest: A ranged robot backed against any straight wall repositions without teleporting
+ok 44 - A ranged robot backed against any straight wall repositions without teleporting
+  ---
+  duration_ms: 22.598313
+  type: 'test'
+  ...
+# Subtest: Retreat and avoidance cannot select unreachable targets outside corners
+ok 45 - Retreat and avoidance cannot select unreachable targets outside corners
+  ---
+  duration_ms: 34.681876
+  type: 'test'
+  ...
+# Subtest: Deliberate braking and attacking a wall do not trigger recovery
+ok 46 - Deliberate braking and attacking a wall do not trigger recovery
+  ---
+  duration_ms: 43.853815
+  type: 'test'
+  ...
+# Subtest: All four solid corners resolve penetration without false ring-outs or duplicate impact damage
+ok 47 - All four solid corners resolve penetration without false ring-outs or duplicate impact damage
+  ---
+  duration_ms: 4.0067
+  type: 'test'
+  ...
+# Subtest: Sliding along wall seams preserves tangential velocity
+ok 48 - Sliding along wall seams preserves tangential velocity
+  ---
+  duration_ms: 0.609681
+  type: 'test'
+  ...
+# Subtest: Ring-out side 0: committed elimination, followed by complete visible exit
+ok 49 - Ring-out side 0: committed elimination, followed by complete visible exit
+  ---
+  duration_ms: 1.657673
+  type: 'test'
+  ...
+# Subtest: Ring-out side 1: committed elimination, followed by complete visible exit
+ok 50 - Ring-out side 1: committed elimination, followed by complete visible exit
+  ---
+  duration_ms: 0.69494
+  type: 'test'
+  ...
+# Subtest: Ring-out side 2: committed elimination, followed by complete visible exit
+ok 51 - Ring-out side 2: committed elimination, followed by complete visible exit
+  ---
+  duration_ms: 0.462098
+  type: 'test'
+  ...
+# Subtest: Ring-out side 3: committed elimination, followed by complete visible exit
+ok 52 - Ring-out side 3: committed elimination, followed by complete visible exit
+  ---
+  duration_ms: 0.440445
+  type: 'test'
+  ...
+# Subtest: A slow crossing still coasts fully outside instead of freezing on the edge
+ok 53 - A slow crossing still coasts fully outside instead of freezing on the edge
+  ---
+  duration_ms: 0.47721
+  type: 'test'
+  ...
+# Subtest: Only the center crossing commits elimination; an overhanging tool alone is not out
+ok 54 - Only the center crossing commits elimination; an overhanging tool alone is not out
+  ---
+  duration_ms: 0.318711
+  type: 'test'
+  ...
+# Subtest: An aerial ring-out finishes beyond the intact wall and lands in its exit animation
+ok 55 - An aerial ring-out finishes beyond the intact wall and lands in its exit animation
+  ---
+  duration_ms: 0.521738
+  type: 'test'
+  ...
+# Subtest: Three survivors keep fighting while an eliminated fourth robot exits
+ok 56 - Three survivors keep fighting while an eliminated fourth robot exits
+  ---
+  duration_ms: 6.611514
+  type: 'test'
+  ...
+# Subtest: Active recovery and ring-out states survive deterministic JSON snapshots
+ok 57 - Active recovery and ring-out states survive deterministic JSON snapshots
+  ---
+  duration_ms: 35.558103
+  type: 'test'
+  ...
+# Subtest: 200-point budget accepts the exact maximum without downgrading the build
+ok 58 - 200-point budget accepts the exact maximum without downgrading the build
+  ---
+  duration_ms: 2.259642
+  type: 'test'
+  ...
+# Subtest: 200-point budget still clamps over-budget imports deterministically
+ok 59 - 200-point budget still clamps over-budget imports deterministically
+  ---
+  duration_ms: 0.607817
+  type: 'test'
+  ...
+# Subtest: 200-point build keeps 300 HP, four bot seats and the same tool limits
+ok 60 - 200-point build keeps 300 HP, four bot seats and the same tool limits
+  ---
+  duration_ms: 6.607202
+  type: 'test'
+  ...
+# Subtest: Every chassis starts at exactly 250 HP for all shapes and armor levels
+ok 61 - Every chassis starts at exactly 250 HP for all shapes and armor levels
+  ---
+  duration_ms: 21.721104
+  type: 'test'
+  ...
+# Subtest: Component doubling retains v0.3 integer rounding including odd values
+ok 62 - Component doubling retains v0.3 integer rounding including odd values
+  ---
+  duration_ms: 10.585384
+  type: 'test'
+  ...
+# Subtest: Build budget is 200; other limits, melee stats, energy and cooldowns stay unchanged
+ok 63 - Build budget is 200; other limits, melee stats, energy and cooldowns stay unchanged
+  ---
+  duration_ms: 0.146571
+  type: 'test'
+  ...
+# Subtest: Exported blueprints keep their existing format and do not persist runtime health
+ok 64 - Exported blueprints keep their existing format and do not persist runtime health
+  ---
+  duration_ms: 1.575429
+  type: 'test'
+  ...
+# Subtest: Large left/right health and energy HUD appears above workshop and arena, without duplicate IDs
+ok 65 - Large left/right health and energy HUD appears above workshop and arena, without duplicate IDs
+  ---
+  duration_ms: 1.584082
+  type: 'test'
+  ...
+# Subtest: Validates a bounded, non-executable configuration and rejects prototype keys
+ok 66 - Validates a bounded, non-executable configuration and rejects prototype keys
+  ---
+  duration_ms: 3.641339
+  type: 'test'
+  ...
+# Subtest: Limits configurations to six tools, twelve rules and 28 decorative lines
+ok 67 - Limits configurations to six tools, twelve rules and 28 decorative lines
+  ---
+  duration_ms: 0.458383
+  type: 'test'
+  ...
+# Subtest: Normalizes invalid numbers, rotations, duplicate IDs and mounting coordinates
+ok 68 - Normalizes invalid numbers, rotations, duplicate IDs and mounting coordinates
+  ---
+  duration_ms: 0.49699
+  type: 'test'
+  ...
+# Subtest: Free XY mounts and arbitrary angles survive normalization
+ok 69 - Free XY mounts and arbitrary angles survive normalization
+  ---
+  duration_ms: 0.487176
+  type: 'test'
+  ...
+# Subtest: Migration maps all four legacy mounts to equivalent tool orientations
+ok 70 - Migration maps all four legacy mounts to equivalent tool orientations
+  ---
+  duration_ms: 2.046531
+  type: 'test'
+  ...
+# Subtest: All catalog tools have increasing damage, cost, mass and cooldown with power
+ok 71 - All catalog tools have increasing damage, cost, mass and cooldown with power
+  ---
+  duration_ms: 0.534487
+  type: 'test'
+  ...
+# Subtest: Every preset fits the same 200-point budget without silent adjustment
+ok 72 - Every preset fits the same 200-point budget without silent adjustment
+  ---
+  duration_ms: 0.432443
+  type: 'test'
+  ...
+# Subtest: Untrusted over-budget arsenals are bounded deterministically
+ok 73 - Untrusted over-budget arsenals are bounded deterministically
+  ---
+  duration_ms: 0.845096
+  type: 'test'
+  ...
+# Subtest: A robot can have no mounted tools and still move or push
+ok 74 - A robot can have no mounted tools and still move or push
+  ---
+  duration_ms: 84.898078
+  type: 'test'
+  ...
+# Subtest: Same seed and blueprints produce identical full simulation including damage
+ok 75 - Same seed and blueprints produce identical full simulation including damage
+  ---
+  duration_ms: 1996.272394
+  type: 'test'
+  ...
+# Subtest: Hazards remain reproducible and rotationally symmetric
+ok 76 - Hazards remain reproducible and rotationally symmetric
+  ---
+  duration_ms: 6.215085
+  type: 'test'
+  ...
+# Subtest: First matching rule wins; unmatched rules brake
+ok 77 - First matching rule wins; unmatched rules brake
+  ---
+  duration_ms: 0.700007
+  type: 'test'
+  ...
+# Subtest: Readiness and damaged-component sensors use real state
+ok 78 - Readiness and damaged-component sensors use real state
+  ---
+  duration_ms: 0.86062
+  type: 'test'
+  ...
+# Subtest: A successful attack consumes energy, damages health and starts its own cooldown
+ok 79 - A successful attack consumes energy, damages health and starts its own cooldown
+  ---
+  duration_ms: 0.79437
+  type: 'test'
+  ...
+# Subtest: The same tool cannot strike again before its cooldown ends
+ok 80 - The same tool cannot strike again before its cooldown ends
+  ---
+  duration_ms: 0.733367
+  type: 'test'
+  ...
+# Subtest: Mounted tools have independent cooldowns and independent health
+ok 81 - Mounted tools have independent cooldowns and independent health
+  ---
+  duration_ms: 2.074823
+  type: 'test'
+  ...
+# Subtest: An individual slot action only fires that mounted tool
+ok 82 - An individual slot action only fires that mounted tool
+  ---
+  duration_ms: 2.883374
+  type: 'test'
+  ...
+# Subtest: Tool placement and full-angle rotation change what an attack can reach
+ok 83 - Tool placement and full-angle rotation change what an attack can reach
+  ---
+  duration_ms: 0.961121
+  type: 'test'
+  ...
+# Subtest: Low energy and out-of-range targets do not create attacks or cooldowns
+ok 84 - Low energy and out-of-range targets do not create attacks or cooldowns
+  ---
+  duration_ms: 0.744804
+  type: 'test'
+  ...
+# Subtest: Broken tools stop attacking but do not destroy an otherwise healthy robot
+ok 85 - Broken tools stop attacking but do not destroy an otherwise healthy robot
+  ---
+  duration_ms: 0.883484
+  type: 'test'
+  ...
+# Subtest: A mounted enemy tool physically intercepts a hit and can be destroyed
+ok 86 - A mounted enemy tool physically intercepts a hit and can be destroyed
+  ---
+  duration_ms: 3.791635
+  type: 'test'
+  ...
+# Subtest: Destroyed armor increases damage to the exposed chassis
+ok 87 - Destroyed armor increases damage to the exposed chassis
+  ---
+  duration_ms: 1.669912
+  type: 'test'
+  ...
+# Subtest: Broken drive units reduce movement without pretending to simulate drivetrain mechanics
+ok 88 - Broken drive units reduce movement without pretending to simulate drivetrain mechanics
+  ---
+  duration_ms: 2.302497
+  type: 'test'
+  ...
+# Subtest: Simultaneous collected attacks both land even if a weapon breaks that tick
+ok 89 - Simultaneous collected attacks both land even if a weapon breaks that tick
+  ---
+  duration_ms: 0.693096
+  type: 'test'
+  ...
+# Subtest: The flipper still launches an opponent and has its own cooldown
+ok 90 - The flipper still launches an opponent and has its own cooldown
+  ---
+  duration_ms: 0.667648
+  type: 'test'
+  ...
+# Subtest: Intact walls stop low-speed contact without taking continuous contact damage
+ok 91 - Intact walls stop low-speed contact without taking continuous contact damage
+  ---
+  duration_ms: 0.728831
+  type: 'test'
+  ...
+# Subtest: Wall impact damage scales with speed and mass and is capped below full wall HP
+ok 92 - Wall impact damage scales with speed and mass and is capped below full wall HP
+  ---
+  duration_ms: 0.114333
+  type: 'test'
+  ...
+# Subtest: A wall withstands several strong impacts, then its damage becomes a permanent gap
+ok 93 - A wall withstands several strong impacts, then its damage becomes a permanent gap
+  ---
+  duration_ms: 0.887841
+  type: 'test'
+  ...
+# Subtest: Tools damage walls according to tool type and power, not collision velocity
+ok 94 - Tools damage walls according to tool type and power, not collision velocity
+  ---
+  duration_ms: 1.543692
+  type: 'test'
+  ...
+# Subtest: Repeated heavy-hammer activations can breach a wall without body impacts
+ok 95 - Repeated heavy-hammer activations can breach a wall without body impacts
+  ---
+  duration_ms: 0.723422
+  type: 'test'
+  ...
+# Subtest: Damaged walls retain damage but a new battle restores all walls and components
+ok 96 - Damaged walls retain damage but a new battle restores all walls and components
+  ---
+  duration_ms: 0.975814
+  type: 'test'
+  ...
+# Subtest: Crossing above an intact wall remains a valid aerial ring-out
+ok 97 - Crossing above an intact wall remains a valid aerial ring-out
+  ---
+  duration_ms: 1.358351
+  type: 'test'
+  ...
+# Subtest: An open gap allows a ground ring-out
+ok 98 - An open gap allows a ground ring-out
+  ---
+  duration_ms: 1.428216
+  type: 'test'
+  ...
+# Subtest: Grinders damage mounted tools as well as the core
+ok 99 - Grinders damage mounted tools as well as the core
+  ---
+  duration_ms: 0.764424
+  type: 'test'
+  ...
+# Subtest: Airborne robots and tools clear grinders
+ok 100 - Airborne robots and tools clear grinders
+  ---
+  duration_ms: 0.471572
+  type: 'test'
+  ...
+# Subtest: Simultaneous elimination is a draw
+ok 101 - Simultaneous elimination is a draw
+  ---
+  duration_ms: 0.455337
+  type: 'test'
+  ...
+# Subtest: Time limit with exactly equal survivor health is a draw
+ok 102 - Time limit with exactly equal survivor health is a draw
+  ---
+  duration_ms: 0.599285
+  type: 'test'
+  ...
+# Subtest: Finished matches and zero-duration steps do not advance
+ok 103 - Finished matches and zero-duration steps do not advance
+  ---
+  duration_ms: 4.686187
+  type: 'test'
+  ...
+# Subtest: Thirty mixed-arsenal matches finish with finite state and bounded health
+ok 104 - Thirty mixed-arsenal matches finish with finite state and bounded health
+  ---
+  duration_ms: 6626.375022
+  type: 'test'
+  ...
+# Subtest: Cycling fire damages exposed components only during its active phase
+ok 105 - Cycling fire damages exposed components only during its active phase
+  ---
+  duration_ms: 0.882182
+  type: 'test'
+  ...
+# Subtest: A rounded full-circle angle normalizes back to zero
+ok 106 - A rounded full-circle angle normalizes back to zero
+  ---
+  duration_ms: 0.167694
+  type: 'test'
+  ...
+# Subtest: Balance allows 200 points, six built tools, twelve rules, plus two battle-only tools
+ok 107 - Balance allows 200 points, six built tools, twelve rules, plus two battle-only tools
+  ---
+  duration_ms: 8.462028
+  type: 'test'
+  ...
+# Subtest: Chassis health is fixed at 250 at every armor level
+ok 108 - Chassis health is fixed at 250 at every armor level
+  ---
+  duration_ms: 0.381276
+  type: 'test'
+  ...
+# Subtest: All tools, panels, and drive units double v0.3 durability after rounding
+ok 109 - All tools, panels, and drive units double v0.3 durability after rounding
+  ---
+  duration_ms: 24.207794
+  type: 'test'
+  ...
+# Subtest: One thousand generated fields have safe starts, nonoverlapping hazards, and all supply pairs
+ok 110 - One thousand generated fields have safe starts, nonoverlapping hazards, and all supply pairs
+  ---
+  duration_ms: 164.738998
+  type: 'test'
+  ...
+# Subtest: Both hazards and supplies are mirrored with equal tool type, power and timing
+ok 111 - Both hazards and supplies are mirrored with equal tool type, power and timing
+  ---
+  duration_ms: 0.446354
+  type: 'test'
+  ...
+# Subtest: Different seeds change type mix, geometry, timing, and tool rewards
+ok 112 - Different seeds change type mix, geometry, timing, and tool rewards
+  ---
+  duration_ms: 1.721289
+  type: 'test'
+  ...
+# Subtest: Supply refreshes at 30, 60 and 90 seconds, but not at the 120-second finish
+ok 113 - Supply refreshes at 30, 60 and 90 seconds, but not at the 120-second finish
+  ---
+  duration_ms: 0.52347
+  type: 'test'
+  ...
+# Subtest: All five hazard types damage the chassis and components while active
+ok 114 - All five hazard types damage the chassis and components while active
+  ---
+  duration_ms: 1.334024
+  type: 'test'
+  ...
+# Subtest: Pulsing hazards show a warning and do no damage while inactive
+ok 115 - Pulsing hazards show a warning and do no damage while inactive
+  ---
+  duration_ms: 0.941341
+  type: 'test'
+  ...
+# Subtest: Tesla pads drain energy and high airborne robots avoid floor hazards
+ok 116 - Tesla pads drain energy and high airborne robots avoid floor hazards
+  ---
+  duration_ms: 0.564602
+  type: 'test'
+  ...
+# Subtest: A repair kit heals 30 percent of max HP and 25 percent of surviving component HP
+ok 117 - A repair kit heals 30 percent of max HP and 25 percent of surviving component HP
+  ---
+  duration_ms: 0.634919
+  type: 'test'
+  ...
+# Subtest: Healing never exceeds max health, revives broken parts, or repairs a destroyed robot
+ok 118 - Healing never exceeds max health, revives broken parts, or repairs a destroyed robot
+  ---
+  duration_ms: 0.410781
+  type: 'test'
+  ...
+# Subtest: Healthy robots leave repair kits for later but damaged components can consume them
+ok 119 - Healthy robots leave repair kits for later but damaged components can consume them
+  ---
+  duration_ms: 0.25179
+  type: 'test'
+  ...
+# Subtest: Tool pickup mounts an extra tool without modifying the saved blueprint or spending points
+ok 120 - Tool pickup mounts an extra tool without modifying the saved blueprint or spending points
+  ---
+  duration_ms: 0.614388
+  type: 'test'
+  ...
+# Subtest: A fully built six-tool robot can pick up two extras for eight combat tools
+ok 121 - A fully built six-tool robot can pick up two extras for eight combat tools
+  ---
+  duration_ms: 0.390891
+  type: 'test'
+  ...
+# Subtest: A broken bonus slot can be replaced without removing any original tool
+ok 122 - A broken bonus slot can be replaced without removing any original tool
+  ---
+  duration_ms: 0.567337
+  type: 'test'
+  ...
+# Subtest: Pickup is contact-based; airborne robots and distant robots cannot collect
+ok 123 - Pickup is contact-based; airborne robots and distant robots cannot collect
+  ---
+  duration_ms: 0.213493
+  type: 'test'
+  ...
+# Subtest: A pickup is consumed only once, by the closest eligible robot
+ok 124 - A pickup is consumed only once, by the closest eligible robot
+  ---
+  duration_ms: 0.226542
+  type: 'test'
+  ...
+# Subtest: Exact pickup ties are deterministic, not permanently biased to player zero
+ok 125 - Exact pickup ties are deterministic, not permanently biased to player zero
+  ---
+  duration_ms: 0.387254
+  type: 'test'
+  ...
+# Subtest: Items cannot be collected before spawn or after expiry
+ok 126 - Items cannot be collected before spawn or after expiry
+  ---
+  duration_ms: 0.201465
+  type: 'test'
+  ...
+# Subtest: New sensors identify useful repair kits, bonuses, and attached bonus tools
+ok 127 - New sensors identify useful repair kits, bonuses, and attached bonus tools
+  ---
+  duration_ms: 0.754389
+  type: 'test'
+  ...
+# Subtest: Visual collect and repair actions steer to the relevant item
+ok 128 - Visual collect and repair actions steer to the relevant item
+  ---
+  duration_ms: 96.204351
+  type: 'test'
+  ...
+# Subtest: Activate all tools includes extras; bonus action selects extras; normal slots stay stable
+ok 129 - Activate all tools includes extras; bonus action selects extras; normal slots stay stable
+  ---
+  duration_ms: 5.169896
+  type: 'test'
+  ...
+# Subtest: Match reset removes loot, restores base components and keeps the unchanged saved design
+ok 130 - Match reset removes loot, restores base components and keeps the unchanged saved design
+  ---
+  duration_ms: 0.633096
+  type: 'test'
+  ...
+# Subtest: Blueprint validation strips forged bonus flags, power, durability and runtime inventory
+ok 131 - Blueprint validation strips forged bonus flags, power, durability and runtime inventory
+  ---
+  duration_ms: 0.478602
+  type: 'test'
+  ...
+# Subtest: Replay from a serialized snapshot preserves loot, repair, timing and full deterministic state
+ok 132 - Replay from a serialized snapshot preserves loot, repair, timing and full deterministic state
+  ---
+  duration_ms: 42.090037
+  type: 'test'
+  ...
+# Subtest: Two, three and four contestants have fixed HP, unique seats and full energy
+ok 133 - Two, three and four contestants have fixed HP, unique seats and full energy
+  ---
+  duration_ms: 5.467827
+  type: 'test'
+  ...
+# Subtest: Nearest living opponent is chosen independently for every seat
+ok 134 - Nearest living opponent is chosen independently for every seat
+  ---
+  duration_ms: 3.285451
+  type: 'test'
+  ...
+# Subtest: Eliminating one or two robots does not stop a four-way battle
+ok 135 - Eliminating one or two robots does not stop a four-way battle
+  ---
+  duration_ms: 1.902332
+  type: 'test'
+  ...
+# Subtest: Seat three can win and simultaneous final eliminations draw
+ok 136 - Seat three can win and simultaneous final eliminations draw
+  ---
+  duration_ms: 1.060601
+  type: 'test'
+  ...
+# Subtest: Non-duel seats collide with each other and do not collide with eliminated robots
+ok 137 - Non-duel seats collide with each other and do not collide with eliminated robots
+  ---
+  duration_ms: 0.948632
+  type: 'test'
+  ...
+# Subtest: Four-way maps are safe and quarter-turn symmetric over 300 seeds
+ok 138 - Four-way maps are safe and quarter-turn symmetric over 300 seeds
+  ---
+  duration_ms: 86.2775
+  type: 'test'
+  ...
+# Subtest: New ranged loadout keeps all three tools inside the original 160-point budget
+ok 139 - New ranged loadout keeps all three tools inside the original 160-point budget
+  ---
+  duration_ms: 0.528799
+  type: 'test'
+  ...
+# Subtest: Machine gun emits exactly twelve delayed projectiles and one cooldown
+ok 140 - Machine gun emits exactly twelve delayed projectiles and one cooldown
+  ---
+  duration_ms: 31.524913
+  type: 'test'
+  ...
+# Subtest: Rocket damage occurs on projectile impact, not on launch
+ok 141 - Rocket damage occurs on projectile impact, not on launch
+  ---
+  duration_ms: 1.062084
+  type: 'test'
+  ...
+# Subtest: Rocket splash can hit another opponent and the shooter at close range
+ok 142 - Rocket splash can hit another opponent and the shooter at close range
+  ---
+  duration_ms: 0.744755
+  type: 'test'
+  ...
+# Subtest: A bullet burst hits the first robot in its path, not the one behind
+ok 143 - A bullet burst hits the first robot in its path, not the one behind
+  ---
+  duration_ms: 2.995383
+  type: 'test'
+  ...
+# Subtest: Flame cone hits more than one opponent but not a target behind the shooter
+ok 144 - Flame cone hits more than one opponent but not a target behind the shooter
+  ---
+  duration_ms: 44.768812
+  type: 'test'
+  ...
+# Subtest: Every tool has a real favorable and unfavorable matchup without changing displayed damage
+ok 145 - Every tool has a real favorable and unfavorable matchup without changing displayed damage
+  ---
+  duration_ms: 37.282927
+  type: 'test'
+  ...
+# Subtest: Walls intercept and absorb projectile damage over time
+ok 146 - Walls intercept and absorb projectile damage over time
+  ---
+  duration_ms: 3.683783
+  type: 'test'
+  ...
+# Subtest: Every extra weapon is collectable and shares the same cooldown rules
+ok 147 - Every extra weapon is collectable and shares the same cooldown rules
+  ---
+  duration_ms: 1.531773
+  type: 'test'
+  ...
+# Subtest: Four-way simulation and active projectiles are deterministic after JSON replay
+ok 148 - Four-way simulation and active projectiles are deterministic after JSON replay
+  ---
+  duration_ms: 1185.758158
+  type: 'test'
+  ...
+# Subtest: Forty mixed 2–4 robot matches finish with finite, bounded state
+ok 149 - Forty mixed 2–4 robot matches finish with finite, bounded state
+  ---
+  duration_ms: 13748.099514
+  type: 'test'
+  ...
+# Subtest: The English page declares its language and translates key controls
+ok 150 - The English page declares its language and translates key controls
+  ---
+  duration_ms: 5.133331
+  type: 'test'
+  ...
+# Subtest: All visual conditions, actions, chassis, and tools use English labels
+ok 151 - All visual conditions, actions, chassis, and tools use English labels
+  ---
+  duration_ms: 0.98014
+  type: 'test'
+  ...
+# Subtest: Translated source files contain no leftover Spanish interface phrases
+ok 152 - Translated source files contain no leftover Spanish interface phrases
+  ---
+  duration_ms: 11.013831
+  type: 'test'
+  ...
+# Subtest: Existing robot fields and user-entered names remain compatible
+ok 153 - Existing robot fields and user-entered names remain compatible
+  ---
+  duration_ms: 1.185531
+  type: 'test'
+  ...
+# Subtest: The self-contained English build exactly matches the source files
+ok 154 - The self-contained English build exactly matches the source files
+  ---
+  duration_ms: 5.123036
+  type: 'test'
+  ...
+# Subtest: Project documentation and package description are in English
+ok 155 - Project documentation and package description are in English
+  ---
+  duration_ms: 0.883464
+  type: 'test'
+  ...
+# Subtest: New robots have no pickup delay, including all six players and new matches
+ok 156 - New robots have no pickup delay, including all six players and new matches
+  ---
+  duration_ms: 6.491753
+  type: 'test'
+  ...
+# Subtest: repair pickup blocks a subsequent repair for ten simulation seconds
+ok 157 - repair pickup blocks a subsequent repair for ten simulation seconds
+  ---
+  duration_ms: 54.227634
+  type: 'test'
+  ...
+# Subtest: repair pickup blocks a subsequent tool for ten simulation seconds
+ok 158 - repair pickup blocks a subsequent tool for ten simulation seconds
+  ---
+  duration_ms: 31.923706
+  type: 'test'
+  ...
+# Subtest: tool pickup blocks a subsequent repair for ten simulation seconds
+ok 159 - tool pickup blocks a subsequent repair for ten simulation seconds
+  ---
+  duration_ms: 81.728902
+  type: 'test'
+  ...
+# Subtest: tool pickup blocks a subsequent tool for ten simulation seconds
+ok 160 - tool pickup blocks a subsequent tool for ten simulation seconds
+  ---
+  duration_ms: 21.891927
+  type: 'test'
+  ...
+# Subtest: Overlapping supplies cannot grant two pickups to one robot in the same tick
+ok 161 - Overlapping supplies cannot grant two pickups to one robot in the same tick
+  ---
+  duration_ms: 0.612715
+  type: 'test'
+  ...
+# Subtest: Six robots have independent pickup timers, even on the same simulation tick
+ok 162 - Six robots have independent pickup timers, even on the same simulation tick
+  ---
+  duration_ms: 0.514748
+  type: 'test'
+  ...
+# Subtest: A nearby eligible opponent can take an item the closest robot cannot collect
+ok 163 - A nearby eligible opponent can take an item the closest robot cannot collect
+  ---
+  duration_ms: 0.452834
+  type: 'test'
+  ...
+# Subtest: A useless repair kit does not start cooldown or stop useful tool collection
+ok 164 - A useless repair kit does not start cooldown or stop useful tool collection
+  ---
+  duration_ms: 0.670462
+  type: 'test'
+  ...
+# Subtest: Component-only repairs start the shared cooldown without increasing chassis HP
+ok 165 - Component-only repairs start the shared cooldown without increasing chassis HP
+  ---
+  duration_ms: 0.694579
+  type: 'test'
+  ...
+# Subtest: Full bonus slots do not start a delay or consume the loose tool
+ok 166 - Full bonus slots do not start a delay or consume the loose tool
+  ---
+  duration_ms: 32.387024
+  type: 'test'
+  ...
+# Subtest: Airborne and eliminated robots cannot start a pickup cooldown
+ok 167 - Airborne and eliminated robots cannot start a pickup cooldown
+  ---
+  duration_ms: 2.800279
+  type: 'test'
+  ...
+# Subtest: Expired and future items never trigger the cooldown
+ok 168 - Expired and future items never trigger the cooldown
+  ---
+  duration_ms: 0.27847
+  type: 'test'
+  ...
+# Subtest: Pickup sensors ignore both kinds during cooldown, then detect them when ready
+ok 169 - Pickup sensors ignore both kinds during cooldown, then detect them when ready
+  ---
+  duration_ms: 53.781882
+  type: 'test'
+  ...
+# Subtest: Pickup cooldown does not alter weapon cooldown or energy regeneration
+ok 170 - Pickup cooldown does not alter weapon cooldown or energy regeneration
+  ---
+  duration_ms: 6.484382
+  type: 'test'
+  ...
+# Subtest: Paused/no-op steps do not consume cooldown; it is bounded to zero after expiry
+ok 171 - Paused/no-op steps do not consume cooldown; it is bounded to zero after expiry
+  ---
+  duration_ms: 78.927922
+  type: 'test'
+  ...
+# Subtest: Snapshots preserve cooldown and exact pickup outcomes after serialization
+ok 172 - Snapshots preserve cooldown and exact pickup outcomes after serialization
+  ---
+  duration_ms: 98.969841
+  type: 'test'
+  ...
+# Subtest: Imported blueprints cannot provide forged pickup cooldowns or inventory
+ok 173 - Imported blueprints cannot provide forged pickup cooldowns or inventory
+  ---
+  duration_ms: 0.385482
+  type: 'test'
+  ...
+# Subtest: Random practice never changes the human name, chassis, tools, strength, drawing or programming
+ok 174 - Random practice never changes the human name, chassis, tools, strength, drawing or programming
+  ---
+  duration_ms: 14.877865
+  type: 'test'
+  ...
+# Subtest: Only explicit practice creation generates AI: human-only battles retain all provided designs
+ok 175 - Only explicit practice creation generates AI: human-only battles retain all provided designs
+  ---
+  duration_ms: 1.115645
+  type: 'test'
+  ...
+# Subtest: Every new seed varies AI names and complete loadouts, with unique names in the battle
+ok 176 - Every new seed varies AI names and complete loadouts, with unique names in the battle
+  ---
+  duration_ms: 72.192402
+  type: 'test'
+  ...
+# Subtest: AI randomization covers all chassis, weapon types, power tiers, motor/armor settings and mount directions
+ok 177 - AI randomization covers all chassis, weapon types, power tiers, motor/armor settings and mount directions
+  ---
+  duration_ms: 46.786099
+  type: 'test'
+  ...
+# Subtest: All generated bots obey normal budget, health, mounting and tool-count constraints
+ok 178 - All generated bots obey normal budget, health, mounting and tool-count constraints
+  ---
+  duration_ms: 296.213714
+  type: 'test'
+  ...
+# Subtest: AI builds and terrain reproduce exactly for a replay seed without mutating standard presets
+ok 179 - AI builds and terrain reproduce exactly for a replay seed without mutating standard presets
+  ---
+  duration_ms: 586.274005
+  type: 'test'
+  ...
+# Subtest: A JSON snapshot keeps AI/human identity and deterministic state for replay
+ok 180 - A JSON snapshot keeps AI/human identity and deterministic state for replay
+  ---
+  duration_ms: 366.353776
+  type: 'test'
+  ...
+# Subtest: Generated configurations are independent objects with no shared editable tools or rules
+ok 181 - Generated configurations are independent objects with no shared editable tools or rules
+  ---
+  duration_ms: 1.088683
+  type: 'test'
+  ...
+# Subtest: Invalid practice sizes reject safely rather than adding bots to human matches
+ok 182 - Invalid practice sizes reject safely rather than adding bots to human matches
+  ---
+  duration_ms: 0.895663
+  type: 'test'
+  ...
+# Subtest: Random AI battles remain finite and terminate with full standings
+ok 183 - Random AI battles remain finite and terminate with full standings
+  ---
+  duration_ms: 4391.789801
+  type: 'test'
+  ...
+# Subtest: Two independent pilots receive identical authoritative component damage and cooldowns
+ok 184 - Two independent pilots receive identical authoritative component damage and cooldowns
+  ---
+  duration_ms: 13146.159274
+  type: 'test'
+  ...
+# Subtest: Online wall HP accumulates across snapshots and both pilots see the same breach
+ok 185 - Online wall HP accumulates across snapshots and both pilots see the same breach
+  ---
+  duration_ms: 13913.219069
+  type: 'test'
+  ...
+# Subtest: The server ignores forged runtime HP, damage and cooldowns and bounds the blueprint
+ok 186 - The server ignores forged runtime HP, damage and cooldowns and bounds the blueprint
+  ---
+  duration_ms: 53.24515
+  type: 'test'
+  ...
+# Subtest: Both online clients see identical randomized terrain and an actual bonus-tool collection
+ok 187 - Both online clients see identical randomized terrain and an actual bonus-tool collection
+  ---
+  duration_ms: 2381.672886
+  type: 'test'
+  ...
+# Subtest: Eight independent pilots share one authoritative match; a ninth is refused and forfeits do not end it early
+ok 188 - Eight independent pilots share one authoritative match; a ninth is refused and forfeits do not end it early
+  ---
+  duration_ms: 1782.066139
+  type: 'test'
+  ...
+# Subtest: Three-person rooms can start, and leaving a waiting lobby transfers hosting without closing it
+ok 189 - Three-person rooms can start, and leaving a waiting lobby transfers hosting without closing it
+  ---
+  duration_ms: 1672.084095
+  type: 'test'
+  ...
+# Subtest: Server accepts the complete 200-point budget and bounds an oversized update
+ok 190 - Server accepts the complete 200-point budget and bounds an oversized update
+  ---
+  duration_ms: 73.074977
+  type: 'test'
+  ...
+# Subtest: 4v4 online: eight human blueprints, identical snapshots, full-team victory and no ninth seat
+ok 191 - 4v4 online: eight human blueprints, identical snapshots, full-team victory and no ninth seat
+  ---
+  duration_ms: 1737.508108
+  type: 'test'
+  ...
+# Subtest: Host can change waiting-room modes; invalid modes reject and balanced capacity is enforced
+ok 192 - Host can change waiting-room modes; invalid modes reject and balanced capacity is enforced
+  ---
+  duration_ms: 118.288986
+  type: 'test'
+  ...
+# Subtest: Three and four teams are supported by the authoritative server without replacing human robots
+ok 193 - Three and four teams are supported by the authoritative server without replacing human robots
+  ---
+  duration_ms: 3401.817916
+  type: 'test'
+  ...
+# Subtest: All eight chassis are distinct and retain 250 HP and a 200-point budget
+ok 194 - All eight chassis are distinct and retain 250 HP and a 200-point budget
+  ---
+  duration_ms: 4.595559
+  type: 'test'
+  ...
+# Subtest: Five and six seats face the center from equal-radius, nonoverlapping spawn points
+ok 195 - Five and six seats face the center from equal-radius, nonoverlapping spawn points
+  ---
+  duration_ms: 1.439514
+  type: 'test'
+  ...
+# Subtest: Five/six-player fields leave every spawn clear over 200 seeds and remain reproducible
+ok 196 - Five/six-player fields leave every spawn clear over 200 seeds and remain reproducible
+  ---
+  duration_ms: 79.296634
+  type: 'test'
+  ...
+# Subtest: All six human blueprints survive normalization; practice only randomizes the five AI seats
+ok 197 - All six human blueprints survive normalization; practice only randomizes the five AI seats
+  ---
+  duration_ms: 3.981302
+  type: 'test'
+  ...
+# Subtest: Random AI can choose all eight chassis; new shapes do not require explicit import flags
+ok 198 - Random AI can choose all eight chassis; new shapes do not require explicit import flags
+  ---
+  duration_ms: 32.330511
+  type: 'test'
+  ...
+# Subtest: Six contestants rank by exact HP; fifth and sixth seats can win or tie
+ok 199 - Six contestants rank by exact HP; fifth and sixth seats can win or tie
+  ---
+  duration_ms: 1.058288
+  type: 'test'
+  ...
+# Subtest: Six-seat elimination continues until a sole survivor; all six remain in standings
+ok 200 - Six-seat elimination continues until a sole survivor; all six remain in standings
+  ---
+  duration_ms: 3.276699
+  type: 'test'
+  ...
+# Subtest: Complete 5–6 player randomized battles finish with finite state and deterministic replay
+ok 201 - Complete 5–6 player randomized battles finish with finite state and deterministic replay
+  ---
+  duration_ms: 5302.59262
+  type: 'test'
+  ...
+# Subtest: Reduced lift and longer streams preserve cooldown, range and capped total damage
+ok 202 - Reduced lift and longer streams preserve cooldown, range and capped total damage
+  ---
+  duration_ms: 0.593527
+  type: 'test'
+  ...
+# Subtest: Crowded fields have fewer traps, fixed for the match and reproducible online
+ok 203 - Crowded fields have fewer traps, fixed for the match and reproducible online
+  ---
+  duration_ms: 61.738301
+  type: 'test'
+  ...
+# Subtest: Tool mount coordinates canonicalize signed zero for JSON replay snapshots
+ok 204 - Tool mount coordinates canonicalize signed zero for JSON replay snapshots
+  ---
+  duration_ms: 0.485824
+  type: 'test'
+  ...
+# Subtest: All nine tools increase damage, effective range, and cooldown at each power
+ok 205 - All nine tools increase damage, effective range, and cooldown at each power
+  ---
+  duration_ms: 1.263889
+  type: 'test'
+  ...
+# Subtest: Light, Standard and Heavy flames have the advertised range and total nominal damage
+ok 206 - Light, Standard and Heavy flames have the advertised range and total nominal damage
+  ---
+  duration_ms: 0.697514
+  type: 'test'
+  ...
+# Subtest: Flame stream applies gradual, bounded damage rather than all damage on activation
+ok 207 - Flame stream applies gradual, bounded damage rather than all damage on activation
+  ---
+  duration_ms: 19.72273
+  type: 'test'
+  ...
+# Subtest: Each flame power delivers exactly its nominal emission damage adjusted for chassis matchup
+ok 208 - Each flame power delivers exactly its nominal emission damage adjusted for chassis matchup
+  ---
+  duration_ms: 12.536094
+  type: 'test'
+  ...
+# Subtest: Partial contact receives partial flame damage and never an extra full activation
+ok 209 - Partial contact receives partial flame damage and never an extra full activation
+  ---
+  duration_ms: 15.104755
+  type: 'test'
+  ...
+# Subtest: Heavier flames reach targets that Light cannot reach
+ok 210 - Heavier flames reach targets that Light cannot reach
+  ---
+  duration_ms: 2.607839
+  type: 'test'
+  ...
+# Subtest: Flame damage is timestep invariant and uses the actual nozzle orientation
+ok 211 - Flame damage is timestep invariant and uses the actual nozzle orientation
+  ---
+  duration_ms: 16.42617
+  type: 'test'
+  ...
+# Subtest: Changing to a non-firing rule immediately stops a flame stream
+ok 212 - Changing to a non-firing rule immediately stops a flame stream
+  ---
+  duration_ms: 1.738897
+  type: 'test'
+  ...
+# Subtest: A tool-specific rule cannot continue a different tool stream
+ok 213 - A tool-specific rule cannot continue a different tool stream
+  ---
+  duration_ms: 0.762482
+  type: 'test'
+  ...
+# Subtest: Flames stop after component destruction, elimination, lifting or loss of life
+ok 214 - Flames stop after component destruction, elimination, lifting or loss of life
+  ---
+  duration_ms: 1.267154
+  type: 'test'
+  ...
+# Subtest: Flame streams cannot damage through solid walls and their visual lanes are clipped
+ok 215 - Flame streams cannot damage through solid walls and their visual lanes are clipped
+  ---
+  duration_ms: 3.83381
+  type: 'test'
+  ...
+# Subtest: A breached wall does not block a flame stream
+ok 216 - A breached wall does not block a flame stream
+  ---
+  duration_ms: 10.061047
+  type: 'test'
+  ...
+# Subtest: Machine gun retains its short cooldown with lower damage per longer burst
+ok 217 - Machine gun retains its short cooldown with lower damage per longer burst
+  ---
+  duration_ms: 0.179571
+  type: 'test'
+  ...
+# Subtest: Machine gun launches twelve physical bullets spaced in time from the current nozzle
+ok 218 - Machine gun launches twelve physical bullets spaced in time from the current nozzle
+  ---
+  duration_ms: 1.51588
+  type: 'test'
+  ...
+# Subtest: Switching rules cancels unlaunched rounds but never deletes bullets already flying
+ok 219 - Switching rules cancels unlaunched rounds but never deletes bullets already flying
+  ---
+  duration_ms: 0.797264
+  type: 'test'
+  ...
+# Subtest: Destroyed guns cannot launch queued rounds
+ok 220 - Destroyed guns cannot launch queued rounds
+  ---
+  duration_ms: 0.506505
+  type: 'test'
+  ...
+# Subtest: Machine gun repeats immediately when ready, without bypassing cooldown or rules
+ok 221 - Machine gun repeats immediately when ready, without bypassing cooldown or rules
+  ---
+  duration_ms: 46.955293
+  type: 'test'
+  ...
+# Subtest: A higher-priority non-firing rule prevents automatic gunfire
+ok 222 - A higher-priority non-firing rule prevents automatic gunfire
+  ---
+  duration_ms: 3.131099
+  type: 'test'
+  ...
+# Subtest: In-progress flame streams and queued bullets reproduce exactly after JSON serialization
+ok 223 - In-progress flame streams and queued bullets reproduce exactly after JSON serialization
+  ---
+  duration_ms: 68.828752
+  type: 'test'
+  ...
+# Subtest: Eight seats retain 250 HP, 200 budget, 120 seconds, 180 walls, and 10s pickup lock
+ok 224 - Eight seats retain 250 HP, 200 budget, 120 seconds, 180 walls, and 10s pickup lock
+  ---
+  duration_ms: 7.262249
+  type: 'test'
+  ...
+# Subtest: Complex replacement bodies preserve IDs and profiles; Cross remains unchanged
+ok 225 - Complex replacement bodies preserve IDs and profiles; Cross remains unchanged
+  ---
+  duration_ms: 0.424912
+  type: 'test'
+  ...
+# Subtest: ffa: balanced deterministic rosters, unchanged human designs, and safe spawns
+ok 226 - ffa: balanced deterministic rosters, unchanged human designs, and safe spawns
+  ---
+  duration_ms: 10.674934
+  type: 'test'
+  ...
+# Subtest: 2v2: balanced deterministic rosters, unchanged human designs, and safe spawns
+ok 227 - 2v2: balanced deterministic rosters, unchanged human designs, and safe spawns
+  ---
+  duration_ms: 15.449295
+  type: 'test'
+  ...
+# Subtest: 3v3: balanced deterministic rosters, unchanged human designs, and safe spawns
+ok 228 - 3v3: balanced deterministic rosters, unchanged human designs, and safe spawns
+  ---
+  duration_ms: 5.877047
+  type: 'test'
+  ...
+# Subtest: 4v4: balanced deterministic rosters, unchanged human designs, and safe spawns
+ok 229 - 4v4: balanced deterministic rosters, unchanged human designs, and safe spawns
+  ---
+  duration_ms: 5.354057
+  type: 'test'
+  ...
+# Subtest: 2v2v2: balanced deterministic rosters, unchanged human designs, and safe spawns
+ok 230 - 2v2v2: balanced deterministic rosters, unchanged human designs, and safe spawns
+  ---
+  duration_ms: 5.171591
+  type: 'test'
+  ...
+# Subtest: 2v2v2v2: balanced deterministic rosters, unchanged human designs, and safe spawns
+ok 231 - 2v2v2v2: balanced deterministic rosters, unchanged human designs, and safe spawns
+  ---
+  duration_ms: 7.221507
+  type: 'test'
+  ...
+# Subtest: Invalid modes and hostile team fields cannot bypass mode or budget validation
+ok 232 - Invalid modes and hostile team fields cannot bypass mode or budget validation
+  ---
+  duration_ms: 2.214635
+  type: 'test'
+  ...
+# Subtest: Nearest enemy ignores a much closer living teammate
+ok 233 - Nearest enemy ignores a much closer living teammate
+  ---
+  duration_ms: 0.680699
+  type: 'test'
+  ...
+# Subtest: ram: no targeting, damage, or launch impulse against allies
+ok 234 - ram: no targeting, damage, or launch impulse against allies
+  ---
+  duration_ms: 1.768732
+  type: 'test'
+  ...
+# Subtest: flipper: no targeting, damage, or launch impulse against allies
+ok 235 - flipper: no targeting, damage, or launch impulse against allies
+  ---
+  duration_ms: 0.47
+  type: 'test'
+  ...
+# Subtest: plow: no targeting, damage, or launch impulse against allies
+ok 236 - plow: no targeting, damage, or launch impulse against allies
+  ---
+  duration_ms: 0.438072
+  type: 'test'
+  ...
+# Subtest: hammer: no targeting, damage, or launch impulse against allies
+ok 237 - hammer: no targeting, damage, or launch impulse against allies
+  ---
+  duration_ms: 0.335877
+  type: 'test'
+  ...
+# Subtest: saw: no targeting, damage, or launch impulse against allies
+ok 238 - saw: no targeting, damage, or launch impulse against allies
+  ---
+  duration_ms: 0.833499
+  type: 'test'
+  ...
+# Subtest: drill: no targeting, damage, or launch impulse against allies
+ok 239 - drill: no targeting, damage, or launch impulse against allies
+  ---
+  duration_ms: 0.265871
+  type: 'test'
+  ...
+# Subtest: flamethrower: no targeting, damage, or launch impulse against allies
+ok 240 - flamethrower: no targeting, damage, or launch impulse against allies
+  ---
+  duration_ms: 3.121455
+  type: 'test'
+  ...
+# Subtest: machinegun: no targeting, damage, or launch impulse against allies
+ok 241 - machinegun: no targeting, damage, or launch impulse against allies
+  ---
+  duration_ms: 1.462268
+  type: 'test'
+  ...
+# Subtest: rocket: no targeting, damage, or launch impulse against allies
+ok 242 - rocket: no targeting, damage, or launch impulse against allies
+  ---
+  duration_ms: 0.449789
+  type: 'test'
+  ...
+# Subtest: Rocket splash protects nearby allies and shooter in teams, but damages enemies
+ok 243 - Rocket splash protects nearby allies and shooter in teams, but damages enemies
+  ---
+  duration_ms: 1.568338
+  type: 'test'
+  ...
+# Subtest: Allied bodies remain solid but their mutual collision does not deal HP damage
+ok 244 - Allied bodies remain solid but their mutual collision does not deal HP damage
+  ---
+  duration_ms: 1.596782
+  type: 'test'
+  ...
+# Subtest: Hazards remain dangerous in team modes and pickup cooldowns remain individual
+ok 245 - Hazards remain dangerous in team modes and pickup cooldowns remain individual
+  ---
+  duration_ms: 0.636821
+  type: 'test'
+  ...
+# Subtest: Team victory waits for the whole opposing team, not one eliminated robot
+ok 246 - Team victory waits for the whole opposing team, not one eliminated robot
+  ---
+  duration_ms: 0.846518
+  type: 'test'
+  ...
+# Subtest: Winning teammates share victory even when one was eliminated earlier
+ok 247 - Winning teammates share victory even when one was eliminated earlier
+  ---
+  duration_ms: 0.340464
+  type: 'test'
+  ...
+# Subtest: Time ranks teams by surviving total HP, not strongest robot or survivor count
+ok 248 - Time ranks teams by surviving total HP, not strongest robot or survivor count
+  ---
+  duration_ms: 0.40379
+  type: 'test'
+  ...
+# Subtest: Exact team-health ties share first; no rounding can manufacture a tie
+ok 249 - Exact team-health ties share first; no rounding can manufacture a tie
+  ---
+  duration_ms: 0.961032
+  type: 'test'
+  ...
+# Subtest: Eliminated robots do not contribute surviving team HP
+ok 250 - Eliminated robots do not contribute surviving team HP
+  ---
+  duration_ms: 0.260904
+  type: 'test'
+  ...
+# Subtest: Three and four teams keep fighting until only one team remains
+ok 251 - Three and four teams keep fighting until only one team remains
+  ---
+  duration_ms: 0.436749
+  type: 'test'
+  ...
+# Subtest: Team metadata survives JSON snapshots and all eight players remain human outside practice
+ok 252 - Team metadata survives JSON snapshots and all eight players remain human outside practice
+  ---
+  duration_ms: 45.527774
+  type: 'test'
+  ...
+# Subtest: Every team mode can finish a full random match with finite physics and complete standings
+ok 253 - Every team mode can finish a full random match with finite physics and complete standings
+  ---
+  duration_ms: 5737.180517
+  type: 'test'
+  ...
+1..253
+# tests 253
+# suites 0
+# pass 253
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 46760.095148

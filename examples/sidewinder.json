@@ -1,0 +1,59 @@
+{
+  "format": "cspire-arena-robot",
+  "version": 2,
+  "robot": {
+    "name": "SIDEWINDER",
+    "body": "circle",
+    "motor": 3,
+    "armor": 2,
+    "tools": [
+      {
+        "id": "t1",
+        "type": "drill",
+        "x": 0,
+        "y": -21,
+        "angle": 270,
+        "power": 2
+      },
+      {
+        "id": "t2",
+        "type": "ram",
+        "x": 0,
+        "y": 21,
+        "angle": 90,
+        "power": 1
+      }
+    ],
+    "lines": [],
+    "rules": [
+      {
+        "when": "hazard",
+        "do": "avoid"
+      },
+      {
+        "when": "repair",
+        "do": "repair"
+      },
+      {
+        "when": "near",
+        "do": "weapon"
+      },
+      {
+        "when": "edge",
+        "do": "center"
+      },
+      {
+        "when": "pickup",
+        "do": "collect"
+      },
+      {
+        "when": "far",
+        "do": "charge"
+      },
+      {
+        "when": "always",
+        "do": "push"
+      }
+    ]
+  }
+}

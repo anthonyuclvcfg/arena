@@ -1,0 +1,59 @@
+{
+  "format": "cspire-arena-robot",
+  "version": 2,
+  "robot": {
+    "name": "DUAL-STRIKE",
+    "body": "wedge",
+    "motor": 3,
+    "armor": 2,
+    "tools": [
+      {
+        "id": "t1",
+        "type": "ram",
+        "x": 19,
+        "y": -11,
+        "angle": 0,
+        "power": 1
+      },
+      {
+        "id": "t2",
+        "type": "saw",
+        "x": 19,
+        "y": 11,
+        "angle": 0,
+        "power": 1
+      }
+    ],
+    "lines": [],
+    "rules": [
+      {
+        "when": "hazard",
+        "do": "avoid"
+      },
+      {
+        "when": "repair",
+        "do": "repair"
+      },
+      {
+        "when": "near",
+        "do": "weapon"
+      },
+      {
+        "when": "edge",
+        "do": "center"
+      },
+      {
+        "when": "pickup",
+        "do": "collect"
+      },
+      {
+        "when": "far",
+        "do": "charge"
+      },
+      {
+        "when": "always",
+        "do": "push"
+      }
+    ]
+  }
+}

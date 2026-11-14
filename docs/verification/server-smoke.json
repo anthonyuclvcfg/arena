@@ -1,0 +1,37 @@
+{
+  "checks": [
+    {
+      "check": "Local server returns game health/version",
+      "passed": true
+    },
+    {
+      "check": "Serve /",
+      "passed": true
+    },
+    {
+      "check": "Serve /engine.js",
+      "passed": true
+    },
+    {
+      "check": "Serve /app.js",
+      "passed": true
+    },
+    {
+      "check": "Serve /style.css",
+      "passed": true
+    },
+    {
+      "check": "Do not serve /AGENTS.md",
+      "passed": true
+    },
+    {
+      "check": "Do not serve /PROJECT_CONTEXT.md",
+      "passed": true
+    },
+    {
+      "check": "Do not serve /data/pilots.json",
+      "passed": true
+    }
+  ],
+  "passed": true
+}

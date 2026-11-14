@@ -1,0 +1,173 @@
+{
+  "checks": [
+    {
+      "check": "Initial timer shows 02:00",
+      "passed": true
+    },
+    {
+      "check": "Hazard condition explicitly says active",
+      "passed": true
+    },
+    {
+      "check": "Help describes active traps, exact HP and two minutes",
+      "passed": true
+    },
+    {
+      "check": "Selected flame tool includes numeric range",
+      "passed": true
+    },
+    {
+      "check": "Standard flame stats show 33 damage, 168.75 range and 4.48s cooldown",
+      "passed": true
+    },
+    {
+      "check": "Heavy flame stats show 44 damage, 202.5 range and 5.76s cooldown",
+      "passed": true
+    },
+    {
+      "check": "Weapon card hides matchup coefficients",
+      "passed": true
+    },
+    {
+      "check": "Time expiry automatically opens standings",
+      "passed": true
+    },
+    {
+      "check": "Standings are inline, not a modal",
+      "passed": true
+    },
+    {
+      "check": "Winner banner is visible and the complete table never overlaps the field",
+      "passed": true
+    },
+    {
+      "check": "Ranking details start collapsed",
+      "passed": true
+    },
+    {
+      "check": "Final clock is exactly 00:00",
+      "passed": true
+    },
+    {
+      "check": "All four bots appear in final table",
+      "passed": true
+    },
+    {
+      "check": "HP ranking is correct and only highest HP row is a winner",
+      "passed": true
+    },
+    {
+      "check": "Winner summary is not a draw",
+      "passed": true
+    },
+    {
+      "check": "Standings include elapsed time and winning reason",
+      "passed": true
+    },
+    {
+      "check": "Final table can be closed and reopened",
+      "passed": true
+    },
+    {
+      "check": "Completed local match enables replay",
+      "passed": true
+    },
+    {
+      "check": "Replay begins before the final state",
+      "passed": true
+    },
+    {
+      "check": "Replay ends with the same HP ranking",
+      "passed": true
+    },
+    {
+      "check": "Another battle closes standings and resets the timer",
+      "passed": true
+    },
+    {
+      "check": "Near-equal HP is not displayed as a false tie",
+      "passed": true
+    },
+    {
+      "check": "Visible HP labels distinguish near-equal values",
+      "passed": true
+    },
+    {
+      "check": "Exact tie shows two winning rows and shared first place",
+      "passed": true
+    },
+    {
+      "check": "Ring-out with 250 HP is ranked below surviving robots",
+      "passed": true
+    },
+    {
+      "check": "Online results do not offer a local restart",
+      "passed": true
+    },
+    {
+      "check": "Early victory also opens the complete standings",
+      "passed": true
+    },
+    {
+      "check": "Results stay within viewport at 320px",
+      "passed": true
+    },
+    {
+      "check": "No page horizontal overflow at 320px",
+      "passed": true
+    },
+    {
+      "check": "Results stay within viewport at 390px",
+      "passed": true
+    },
+    {
+      "check": "No page horizontal overflow at 390px",
+      "passed": true
+    },
+    {
+      "check": "Results stay within viewport at 740px",
+      "passed": true
+    },
+    {
+      "check": "No page horizontal overflow at 740px",
+      "passed": true
+    },
+    {
+      "check": "Results stay within viewport at 1500px",
+      "passed": true
+    },
+    {
+      "check": "No page horizontal overflow at 1500px",
+      "passed": true
+    },
+    {
+      "check": "Live flame remains a timed engine stream",
+      "passed": true
+    },
+    {
+      "check": "Flame renderer draws yellow particle lines",
+      "passed": true
+    },
+    {
+      "check": "Machine gun draws small bright circular bullet heads",
+      "passed": true
+    },
+    {
+      "check": "Streams start at the real mounted nozzle",
+      "passed": true
+    },
+    {
+      "check": "Actual flame exposure has reduced opponent health",
+      "passed": true
+    },
+    {
+      "check": "Paused effects remain visually stable",
+      "passed": true
+    },
+    {
+      "check": "No JavaScript browser errors",
+      "passed": true
+    }
+  ],
+  "errors": []
+}

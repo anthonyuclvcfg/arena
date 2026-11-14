@@ -1,0 +1,17 @@
+# Local state and secrets
+data/
+.env
+.env.*
+!.env.example
+*.log
+
+# Development-only files
+node_modules/
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+artifacts/
+.DS_Store
+Thumbs.db

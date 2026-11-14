@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0a1015">
+  <title>CSPIRE//ARENA — Design. Program. Survive.</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#" aria-label="CSpire Arena, home"><svg viewBox="0 0 36 36" aria-hidden="true"><path d="M18 3 33 11v15L18 34 3 26V11Z M11 13v12h14 M18 8v12h10"/></svg><span>CSPIRE<span class="slash">//</span>ARENA</span><small>LAB / 0.5.6</small></a>
+    <nav aria-label="Sections"><button class="navitem active" data-scroll="workshop"><span>01</span> Build</button><button class="navitem" data-scroll="brain"><span>02</span> Program</button><button class="navitem" data-scroll="arena-panel"><span>03</span> Battle</button></nav>
+    <div class="connection"><i id="connection-dot"></i><span id="connection-label">LOCAL · NO ACCOUNT</span></div>
+  </header>
+  <main>
+    <section class="match-hud" aria-label="Live battle health and energy">
+      <div class="fighter" id="fighter-a">
+        <div class="fighter-heading"><b id="name-a">VECTOR-01</b><small id="seat-a">YOU</small></div>
+        <div class="fighter-vitals">
+          <div class="health-vital"><span class="vital-label">HEALTH</span><div class="vital-number"><strong id="health-a">—</strong><span class="vital-max">/ <span id="max-health-a">—</span></span></div></div>
+          <div class="energy-vital"><span class="vital-label">ENERGY</span><div class="vital-number"><strong id="energy-a">100</strong><span class="vital-unit">%</span></div></div>
+        </div>
+        <div class="health-track" id="health-meter-a" role="meter" aria-label="You health" aria-valuemin="0" aria-valuemax="1" aria-valuenow="0"><i id="hp-a"></i></div>
+        <div class="energy-track" id="energy-meter-a" role="meter" aria-label="You energy" aria-valuemin="0" aria-valuemax="100" aria-valuenow="100"><i id="energy-bar-a"></i></div>
+        <div class="pickup-status" id="pickup-status-a" title="Repair kits and bonus tools share a 10-second pickup cooldown">BONUS READY</div>
+      </div>
+      <div class="clock"><strong id="clock">02:00</strong><span id="match-state">READY</span></div>
+      <div class="fighter rival" id="fighter-b">
+        <div class="fighter-heading"><b id="name-b">BLOCK-09</b><small id="seat-b">OPPONENT</small></div>
+        <div class="fighter-vitals">
+          <div class="health-vital"><span class="vital-label">HEALTH</span><div class="vital-number"><strong id="health-b">—</strong><span class="vital-max">/ <span id="max-health-b">—</span></span></div></div>
+          <div class="energy-vital"><span class="vital-label">ENERGY</span><div class="vital-number"><strong id="energy-b">100</strong><span class="vital-unit">%</span></div></div>
+        </div>
+        <div class="health-track" id="health-meter-b" role="meter" aria-label="Opponent health" aria-valuemin="0" aria-valuemax="1" aria-valuenow="0"><i id="hp-b"></i></div>
+        <div class="energy-track" id="energy-meter-b" role="meter" aria-label="Opponent energy" aria-valuemin="0" aria-valuemax="100" aria-valuenow="100"><i id="energy-bar-b"></i></div>
+        <div class="pickup-status" id="pickup-status-b" title="Repair kits and bonus tools share a 10-second pickup cooldown">BONUS READY</div>
+      </div>
+      <div class="fighter" id="fighter-c" hidden>
+        <div class="fighter-heading"><b id="name-c">MANTIS-02</b><small id="seat-c">OPPONENT</small></div>
+        <div class="fighter-vitals">
+          <div class="health-vital"><span class="vital-label">HEALTH</span><div class="vital-number"><strong id="health-c">—</strong><span class="vital-max">/ <span id="max-health-c">—</span></span></div></div>
+          <div class="energy-vital"><span class="vital-label">ENERGY</span><div class="vital-number"><strong id="energy-c">100</strong><span class="vital-unit">%</span></div></div>
+        </div>
+        <div class="health-track" id="health-meter-c" role="meter" aria-label="You health" aria-valuemin="0" aria-valuemax="1" aria-valuenow="0"><i id="hp-c"></i></div>
+        <div class="energy-track" id="energy-meter-c" role="meter" aria-label="You energy" aria-valuemin="0" aria-valuemax="100" aria-valuenow="100"><i id="energy-bar-c"></i></div>
+        <div class="pickup-status" id="pickup-status-c" title="Repair kits and bonus tools share a 10-second pickup cooldown">BONUS READY</div>
+      </div>
+      <div class="fighter rival" id="fighter-d" hidden>
+        <div class="fighter-heading"><b id="name-d">EMBER-04</b><small id="seat-d">OPPONENT</small></div>
+        <div class="fighter-vitals">
+          <div class="health-vital"><span class="vital-label">HEALTH</span><div class="vital-number"><strong id="health-d">—</strong><span class="vital-max">/ <span id="max-health-d">—</span></span></div></div>
+          <div class="energy-vital"><span class="vital-label">ENERGY</span><div class="vital-number"><strong id="energy-d">100</strong><span class="vital-unit">%</span></div></div>
+        </div>
+        <div class="health-track" id="health-meter-d" role="meter" aria-label="Opponent health" aria-valuemin="0" aria-valuemax="1" aria-valuenow="0"><i id="hp-d"></i></div>
+        <div class="energy-track" id="energy-meter-d" role="meter" aria-label="Opponent energy" aria-valuemin="0" aria-valuemax="100" aria-valuenow="100"><i id="energy-bar-d"></i></div>
+        <div class="pickup-status" id="pickup-status-d" title="Repair kits and bonus tools share a 10-second pickup cooldown">BONUS READY</div>
+      </div>
+      <div class="fighter rival" id="fighter-e" hidden>
+        <div class="fighter-heading"><b id="name-e">NOVA-05</b><small id="seat-e">OPPONENT</small></div>
+        <div class="fighter-vitals">
+          <div class="health-vital"><span class="vital-label">HEALTH</span><div class="vital-number"><strong id="health-e">—</strong><span class="vital-max">/ <span id="max-health-e">—</span></span></div></div>
+          <div class="energy-vital"><span class="vital-label">ENERGY</span><div class="vital-number"><strong id="energy-e">100</strong><span class="vital-unit">%</span></div></div>
+        </div>
+        <div class="health-track" id="health-meter-e" role="meter" aria-label="Opponent health" aria-valuemin="0" aria-valuemax="1" aria-valuenow="0"><i id="hp-e"></i></div>
+        <div class="energy-track" id="energy-meter-e" role="meter" aria-label="Opponent energy" aria-valuemin="0" aria-valuemax="100" aria-valuenow="100"><i id="energy-bar-e"></i></div>
+        <div class="pickup-status" id="pickup-status-e" title="Repair kits and bonus tools share a 10-second pickup cooldown">BONUS READY</div>
+      </div>
+      <div class="fighter rival" id="fighter-f" hidden>
+        <div class="fighter-heading"><b id="name-f">BOLT-06</b><small id="seat-f">OPPONENT</small></div>
+        <div class="fighter-vitals">
+          <div class="health-vital"><span class="vital-label">HEALTH</span><div class="vital-number"><strong id="health-f">—</strong><span class="vital-max">/ <span id="max-health-f">—</span></span></div></div>
+          <div class="energy-vital"><span class="vital-label">ENERGY</span><div class="vital-number"><strong id="energy-f">100</strong><span class="vital-unit">%</span></div></div>
+        </div>
+        <div class="health-track" id="health-meter-f" role="meter" aria-label="Opponent health" aria-valuemin="0" aria-valuemax="1" aria-valuenow="0"><i id="hp-f"></i></div>
+        <div class="energy-track" id="energy-meter-f" role="meter" aria-label="Opponent energy" aria-valuemin="0" aria-valuemax="100" aria-valuenow="100"><i id="energy-bar-f"></i></div>
+        <div class="pickup-status" id="pickup-status-f" title="Repair kits and bonus tools share a 10-second pickup cooldown">BONUS READY</div>
+      </div>
+      <div class="fighter rival" id="fighter-g" hidden>
+        <div class="fighter-heading"><b id="name-g">SOLAR-07</b><small id="seat-g">OPPONENT</small></div>
+        <div class="fighter-vitals">
+          <div class="health-vital"><span class="vital-label">HEALTH</span><div class="vital-number"><strong id="health-g">—</strong><span class="vital-max">/ <span id="max-health-g">—</span></span></div></div>
+          <div class="energy-vital"><span class="vital-label">ENERGY</span><div class="vital-number"><strong id="energy-g">100</strong><span class="vital-unit">%</span></div></div>
+        </div>
+        <div class="health-track" id="health-meter-g" role="meter" aria-label="Opponent health" aria-valuemin="0" aria-valuemax="1" aria-valuenow="0"><i id="hp-g"></i></div>
+        <div class="energy-track" id="energy-meter-g" role="meter" aria-label="Opponent energy" aria-valuemin="0" aria-valuemax="100" aria-valuenow="100"><i id="energy-bar-g"></i></div>
+        <div class="pickup-status" id="pickup-status-g" title="Repair kits and bonus tools share a 10-second pickup cooldown">BONUS READY</div>
+      </div>
+      <div class="fighter rival" id="fighter-h" hidden>
+        <div class="fighter-heading"><b id="name-h">ICE-08</b><small id="seat-h">OPPONENT</small></div>
+        <div class="fighter-vitals">
+          <div class="health-vital"><span class="vital-label">HEALTH</span><div class="vital-number"><strong id="health-h">—</strong><span class="vital-max">/ <span id="max-health-h">—</span></span></div></div>
+          <div class="energy-vital"><span class="vital-label">ENERGY</span><div class="vital-number"><strong id="energy-h">100</strong><span class="vital-unit">%</span></div></div>
+        </div>
+        <div class="health-track" id="health-meter-h" role="meter" aria-label="Opponent health" aria-valuemin="0" aria-valuemax="1" aria-valuenow="0"><i id="hp-h"></i></div>
+        <div class="energy-track" id="energy-meter-h" role="meter" aria-label="Opponent energy" aria-valuemin="0" aria-valuemax="100" aria-valuenow="100"><i id="energy-bar-h"></i></div>
+        <div class="pickup-status" id="pickup-status-h" title="Repair kits and bonus tools share a 10-second pickup cooldown">BONUS READY</div>
+      </div>
+    </section>
+    <section class="intro"><div><p class="eyebrow">EVOLVING BATTLES / ONE ROBOT. YOUR LOGIC.</p><h1>Do not drive it.<br class="mobile-break"> <span>Teach it to win.</span></h1><p class="intro-copy">250 HP. Up to eight robots. 120 seconds. Solo or team battles. Highest surviving HP wins at the buzzer.</p></div><button id="help-open" class="outline-button">Battle rules <span>↗</span></button></section>
+    <div class="layout" id="battle-layout">
+      <div id="builder-dock" class="side-dock side-dock-left"><div class="side-content">
+      <section id="workshop" class="panel workshop">
+        <div class="panel-title sidebar-heading"><h2><span>01</span> Your robot</h2><div class="panel-heading-tools"><span id="save-status" class="tiny-label">SAVED LOCALLY</span><button id="collapse-builder" class="panel-collapse" data-panel-close="builder" aria-label="Minimize robot builder" title="Minimize robot builder" aria-controls="builder-dock" aria-expanded="true"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M9 4v16m7-12-4 4 4 4"/></svg></button></div></div>
+        <label class="field-label" for="robot-name">IDENTIFIER</label>
+        <input id="robot-name" maxlength="18" autocomplete="off" spellcheck="false" value="VECTOR-01">
+        <div class="preview-wrap"><canvas id="builder" width="600" height="390" tabindex="0" aria-label="Robot drawing editor. Drag a tool to move it, use the wheel to rotate it, or double-click to remove it." aria-describedby="draw-hint"></canvas><div class="preview-caption"><span id="preview-mode">TOP VIEW</span><span>FRONT →</span></div></div>
+        <div class="draw-tools"><button id="draw-toggle" class="mini-button" aria-pressed="false">＋ Draw lines</button><button id="undo-line" class="icon-button" title="Undo last line" aria-label="Undo last line">↶</button><button id="clear-lines" class="icon-button" title="Clear drawing" aria-label="Clear drawing">⌫</button></div>
+        <p id="draw-hint" class="hint">Click a tool to select it; drag to move. Wheel: rotate 15° (Shift: 5°). Double-click a mounted tool to remove it. Draw lines adds decoration.</p>
+        <label class="field-label">CHASSIS</label>
+        <div id="body-options" class="body-options" role="group" aria-label="Chassis shape">
+          <button data-body="wedge" aria-pressed="true"><span>▷</span>Wedge</button><button data-body="box" aria-pressed="false"><span>▭</span>Box</button><button data-body="hex" aria-pressed="false"><span>⬡</span>Hex</button><button data-body="circle" aria-pressed="false"><span>○</span>Circle</button>
+          <button data-body="diamond" aria-pressed="false"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M29,16 L21.72,12.62 L17.56,6.64 L9.5,3.52 L11.58,10.02 L4.82,8.46 L7.42,13.14 L3,14.44 L6.25,16 L3,17.56 L7.42,18.86 L4.82,23.54 L11.58,21.98 L9.5,28.48 L17.56,25.36 L21.72,19.38 Z"/></svg>Manta</button>
+          <button data-body="octagon" aria-pressed="false"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M29,12.36 L29,19.64 L26.14,19.64 L26.14,24.84 L22.76,28.22 L18.6,28.22 L18.6,25.36 L13.4,25.36 L13.4,28.22 L8.2,28.22 L3.78,23.8 L3.78,18.86 L6.12,18.86 L6.12,13.14 L3.78,13.14 L3.78,8.2 L8.2,3.78 L13.4,3.78 L13.4,6.64 L18.6,6.64 L18.6,3.78 L22.76,3.78 L26.14,7.16 L26.14,12.36 Z"/></svg>Bastion</button>
+          <button data-body="capsule" aria-pressed="false"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M3.52,7.16 L6.64,4.3 L24.84,4.3 L28.74,7.94 L26.66,11.32 L20.55,11.32 L20.55,13.92 L23.15,16 L20.55,18.08 L20.55,20.68 L26.66,20.68 L28.74,24.06 L24.84,27.7 L6.64,27.7 L3.52,24.84 L3.52,21.98 L10.15,20.68 L10.15,11.32 L3.52,10.02 Z"/></svg>Twin Hull</button>
+          <button data-body="cross" aria-pressed="false"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M11 2h10v9h9v10h-9v9H11v-9H2V11h9Z"/></svg>Cross</button>
+        </div>
+        <div class="arsenal-header"><label class="field-label" for="loadout">TOOL BAY</label><span id="tool-count" class="tiny-label">2 / 6 MOUNTED</span></div>
+        <select id="loadout" aria-label="Example loadout"><option value="custom">Loadout examples...</option><option value="dual">Dual strike · ram + saw</option><option value="breacher">Breacher · heavy hammer + plow</option><option value="sidewinder">Sidewinder · side-mounted tools</option><option value="ranged">Fire support · gun + rockets + flame</option><option value="arsenal">Full arsenal · 6 melee tools</option></select>
+        <div id="tool-catalog" class="tool-catalog" role="group" aria-label="Add a predefined tool"></div>
+        <div id="tool-slots" class="tool-slots" role="group" aria-label="Mounted tools"></div>
+        <div id="tool-editor" class="tool-editor">
+          <div class="tool-editor-title"><strong id="selected-tool-label">01 / RAM</strong><button id="remove-tool" class="text-button">Remove ×</button></div>
+          <div class="mount-fields"><div><label class="field-label" for="tool-x">X POSITION</label><input id="tool-x" type="number" min="-26" max="26" step="0.5"></div><div><label class="field-label" for="tool-y">Y POSITION</label><input id="tool-y" type="number" min="-26" max="26" step="0.5"></div><div><label class="field-label" for="tool-angle">ANGLE °</label><input id="tool-angle" type="number" min="0" max="359.9" step="5"></div></div>
+          <div class="rotation-controls"><button id="rotate-left" class="mini-button" aria-label="Rotate tool counterclockwise 15 degrees">↶ 15°</button><input id="tool-rotation" type="range" min="0" max="359" step="1" aria-label="Tool rotation"><button id="rotate-right" class="mini-button" aria-label="Rotate tool clockwise 15 degrees">15° ↷</button></div>
+          <div class="power-row"><label class="field-label" for="tool-power">POWER</label><select id="tool-power"><option value="1">1 · Light</option><option value="2">2 · Standard</option><option value="3">3 · Heavy</option></select></div>
+          <div id="tool-specs" class="tool-specs"></div><p id="weapon-hint" class="hint"></p>
+        </div>
+        <p class="hint arsenal-note">Build up to 6 tools. Collect 2 extra tools during a battle. Each has its own health and cooldown. Yellow bonus tools turn red at 25% HP or less. More power costs points and takes longer to recharge.</p>
+        <label class="slider-label" for="motor"><span>Motor <small>speed and pushing power</small></span><b id="motor-value">4 / 5</b></label><input type="range" id="motor" min="1" max="5" step="1" value="4">
+        <label class="slider-label" for="armor"><span>Armor <small>panel strength · chassis stays 250 HP</small></span><b id="armor-value">3 / 5</b></label><input type="range" id="armor" min="1" max="5" step="1" value="3">
+        <div class="budget"><div><span>BUDGET</span><strong><b id="budget-value">92</b><small> / <span id="budget-limit">200</span></small></strong></div><div class="track"><i id="budget-bar"></i></div></div>
+        <div class="stat-row"><span><b id="stat-mass">—</b>MASS</span><span><b id="stat-speed">—</b>SPEED</span><span><b id="stat-hp">—</b>INTEGRITY</span></div>
+        <div class="file-actions"><button id="export" class="text-button">Export robot ↗</button><button id="import" class="text-button">Import ↙</button><input id="import-file" type="file" accept="application/json,.json" hidden></div>
+      </section>
+      </div></div>
+      <section id="arena-panel" class="panel arena-panel">
+        <div class="panel-title arena-heading"><h2><span class="live-dot"></span> Arena 01</h2><div class="arena-header-actions">
+          <button id="seed-button" class="seed-button" title="Preview a random layout. Starting a new battle rolls another seed.">SEED <span id="seed-label">28471</span> ↻</button>
+          <button id="restore-builder" class="view-button" data-panel-open="builder" aria-label="Show robot builder" title="Show robot builder" aria-controls="builder-dock" aria-expanded="false" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M9 4v16m7-12-4 4 4 4"/></svg><span>Build</span></button>
+          <button id="arena-size-toggle" class="view-button" aria-label="Maximize arena" title="Maximize arena" aria-controls="builder-dock logic-dock" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 3H3v6m12-6h6v6M3 15v6h6m12-6v6h-6"/></svg></button>
+          <button id="restore-logic" class="view-button" data-panel-open="logic" aria-label="Show logic and telemetry" title="Show logic and telemetry" aria-controls="logic-dock" aria-expanded="false" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M15 4v16M8 8l4 4-4 4"/></svg><span>Logic</span></button>
+        </div></div>
+        <div class="match-options roster-control mode-control"><label for="battle-mode">MODE</label><select id="battle-mode"><option value="ffa">Free-for-all</option><option value="2v2">2 vs 2</option><option value="3v3">3 vs 3</option><option value="4v4">4 vs 4</option><option value="2v2v2">2 vs 2 vs 2</option><option value="2v2v2v2">2 vs 2 vs 2 vs 2</option></select><label for="bot-count">ROBOTS</label><select id="bot-count"><option value="2">2 · Duel</option><option value="3">3 · Free-for-all</option><option value="4" selected>4 · Free-for-all</option><option value="5">5 · Free-for-all</option><option value="6">6 · Free-for-all</option><option value="7">7 · Free-for-all</option><option value="8">8 · Free-for-all</option></select></div><p id="battle-mode-note" class="mode-note">Every robot for itself. Choose 2–8 participants.</p><details class="roster-options"><summary>Random AI bots <span>New builds every battle</span></summary>
+          <p class="ai-roster-note">Only computer-controlled bots change. Your robot and real players keep their saved designs.</p>
+          <div id="opponent-row-1" class="ai-roster-row"><div><b id="ai-name-1"></b><small id="ai-spec-1"></small></div><p id="ai-tools-1"></p></div>
+          <div id="opponent-row-2" class="ai-roster-row"><div><b id="ai-name-2"></b><small id="ai-spec-2"></small></div><p id="ai-tools-2"></p></div>
+          <div id="opponent-row-3" class="ai-roster-row"><div><b id="ai-name-3"></b><small id="ai-spec-3"></small></div><p id="ai-tools-3"></p></div>
+<div id="opponent-row-4" class="ai-roster-row"><div><b id="ai-name-4"></b><small id="ai-spec-4"></small></div><p id="ai-tools-4"></p></div>
+<div id="opponent-row-5" class="ai-roster-row"><div><b id="ai-name-5"></b><small id="ai-spec-5"></small></div><p id="ai-tools-5"></p></div>
+<div id="opponent-row-6" class="ai-roster-row"><div><b id="ai-name-6"></b><small id="ai-spec-6"></small></div><p id="ai-tools-6"></p></div>
+<div id="opponent-row-7" class="ai-roster-row"><div><b id="ai-name-7"></b><small id="ai-spec-7"></small></div><p id="ai-tools-7"></p></div>
+        </details>
+        <div class="battle-controls"><button id="start" class="primary-button"><span>▷</span> Test battle</button><button id="pause" class="outline-button compact" disabled aria-label="Pause">Ⅱ</button><button id="speed" class="outline-button compact">1×</button><button id="replay" class="outline-button compact" disabled title="Replay last battle">↶ Replay</button></div>
+        <div id="results-shortcut" class="results-shortcut" hidden><button id="results-open" class="text-button" aria-controls="results-panel" aria-expanded="false">View final standings ↗</button></div>
+        <div class="field-strip"><span id="field-summary">RANDOM HAZARDS / FIELD BONUSES</span><span id="next-supply">SUPPLY REFRESH IN 30s</span></div>
+        <div id="team-strip" class="team-strip" aria-label="Live team health" hidden></div>
+        <div id="arena-stage" class="arena-stage">
+        <div class="arena-wrap"><canvas id="arena" width="1000" height="1000" tabindex="0" aria-label="Battle arena. Point at a wall to inspect it, or use left and right arrow keys."></canvas><div id="arena-banner" class="arena-banner"><span>READY FOR BATTLE</span><strong>Let your robot decide.</strong><p>Avoid the hazards. Find repairs. Collect extra tools.</p></div></div>
+  <section id="results-panel" class="results-panel" hidden tabindex="-1" aria-labelledby="results-title" aria-describedby="results-summary">
+    <div class="dialog-heading"><span class="eyebrow">FINAL STANDINGS</span><button data-results-close class="icon-button" aria-label="Hide standings">×</button></div>
+    <h2 id="results-title">Final standings</h2>
+    <p id="results-summary" class="results-summary" role="status"></p>
+    <div class="results-meta"><span id="results-reason"></span><span id="results-time"></span></div>
+    <div id="results-teams" class="results-teams" hidden aria-label="Final team standings"></div>
+    <div class="results-table-wrap"><table class="results-table">
+      <caption class="sr-only">Final ranking, remaining chassis health and elimination status for every robot.</caption>
+      <thead><tr><th scope="col">PLACE</th><th scope="col">ROBOT</th><th scope="col">HP LEFT</th><th scope="col">STATUS</th></tr></thead>
+      <tbody id="results-rows"></tbody>
+    </table></div>
+    <details class="results-details"><summary>Ranking rules</summary><p class="results-note">Teams rank by surviving total HP; eliminated members add no HP. All members of the winning team share its place. In free-for-all, survivors rank by exact chassis HP. Eliminated robots rank below them by survival time, then HP. Only exact HP ties share first place. Extra decimals are shown when needed to distinguish HP values.</p></details>
+    <div class="results-actions"><button data-results-close class="outline-button compact">Hide standings</button><button id="results-replay" class="outline-button compact">↶ Replay</button><button id="results-next" class="primary-button compact">Another battle →</button></div>
+    <p id="results-online-note" class="hint" hidden>Online battle complete. Leave your room to edit your robot or start a new room.</p>
+  </section>
+        </div>
+        <div class="arena-legend"><span><i class="legend-fire"></i> Fire</span><span><i class="legend-grinder"></i> Grinder</span><span><i class="legend-spikes"></i> Spikes</span><span><i class="legend-electric"></i> Tesla</span><span><i class="legend-acid"></i> Acid</span><span class="legend-bonus"><i class="legend-repair">+</i> Repair</span><span class="legend-bonus"><i class="legend-tool">◇</i> Extra tool</span><span class="legend-critical"><i>!</i> Tool HP ≤ 25%</span></div>
+        <div class="wall-inspector"><div><span class="tiny-label" id="wall-label">WALL 01 · REINFORCED</span><small>Point at or tap a wall to inspect</small></div><div class="wall-meter"><strong id="wall-health">180 / 180 HP</strong><div class="track"><i id="wall-bar"></i></div></div><button id="wall-auto" class="text-button" title="Track the weakest wall">Auto ↻</button></div>
+        <div id="damage-deck" class="damage-deck" aria-label="All robots component status"></div>
+        <div class="online-strip"><div><span class="tiny-label">PLAYER VS PLAYER</span><p id="online-status">Share a room and pit your robots against each other.</p></div><button id="online-open" class="outline-button compact">Online ↗</button></div>
+      </section>
+      <div id="logic-dock" class="side-dock side-dock-right"><div class="side-content">
+      <aside id="logic-panel" class="right-column">
+        <section id="brain" class="panel brain">
+          <div class="panel-title sidebar-heading"><h2><span>02</span> Its brain</h2><div class="panel-heading-tools"><span id="rule-count" class="tiny-label">7 / 12 RULES</span><button id="collapse-logic" class="panel-collapse" data-panel-close="logic" aria-label="Minimize logic and telemetry" title="Minimize logic and telemetry" aria-controls="logic-dock" aria-expanded="true"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M15 4v16M8 8l4 4-4 4"/></svg></button></div></div>
+          <p class="section-copy">Your robot follows the <b>first matching rule</b>, from top to bottom.</p>
+          <label class="sr-only" for="preset">Behavior preset</label><select id="preset"><option value="balanced">Balanced logic</option><option value="aggressive">Aggressive logic</option><option value="careful">Cautious logic</option><option value="scavenger">Scavenger logic · seek bonuses</option><option value="custom" disabled>Custom logic</option></select>
+          <div id="rules"></div><button id="add-rule" class="add-rule">＋ Add rule</button>
+          <div class="brain-footer"><span class="live-dot"></span> DECISION EVERY 0.1 s · NO CODE</div>
+        </section>
+        <section class="panel telemetry"><div class="panel-title"><h2><span>03</span> Live telemetry</h2><span id="telemetry-mode" class="tiny-label">LOCAL</span></div><div class="telemetry-row"><span>Your action</span><b id="current-action">Standing by</b></div><div class="telemetry-row"><span>Robot height</span><b id="current-height">0 u</b></div><div class="telemetry-row"><span>Broken walls</span><b id="broken-walls">0 / 48</b></div><div class="telemetry-row"><span>Mobility</span><b id="mobility">100%</b></div><div class="telemetry-row"><span>Active tools</span><b id="active-tools">2 / 2</b></div><div class="telemetry-row"><span>Bonus tools</span><b id="bonus-tools">0 / 2</b></div><div class="telemetry-row"><span>Repair kits used</span><b id="repairs-collected">0</b></div><div class="telemetry-row"><span>Next pickup</span><b id="pickup-cooldown">Ready</b></div><div id="tool-telemetry" class="tool-telemetry"></div><div id="events" class="event-log" aria-live="polite"><p>Battle events will appear here.</p></div></section>
+        <p class="side-note"><span>↳</span> One saved robot. Field tools are temporary: your blueprint stays yours. Choose Balanced or Scavenger logic to seek bonuses.</p>
+      </aside>
+      </div></div>
+    </div>
+    <footer><span>CSPIRE//ARENA <b>FREE-FOR-ALL / 0.5.6</b></span><p>Last robot standing wins. Ring-outs and destruction eliminate a robot. 120-second limit. Highest surviving robot/team HP wins; exact HP ties share first place.</p><span>HTML + CSS + JS · NO DEPENDENCIES</span></footer>
+  </main>
+  <dialog id="help-dialog"><div class="dialog-heading"><span class="eyebrow">RULEBOOK / 01</span><button data-close class="icon-button" aria-label="Close">×</button></div><h2>The arena shows no mercy.</h2><div class="help-grid"><section><b>01 / One robot only</b><p>Choose from eight chassis shapes, including Manta, Bastion, Twin Hull and the unchanged Cross, with up to six tools, a motor, and armor within 200 points. Tools can be placed anywhere on the mounting grid and rotated through 360°. Drawn lines remain decorative.</p></section><section><b>02 / You program. It fights.</b><p>Arrange up to twelve IF → DO rules. The first matching rule runs; if none match, the robot brakes. Hazard conditions and avoidance actions ignore inactive traps. When a trap switches on or off, the robot rechecks its rules immediately. The side panels slide away at battle start. Use their panel icons to hide or restore them; the arena expand icon controls both. Viewing panels during a battle never unlocks editing. There is no manual control. Moving robots automatically reverse and turn away if they become stuck against a wall; intentional braking and wall attacks are preserved.</p></section><section><b>03 / Out means out</b><p>Crossing the boundary commits a ring-out. The eliminated robot coasts until its whole outline clears the edge, with no return or further actions. The camera stays fixed during exits; robots leaving the visible apron are clipped, never zoomed out. Each wall segment has 180 HP. Impact damage depends on mass and speed and is capped at 72 per collision. Tool damage depends on type and power. Damage accumulates until a permanent gap opens.</p></section><section><b>04 / Over the top counts too</b><p>The flipper adds height and speed with a reduced vertical impulse (15% less). Above 42 units, the wall cannot stop a robot. A robot cannot drive while airborne.</p></section><section><b>05 / The floor is an enemy</b><p>Every battle rolls new hazards: fire, grinders, spikes, Tesla pads and acid. Positions, sizes and pulse timing vary. Hazards use mirrored pairs or four-way layouts depending on the mode, with every starting zone kept clear. Crowded fields use fewer traps: 6 for five robots and 4 for six to eight. Programming detects and avoids active traps only. Inactive traps and their warning lights are ignored until they activate.</p></section><section><b>06 / Last robot standing</b><p>Two to eight robots fight solo or in teams, starting with 250 chassis HP and full energy. AI practice opponents get new names, chassis, motors, armor and tools each match, within the same 200-point budget. Human players keep their builds. Choose Free-for-all, 2 vs 2, 3 vs 3, 4 vs 4, three teams of two, or four teams of two. Teammates have the same color and do not target or damage each other with weapons. Physical contact and arena hazards still apply. The last surviving robot or team wins. At 120 seconds, free-for-all ranks by exact remaining chassis HP; teams rank by the sum of their surviving members’ HP. Only equal HP at the top is a draw. The winner is announced over the arena. The full standings appear to the right of the field, or below it on narrow screens, without a modal or dimming layer. Eliminated robots rank below survivors by survival time, then HP for simultaneous eliminations. Online matches are simulated on the server.</p></section><section><b>07 / Repair on contact</b><p>Drive over a green kit to restore up to 30% of maximum chassis HP and 25% of each surviving component. Healing is capped. Destroyed parts stay broken; full-health robots leave unneeded kits alone.</p></section><section><b>08 / Finders, keepers</b><p>Drive over an amber tool to auto-mount it in one of two bonus slots. It uses shared energy and adds mass, but costs no build points. Activate all tools also uses bonus tools. Broken bonus tools can be replaced by another pickup. Supplies refresh at 30, 60 and 90 seconds; unclaimed old supplies expire. All loot is battle-only. Collecting either a repair kit or a tool starts a shared 10-second pickup cooldown for that robot. Other robots are unaffected; unavailable or unusable items do not start the cooldown. Bonus tools are yellow; at 25% HP or less they turn red and show a warning marker.</p></section></div><p class="dialog-note">This prototype stores your identity in this browser; it is not a verified account system. Tools, four armor panels, and both drives have separate health. Broken tools stop working; broken drives reduce mobility. Debris is visual, not a physical obstacle. Chassis HP is fixed at 250. Armor still improves panel durability. Every power level increases damage, range and cooldown. Flame damage is spread across a 1.6 / 1.8 / 2.0-second yellow stream (Light / Standard / Heavy); machine guns repeat twelve-dot bursts over 1.1 seconds while a firing rule is active. Nominal Light damage is 22 per full flame emission and 15 per full gun burst; stronger levels scale it up. Changing rules stops flames and unlaunched rounds, but already-fired bullets and rockets keep flying to impact or their full range. At the end signal, launched shots finish before the final standings are confirmed; no new rounds are fired. Tools deal different amounts of damage by target; the cards show nominal damage only. Rocket splash can damage the shooter at close range in free-for-all, but allied and self weapon damage are disabled in team modes. Components are fully restored for each new battle.</p></dialog>
+  <dialog id="online-dialog"><div class="dialog-heading"><span class="eyebrow">PRIVATE ROOM / ONLINE</span><button data-close class="icon-button" aria-label="Close">×</button></div><h2>Your robot against theirs.</h2><p class="section-copy">Up to eight pilots join the same server. Each brings one saved robot. The host chooses the mode. Free-for-all starts with 2–8 players; teams require a full balanced roster. Seats alternate between teams in join order.</p><div id="server-warning" class="notice" hidden>This copy is open as a local file. To use rooms, run <code>node server.js</code> from the project folder and open <code>http://localhost:3000</code>.</div><label class="field-label" for="room-mode">BATTLE MODE · HOST CONTROL</label><select id="room-mode"><option value="ffa">Free-for-all</option><option value="2v2">2 vs 2</option><option value="3v3">3 vs 3</option><option value="4v4">4 vs 4</option><option value="2v2v2">2 vs 2 vs 2</option><option value="2v2v2v2">2 vs 2 vs 2 vs 2</option></select><p id="room-mode-help" class="hint">Teams are assigned in alternating join order. No weapon friendly fire.</p><label class="field-label" for="pilot-name">YOUR ALIAS</label><input id="pilot-name" maxlength="24" placeholder="Pilot"><div class="room-buttons"><button id="create-room" class="primary-button">Create room</button><span>or</span><input id="room-code" maxlength="6" placeholder="CODE" aria-label="Room code"><button id="join-room" class="outline-button">Join</button></div><div id="room-info" class="room-info" hidden><span class="tiny-label">SHARE THIS CODE</span><strong id="share-code">—</strong><p id="room-message">Waiting for an opponent…</p><div id="room-roster" class="room-roster" aria-label="Room roster and teams"></div><button id="copy-room" class="text-button">Copy code</button><button id="launch-online" class="primary-button" hidden>Start online battle</button><button id="leave-room" class="text-button">Leave room</button></div><p id="online-error" role="alert"></p><p class="dialog-note">No external account or dependencies. All players must be able to reach the server. Downloading this project does not publish the game online.</p></dialog>
+
+  <div id="toast" role="status"></div>
+  <script src="engine.js"></script><script src="app.js"></script>
+</body>
+</html>

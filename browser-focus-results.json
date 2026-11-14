@@ -1,0 +1,235 @@
+{
+  "passed": 57,
+  "total": 57,
+  "checks": [
+    {
+      "check": "New brand and two-minute timer are visible",
+      "passed": true
+    },
+    {
+      "check": "Both side panels start expanded",
+      "passed": true
+    },
+    {
+      "check": "Left dock visibly translates left while its width shrinks",
+      "passed": true
+    },
+    {
+      "check": "Manual left collapse frees width and leaves right open",
+      "passed": true
+    },
+    {
+      "check": "Collapsed builder is zero-height and inaccessible to keyboard",
+      "passed": true
+    },
+    {
+      "check": "Focus transfers to a visible restore button",
+      "passed": true
+    },
+    {
+      "check": "Keyboard restore reopens the original robot unchanged",
+      "passed": true
+    },
+    {
+      "check": "Right dock visibly translates right",
+      "passed": true
+    },
+    {
+      "check": "Right collapse does not hide the builder",
+      "passed": true
+    },
+    {
+      "check": "Manual maximize collapses both sides and uses the released width",
+      "passed": true
+    },
+    {
+      "check": "Maximized battlefield is actually larger and remains square",
+      "passed": true
+    },
+    {
+      "check": "Maximized battlefield fits below the sticky HUD",
+      "passed": true
+    },
+    {
+      "check": "Maximized view adds no modal or dimming layer",
+      "passed": true
+    },
+    {
+      "check": "One click restores both panels",
+      "passed": true
+    },
+    {
+      "check": "Battle expands the arena during the countdown, before physics starts",
+      "passed": true
+    },
+    {
+      "check": "Countdown does not reset or extend the two-minute simulation",
+      "passed": true
+    },
+    {
+      "check": "Panels can reopen during battle but editing remains locked",
+      "passed": true
+    },
+    {
+      "check": "Viewing controls do not mutate the human design",
+      "passed": true
+    },
+    {
+      "check": "Stopping restores the pre-battle manual panel preference",
+      "passed": true
+    },
+    {
+      "check": "Finish keeps the arena expanded instead of reopening panels",
+      "passed": true
+    },
+    {
+      "check": "Final standings sit to the right while the winner is visible over the board",
+      "passed": true
+    },
+    {
+      "check": "Every robot remains in the final standings",
+      "passed": true
+    },
+    {
+      "check": "Build navigation restores a hidden panel",
+      "passed": true
+    },
+    {
+      "check": "320px focus view has no horizontal overflow",
+      "passed": true
+    },
+    {
+      "check": "320px focused docks occupy zero vertical space",
+      "passed": true
+    },
+    {
+      "check": "320px battlefield retains a square aspect ratio",
+      "passed": true
+    },
+    {
+      "check": "320px builder can be restored manually",
+      "passed": true
+    },
+    {
+      "check": "390px focus view has no horizontal overflow",
+      "passed": true
+    },
+    {
+      "check": "390px focused docks occupy zero vertical space",
+      "passed": true
+    },
+    {
+      "check": "390px battlefield retains a square aspect ratio",
+      "passed": true
+    },
+    {
+      "check": "390px builder can be restored manually",
+      "passed": true
+    },
+    {
+      "check": "740px focus view has no horizontal overflow",
+      "passed": true
+    },
+    {
+      "check": "740px focused docks occupy zero vertical space",
+      "passed": true
+    },
+    {
+      "check": "740px battlefield retains a square aspect ratio",
+      "passed": true
+    },
+    {
+      "check": "740px builder can be restored manually",
+      "passed": true
+    },
+    {
+      "check": "900px focus view has no horizontal overflow",
+      "passed": true
+    },
+    {
+      "check": "900px focused docks occupy zero vertical space",
+      "passed": true
+    },
+    {
+      "check": "900px battlefield retains a square aspect ratio",
+      "passed": true
+    },
+    {
+      "check": "900px builder can be restored manually",
+      "passed": true
+    },
+    {
+      "check": "1190px focus view has no horizontal overflow",
+      "passed": true
+    },
+    {
+      "check": "1190px focused docks occupy zero vertical space",
+      "passed": true
+    },
+    {
+      "check": "1190px battlefield retains a square aspect ratio",
+      "passed": true
+    },
+    {
+      "check": "1190px builder can be restored manually",
+      "passed": true
+    },
+    {
+      "check": "1280px focus view has no horizontal overflow",
+      "passed": true
+    },
+    {
+      "check": "1280px focused docks occupy zero vertical space",
+      "passed": true
+    },
+    {
+      "check": "1280px battlefield retains a square aspect ratio",
+      "passed": true
+    },
+    {
+      "check": "1280px builder can be restored manually",
+      "passed": true
+    },
+    {
+      "check": "1920px focus view has no horizontal overflow",
+      "passed": true
+    },
+    {
+      "check": "1920px focused docks occupy zero vertical space",
+      "passed": true
+    },
+    {
+      "check": "1920px battlefield retains a square aspect ratio",
+      "passed": true
+    },
+    {
+      "check": "1920px builder can be restored manually",
+      "passed": true
+    },
+    {
+      "check": "Reduced motion disables the panel animation",
+      "passed": true
+    },
+    {
+      "check": "Online start snapshots auto-expand both independent client views",
+      "passed": true
+    },
+    {
+      "check": "Subsequent online snapshots respect a manually reopened panel",
+      "passed": true
+    },
+    {
+      "check": "Human online opponents are not labelled random AI",
+      "passed": true
+    },
+    {
+      "check": "Online results keep the field visible and preserve manual panel choices",
+      "passed": true
+    },
+    {
+      "check": "No browser JavaScript errors",
+      "passed": true
+    }
+  ],
+  "errors": []
+}

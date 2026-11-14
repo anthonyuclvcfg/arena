@@ -1,0 +1,57 @@
+{
+  "gameVersion": "0.5.6",
+  "startedAt": "2026-11-13T20:57:12.685Z",
+  "python": [
+    "python3"
+  ],
+  "suites": [
+    {
+      "file": "browser-ui.py",
+      "passed": true,
+      "exitCode": 0,
+      "checks": 65,
+      "passedChecks": 65,
+      "pageErrors": [],
+      "reportError": null
+    },
+    {
+      "file": "browser-results.py",
+      "passed": true,
+      "exitCode": 0,
+      "checks": 42,
+      "passedChecks": 42,
+      "pageErrors": [],
+      "reportError": null
+    },
+    {
+      "file": "browser-focus.py",
+      "passed": true,
+      "exitCode": 0,
+      "checks": 57,
+      "passedChecks": 57,
+      "pageErrors": [],
+      "reportError": null
+    },
+    {
+      "file": "browser-editor-six.py",
+      "passed": true,
+      "exitCode": 0,
+      "checks": 61,
+      "passedChecks": 61,
+      "pageErrors": [],
+      "reportError": null
+    },
+    {
+      "file": "browser-teams-camera.py",
+      "passed": true,
+      "exitCode": 0,
+      "checks": 99,
+      "passedChecks": 99,
+      "pageErrors": [],
+      "reportError": null
+    }
+  ],
+  "finishedAt": "2026-11-13T20:58:32.925Z",
+  "passed": true,
+  "totalChecks": 324
+}

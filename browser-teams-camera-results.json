@@ -1,0 +1,403 @@
+{
+  "passed": 99,
+  "total": 99,
+  "checks": [
+    {
+      "check": "Standalone starts in English as CSPIRE//ARENA 0.5.6",
+      "passed": true
+    },
+    {
+      "check": "Manta is selectable under its compatible chassis ID",
+      "passed": true
+    },
+    {
+      "check": "Manta has its new label and outline icon",
+      "passed": true
+    },
+    {
+      "check": "Manta icon uses the complete complex contour",
+      "passed": true
+    },
+    {
+      "check": "Bastion is selectable under its compatible chassis ID",
+      "passed": true
+    },
+    {
+      "check": "Bastion has its new label and outline icon",
+      "passed": true
+    },
+    {
+      "check": "Bastion icon uses the complete complex contour",
+      "passed": true
+    },
+    {
+      "check": "Twin Hull is selectable under its compatible chassis ID",
+      "passed": true
+    },
+    {
+      "check": "Twin Hull has its new label and outline icon",
+      "passed": true
+    },
+    {
+      "check": "Twin Hull icon uses the complete complex contour",
+      "passed": true
+    },
+    {
+      "check": "Cross is selectable under its compatible chassis ID",
+      "passed": true
+    },
+    {
+      "check": "Cross has its new label and outline icon",
+      "passed": true
+    },
+    {
+      "check": "Cross icon is unchanged",
+      "passed": true
+    },
+    {
+      "check": "Exactly eight chassis options, no redundant old shape names",
+      "passed": true
+    },
+    {
+      "check": "2v2 locks a balanced participant count",
+      "passed": true
+    },
+    {
+      "check": "2v2 creates the correct teams and live HP chips",
+      "passed": true
+    },
+    {
+      "check": "2v2 keeps the human design exactly and randomizes only AI",
+      "passed": true
+    },
+    {
+      "check": "2v2 shares colors between teammates",
+      "passed": true
+    },
+    {
+      "check": "2v2 shows team names and numbers in HUD role labels",
+      "passed": true
+    },
+    {
+      "check": "3v3 locks a balanced participant count",
+      "passed": true
+    },
+    {
+      "check": "3v3 creates the correct teams and live HP chips",
+      "passed": true
+    },
+    {
+      "check": "3v3 keeps the human design exactly and randomizes only AI",
+      "passed": true
+    },
+    {
+      "check": "3v3 shares colors between teammates",
+      "passed": true
+    },
+    {
+      "check": "3v3 shows team names and numbers in HUD role labels",
+      "passed": true
+    },
+    {
+      "check": "4v4 locks a balanced participant count",
+      "passed": true
+    },
+    {
+      "check": "4v4 creates the correct teams and live HP chips",
+      "passed": true
+    },
+    {
+      "check": "4v4 keeps the human design exactly and randomizes only AI",
+      "passed": true
+    },
+    {
+      "check": "4v4 shares colors between teammates",
+      "passed": true
+    },
+    {
+      "check": "4v4 shows team names and numbers in HUD role labels",
+      "passed": true
+    },
+    {
+      "check": "2v2v2 locks a balanced participant count",
+      "passed": true
+    },
+    {
+      "check": "2v2v2 creates the correct teams and live HP chips",
+      "passed": true
+    },
+    {
+      "check": "2v2v2 keeps the human design exactly and randomizes only AI",
+      "passed": true
+    },
+    {
+      "check": "2v2v2 shares colors between teammates",
+      "passed": true
+    },
+    {
+      "check": "2v2v2 shows team names and numbers in HUD role labels",
+      "passed": true
+    },
+    {
+      "check": "2v2v2v2 locks a balanced participant count",
+      "passed": true
+    },
+    {
+      "check": "2v2v2v2 creates the correct teams and live HP chips",
+      "passed": true
+    },
+    {
+      "check": "2v2v2v2 keeps the human design exactly and randomizes only AI",
+      "passed": true
+    },
+    {
+      "check": "2v2v2v2 shares colors between teammates",
+      "passed": true
+    },
+    {
+      "check": "2v2v2v2 shows team names and numbers in HUD role labels",
+      "passed": true
+    },
+    {
+      "check": "Eight free-for-all robots are supported with seven AI opponents",
+      "passed": true
+    },
+    {
+      "check": "Eight distinct identity colors appear in free-for-all",
+      "passed": true
+    },
+    {
+      "check": "Seven and eight robots keep four traps, while 250 HP and 200 points stay unchanged",
+      "passed": true
+    },
+    {
+      "check": "All HUD IDs remain unique",
+      "passed": true
+    },
+    {
+      "check": "Starting 4v4 auto-collapses side panels and retains mode",
+      "passed": true
+    },
+    {
+      "check": "Mode changes are locked while a battle runs",
+      "passed": true
+    },
+    {
+      "check": "A natural 4v4 match advances with eight robots",
+      "passed": true
+    },
+    {
+      "check": "Stopping a team battle preserves the human design",
+      "passed": true
+    },
+    {
+      "check": "right exit commits elimination without zoom or pan",
+      "passed": true
+    },
+    {
+      "check": "right completed exit has the exact original Canvas transform",
+      "passed": true
+    },
+    {
+      "check": "right ring-out does not stop the remaining battle",
+      "passed": true
+    },
+    {
+      "check": "left exit commits elimination without zoom or pan",
+      "passed": true
+    },
+    {
+      "check": "left completed exit has the exact original Canvas transform",
+      "passed": true
+    },
+    {
+      "check": "left ring-out does not stop the remaining battle",
+      "passed": true
+    },
+    {
+      "check": "top exit commits elimination without zoom or pan",
+      "passed": true
+    },
+    {
+      "check": "top completed exit has the exact original Canvas transform",
+      "passed": true
+    },
+    {
+      "check": "top ring-out does not stop the remaining battle",
+      "passed": true
+    },
+    {
+      "check": "bottom exit commits elimination without zoom or pan",
+      "passed": true
+    },
+    {
+      "check": "bottom completed exit has the exact original Canvas transform",
+      "passed": true
+    },
+    {
+      "check": "bottom ring-out does not stop the remaining battle",
+      "passed": true
+    },
+    {
+      "check": "aerial exit commits elimination without zoom or pan",
+      "passed": true
+    },
+    {
+      "check": "aerial completed exit has the exact original Canvas transform",
+      "passed": true
+    },
+    {
+      "check": "aerial ring-out does not stop the remaining battle",
+      "passed": true
+    },
+    {
+      "check": "Even far-out objects cannot expand the camera",
+      "passed": true
+    },
+    {
+      "check": "320px eight-seat view has no horizontal overflow",
+      "passed": true
+    },
+    {
+      "check": "320px eight cards do not overlap",
+      "passed": true
+    },
+    {
+      "check": "320px health remains more prominent than energy",
+      "passed": true
+    },
+    {
+      "check": "320px arena stays square and camera remains fixed",
+      "passed": true
+    },
+    {
+      "check": "390px eight-seat view has no horizontal overflow",
+      "passed": true
+    },
+    {
+      "check": "390px eight cards do not overlap",
+      "passed": true
+    },
+    {
+      "check": "390px health remains more prominent than energy",
+      "passed": true
+    },
+    {
+      "check": "390px arena stays square and camera remains fixed",
+      "passed": true
+    },
+    {
+      "check": "740px eight-seat view has no horizontal overflow",
+      "passed": true
+    },
+    {
+      "check": "740px eight cards do not overlap",
+      "passed": true
+    },
+    {
+      "check": "740px health remains more prominent than energy",
+      "passed": true
+    },
+    {
+      "check": "740px arena stays square and camera remains fixed",
+      "passed": true
+    },
+    {
+      "check": "1100px eight-seat view has no horizontal overflow",
+      "passed": true
+    },
+    {
+      "check": "1100px eight cards do not overlap",
+      "passed": true
+    },
+    {
+      "check": "1100px health remains more prominent than energy",
+      "passed": true
+    },
+    {
+      "check": "1100px arena stays square and camera remains fixed",
+      "passed": true
+    },
+    {
+      "check": "1560px eight-seat view has no horizontal overflow",
+      "passed": true
+    },
+    {
+      "check": "1560px eight cards do not overlap",
+      "passed": true
+    },
+    {
+      "check": "1560px health remains more prominent than energy",
+      "passed": true
+    },
+    {
+      "check": "1560px arena stays square and camera remains fixed",
+      "passed": true
+    },
+    {
+      "check": "Team winner name is over the field",
+      "passed": true
+    },
+    {
+      "check": "All eight robots and both aggregate team rows are in the standings",
+      "passed": true
+    },
+    {
+      "check": "Eliminated winner teammates also share their team victory",
+      "passed": true
+    },
+    {
+      "check": "Team ranking excludes eliminated HP",
+      "passed": true
+    },
+    {
+      "check": "Desktop final scoreboard is to the right, with no dialog or dimming",
+      "passed": true
+    },
+    {
+      "check": "320px standings move below without horizontal overflow",
+      "passed": true
+    },
+    {
+      "check": "390px standings move below without horizontal overflow",
+      "passed": true
+    },
+    {
+      "check": "740px standings move below without horizontal overflow",
+      "passed": true
+    },
+    {
+      "check": "Online 4v4 lobby shows seven real players, one open seat, and no AI substitutions",
+      "passed": true
+    },
+    {
+      "check": "Team lobby cannot start incomplete and host can change mode",
+      "passed": true
+    },
+    {
+      "check": "Eighth player unlocks the host start button and balanced lobby teams",
+      "passed": true
+    },
+    {
+      "check": "Non-host team player cannot change mode or start",
+      "passed": true
+    },
+    {
+      "check": "Eight-player online snapshot uses team labels and locks the editor",
+      "passed": true
+    },
+    {
+      "check": "Guest receives team victory rather than defeat because the representative is another teammate",
+      "passed": true
+    },
+    {
+      "check": "Online standings also contain all eight human designs",
+      "passed": true
+    },
+    {
+      "check": "No JavaScript errors in the new browser tests",
+      "passed": true
+    }
+  ],
+  "errors": []
+}

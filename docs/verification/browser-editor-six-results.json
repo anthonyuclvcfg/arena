@@ -1,0 +1,249 @@
+{
+  "checks": [
+    {
+      "check": "Clicking hammer head selects that tool, not the previous selection",
+      "passed": true
+    },
+    {
+      "check": "Clicking a head does not move the mounting point",
+      "passed": true
+    },
+    {
+      "check": "Clicking the ram face selects the exact visible tool",
+      "passed": true
+    },
+    {
+      "check": "Drag preserves grab offset instead of snapping mount to the pointer",
+      "passed": true
+    },
+    {
+      "check": "Dragging one tool leaves other tools unmoved",
+      "passed": true
+    },
+    {
+      "check": "Dragging empty canvas never drags the previous tool",
+      "passed": true
+    },
+    {
+      "check": "Wheel rotates the hovered tool instead of the previously selected tool",
+      "passed": true
+    },
+    {
+      "check": "Wheel over empty builder rotates selected tool with fine Shift steps",
+      "passed": true
+    },
+    {
+      "check": "Ctrl+wheel remains browser zoom rather than tool editing",
+      "passed": true
+    },
+    {
+      "check": "Double-clicking hammer head removes only that tool",
+      "passed": true
+    },
+    {
+      "check": "Deleting a tool restores its exact build cost",
+      "passed": true
+    },
+    {
+      "check": "Double-clicking empty builder never deletes the selected tool",
+      "passed": true
+    },
+    {
+      "check": "Numbered tool slots also remove the correct tool on double-click",
+      "passed": true
+    },
+    {
+      "check": "Overlapping silhouettes select the frontmost tool",
+      "passed": true
+    },
+    {
+      "check": "Numbered slot can select the obscured tool",
+      "passed": true
+    },
+    {
+      "check": "Drawing mode does not delete or rotate mounted tools",
+      "passed": true
+    },
+    {
+      "check": "ram rotated tip selects the correct mounted tool",
+      "passed": true
+    },
+    {
+      "check": "flipper rotated tip selects the correct mounted tool",
+      "passed": true
+    },
+    {
+      "check": "plow rotated tip selects the correct mounted tool",
+      "passed": true
+    },
+    {
+      "check": "hammer rotated tip selects the correct mounted tool",
+      "passed": true
+    },
+    {
+      "check": "saw rotated tip selects the correct mounted tool",
+      "passed": true
+    },
+    {
+      "check": "drill rotated tip selects the correct mounted tool",
+      "passed": true
+    },
+    {
+      "check": "flamethrower rotated tip selects the correct mounted tool",
+      "passed": true
+    },
+    {
+      "check": "machinegun rotated tip selects the correct mounted tool",
+      "passed": true
+    },
+    {
+      "check": "rocket rotated tip selects the correct mounted tool",
+      "passed": true
+    },
+    {
+      "check": "Eight distinct chassis choices are offered",
+      "passed": true
+    },
+    {
+      "check": "diamond can be selected without changing HP or tool inventory",
+      "passed": true
+    },
+    {
+      "check": "octagon can be selected without changing HP or tool inventory",
+      "passed": true
+    },
+    {
+      "check": "capsule can be selected without changing HP or tool inventory",
+      "passed": true
+    },
+    {
+      "check": "cross can be selected without changing HP or tool inventory",
+      "passed": true
+    },
+    {
+      "check": "5 robots yield 6 traps with a full matching HUD",
+      "passed": true
+    },
+    {
+      "check": "6 robots yield 4 traps with a full matching HUD",
+      "passed": true
+    },
+    {
+      "check": "All six bodies and HUDs have distinct colors",
+      "passed": true
+    },
+    {
+      "check": "Battle lock prevents double-click delete and wheel rotation",
+      "passed": true
+    },
+    {
+      "check": "HUD shows the new 10-second cooldown on the collecting robot only",
+      "passed": true
+    },
+    {
+      "check": "Telemetry reports the shared pickup lock",
+      "passed": true
+    },
+    {
+      "check": "HUD countdown follows simulation time, not wall-clock waits",
+      "passed": true
+    },
+    {
+      "check": "Six-seat layout fits 320px without horizontal overflow",
+      "passed": true
+    },
+    {
+      "check": "Six-seat HUD cards never overlap at 320px",
+      "passed": true
+    },
+    {
+      "check": "Energy remains less than half HP size at 320px",
+      "passed": true
+    },
+    {
+      "check": "Six-seat layout fits 390px without horizontal overflow",
+      "passed": true
+    },
+    {
+      "check": "Six-seat HUD cards never overlap at 390px",
+      "passed": true
+    },
+    {
+      "check": "Energy remains less than half HP size at 390px",
+      "passed": true
+    },
+    {
+      "check": "Six-seat layout fits 740px without horizontal overflow",
+      "passed": true
+    },
+    {
+      "check": "Six-seat HUD cards never overlap at 740px",
+      "passed": true
+    },
+    {
+      "check": "Energy remains less than half HP size at 740px",
+      "passed": true
+    },
+    {
+      "check": "Six-seat layout fits 900px without horizontal overflow",
+      "passed": true
+    },
+    {
+      "check": "Six-seat HUD cards never overlap at 900px",
+      "passed": true
+    },
+    {
+      "check": "Energy remains less than half HP size at 900px",
+      "passed": true
+    },
+    {
+      "check": "Six-seat layout fits 1280px without horizontal overflow",
+      "passed": true
+    },
+    {
+      "check": "Six-seat HUD cards never overlap at 1280px",
+      "passed": true
+    },
+    {
+      "check": "Energy remains less than half HP size at 1280px",
+      "passed": true
+    },
+    {
+      "check": "Six-seat layout fits 1560px without horizontal overflow",
+      "passed": true
+    },
+    {
+      "check": "Six-seat HUD cards never overlap at 1560px",
+      "passed": true
+    },
+    {
+      "check": "Energy remains less than half HP size at 1560px",
+      "passed": true
+    },
+    {
+      "check": "Full six-row standings appear to the right on desktop",
+      "passed": true
+    },
+    {
+      "check": "Winner name is visible over the board and never intercepts pointer events",
+      "passed": true
+    },
+    {
+      "check": "Final six-player standings stay readable and outside field at 320px",
+      "passed": true
+    },
+    {
+      "check": "Final six-player standings stay readable and outside field at 390px",
+      "passed": true
+    },
+    {
+      "check": "Final six-player standings stay readable and outside field at 740px",
+      "passed": true
+    },
+    {
+      "check": "No JavaScript runtime errors in editor/six-seat/pickup checks",
+      "passed": true
+    }
+  ],
+  "errors": []
+}

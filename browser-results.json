@@ -1,0 +1,270 @@
+{
+  "version": "0.5.6",
+  "checks": [
+    {
+      "check": "English edition 0.5.6 loads",
+      "passed": true
+    },
+    {
+      "check": "Unavailable local storage is reported without crashing the game",
+      "passed": true
+    },
+    {
+      "check": "Default field has four robots",
+      "passed": true
+    },
+    {
+      "check": "Default arena shows four hazards and four available bonuses",
+      "passed": true
+    },
+    {
+      "check": "All four robots start with exactly 250 HP",
+      "passed": true
+    },
+    {
+      "check": "Four visible health cards match engine values",
+      "passed": true
+    },
+    {
+      "check": "Build budget is 200 in the engine and visible HUD",
+      "passed": true
+    },
+    {
+      "check": "Nine predefined tool cards",
+      "passed": true
+    },
+    {
+      "check": "Every catalog card shows its own base damage and cooldown",
+      "passed": true
+    },
+    {
+      "check": "No matchup multipliers or counter lists appear on cards",
+      "passed": true
+    },
+    {
+      "check": "Four health values use distinct identity colors",
+      "passed": true
+    },
+    {
+      "check": "Energy is less than half the health font size on desktop",
+      "passed": true
+    },
+    {
+      "check": "Health remains large on desktop",
+      "passed": true
+    },
+    {
+      "check": "Desktop does not overflow horizontally",
+      "passed": true
+    },
+    {
+      "check": "HUD is above workshop and arena",
+      "passed": true
+    },
+    {
+      "check": "HUD sticks to top while scrolling",
+      "passed": true
+    },
+    {
+      "check": "Duel selector creates two robots and hides unused HUD cards",
+      "passed": true
+    },
+    {
+      "check": "Three-bot selector creates three robots and hides only the fourth card",
+      "passed": true
+    },
+    {
+      "check": "Practice roster displays only AI opponents",
+      "passed": true
+    },
+    {
+      "check": "Original RAM card shows 16 base damage",
+      "passed": true
+    },
+    {
+      "check": "Power increases nominal damage and cooldown without changing base damage",
+      "passed": true
+    },
+    {
+      "check": "Chassis HP stays at 250 after changing tool power",
+      "passed": true
+    },
+    {
+      "check": "Armor changes panel strength but not chassis HP",
+      "passed": true
+    },
+    {
+      "check": "Ranged loadout keeps gun, rocket and flame mounts",
+      "passed": true
+    },
+    {
+      "check": "Editor accepts a full 200-point build without lowering tools",
+      "passed": true
+    },
+    {
+      "check": "Budget bar reaches 100 percent at 200 points",
+      "passed": true
+    },
+    {
+      "check": "Editor rejects spending above 200 with the correct message",
+      "passed": true
+    },
+    {
+      "check": "New weapon icons are valid SVG and no undefined text appears",
+      "passed": true
+    },
+    {
+      "check": "Life and energy update independently and retain a 250 maximum",
+      "passed": true
+    },
+    {
+      "check": "Bonus weapons appear in component status",
+      "passed": true
+    },
+    {
+      "check": "Healthy bonus remains yellow",
+      "passed": true
+    },
+    {
+      "check": "Heavily damaged bonus gets a critical class",
+      "passed": true
+    },
+    {
+      "check": "Critical bonus status is red",
+      "passed": true
+    },
+    {
+      "check": "Critical bonus is also red in the actual canvas drawing",
+      "passed": true
+    },
+    {
+      "check": "Critical bonus has a visible warning",
+      "passed": true
+    },
+    {
+      "check": "Repaired bonus changes back to yellow",
+      "passed": true
+    },
+    {
+      "check": "Four-way local battle advances in real time",
+      "passed": true
+    },
+    {
+      "check": "Roster controls lock during a battle",
+      "passed": true
+    },
+    {
+      "check": "Tool editor locks during a battle",
+      "passed": true
+    },
+    {
+      "check": "Battle automatically collapses both side panels",
+      "passed": true
+    },
+    {
+      "check": "Panels can reopen without unlocking editing",
+      "passed": true
+    },
+    {
+      "check": "Pause halts the actual simulation",
+      "passed": true
+    },
+    {
+      "check": "All four component decks render",
+      "passed": true
+    },
+    {
+      "check": "Canvas draws all four body colors",
+      "passed": true
+    },
+    {
+      "check": "Online seat three is labelled YOU, not the first robot",
+      "passed": true
+    },
+    {
+      "check": "Eliminated player is marked OUT while other robots remain",
+      "passed": true
+    },
+    {
+      "check": "Eliminated local pilot receives spectating telemetry",
+      "passed": true
+    },
+    {
+      "check": "320px layout has no horizontal overflow",
+      "passed": true
+    },
+    {
+      "check": "320px energy is under half the health size",
+      "passed": true
+    },
+    {
+      "check": "390px layout has no horizontal overflow",
+      "passed": true
+    },
+    {
+      "check": "390px energy is under half the health size",
+      "passed": true
+    },
+    {
+      "check": "740px layout has no horizontal overflow",
+      "passed": true
+    },
+    {
+      "check": "740px energy is under half the health size",
+      "passed": true
+    },
+    {
+      "check": "900px layout has no horizontal overflow",
+      "passed": true
+    },
+    {
+      "check": "900px energy is under half the health size",
+      "passed": true
+    },
+    {
+      "check": "Mobile health remains at least 28px",
+      "passed": true
+    },
+    {
+      "check": "Mobile HUD cards do not overlap",
+      "passed": true
+    },
+    {
+      "check": "All DOM IDs are unique",
+      "passed": true
+    },
+    {
+      "check": "Wall inspector displays the reduced 180 HP maximum",
+      "passed": true
+    },
+    {
+      "check": "Crossing a breach marks the robot OUT immediately",
+      "passed": true
+    },
+    {
+      "check": "Three survivors continue during the visible exit",
+      "passed": true
+    },
+    {
+      "check": "Exiting robot, including rear-facing tools, clears the border",
+      "passed": true
+    },
+    {
+      "check": "Wall pointer inspection remains aligned without exit zoom",
+      "passed": true
+    },
+    {
+      "check": "Recovery telemetry is visible during reverse-and-turn maneuver",
+      "passed": true
+    },
+    {
+      "check": "Automatic recovery activates without changing the user rules",
+      "passed": true
+    },
+    {
+      "check": "No browser JavaScript errors",
+      "passed": true
+    }
+  ],
+  "errors": []
+}

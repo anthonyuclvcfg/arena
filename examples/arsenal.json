@@ -1,0 +1,91 @@
+{
+  "format": "cspire-arena-robot",
+  "version": 2,
+  "robot": {
+    "name": "FULL-ARSENAL",
+    "body": "wedge",
+    "motor": 2,
+    "armor": 2,
+    "tools": [
+      {
+        "id": "t1",
+        "type": "ram",
+        "x": 18,
+        "y": -12,
+        "angle": 0,
+        "power": 1
+      },
+      {
+        "id": "t2",
+        "type": "drill",
+        "x": 18,
+        "y": 12,
+        "angle": 0,
+        "power": 1
+      },
+      {
+        "id": "t3",
+        "type": "saw",
+        "x": 0,
+        "y": -22,
+        "angle": 270,
+        "power": 1
+      },
+      {
+        "id": "t4",
+        "type": "hammer",
+        "x": 0,
+        "y": 22,
+        "angle": 90,
+        "power": 1
+      },
+      {
+        "id": "t5",
+        "type": "flipper",
+        "x": -18,
+        "y": -12,
+        "angle": 180,
+        "power": 1
+      },
+      {
+        "id": "t6",
+        "type": "plow",
+        "x": -18,
+        "y": 12,
+        "angle": 180,
+        "power": 1
+      }
+    ],
+    "lines": [],
+    "rules": [
+      {
+        "when": "hazard",
+        "do": "avoid"
+      },
+      {
+        "when": "repair",
+        "do": "repair"
+      },
+      {
+        "when": "near",
+        "do": "weapon"
+      },
+      {
+        "when": "edge",
+        "do": "center"
+      },
+      {
+        "when": "pickup",
+        "do": "collect"
+      },
+      {
+        "when": "far",
+        "do": "charge"
+      },
+      {
+        "when": "always",
+        "do": "push"
+      }
+    ]
+  }
+}

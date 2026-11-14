@@ -1,0 +1,41 @@
+{
+  "sourceArchive": "cspire-arena-v5.6-en.zip",
+  "sourceArchiveSHA256": "4ffc35087783bca9360a90da15a259072cb436d272fd28eae7bd56db69817ff7",
+  "files": [
+    {
+      "file": "public/engine.js",
+      "unchanged": true,
+      "sha256": "1e0e871c3736b8b30c0111045c9fa080572becaa2ca93214bb2cddef59eb9215"
+    },
+    {
+      "file": "public/app.js",
+      "unchanged": true,
+      "sha256": "da6be889357f073f4f306f36af97d94541357dfe1aa968b8dd8fce38eb04ec12"
+    },
+    {
+      "file": "public/index.html",
+      "unchanged": true,
+      "sha256": "cc7fcf42fbee842e835a9b2e15daa97fab497ad0624a80567145a4d5b10c2538"
+    },
+    {
+      "file": "public/style.css",
+      "unchanged": true,
+      "sha256": "20a963dd64af7ee671f250b756c71c5691f0cd50b22fdcfe6803a45cff6ce78c"
+    },
+    {
+      "file": "server.js",
+      "unchanged": true,
+      "sha256": "512dcf3e4a4757659a3d26238e9b8dd271e3cd3b40e5cd497a4d784ae56c8da1"
+    },
+    {
+      "file": "build.js",
+      "unchanged": true,
+      "sha256": "891bf837465ae5ed03648722fb10fed1b04feec903ee2a02dfb0b1f9628ffb5f"
+    },
+    {
+      "file": "cspire-arena.html",
+      "unchanged": true,
+      "sha256": "3c9e87a4f39a65ce3ae61b4540e645e625bbb26185ab74969882f00b2a24e6c2"
+    }
+  ]
+}

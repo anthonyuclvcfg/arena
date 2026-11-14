@@ -1,0 +1,59 @@
+{
+  "format": "cspire-arena-robot",
+  "version": 2,
+  "robot": {
+    "name": "BREACHER",
+    "body": "box",
+    "motor": 2,
+    "armor": 2,
+    "tools": [
+      {
+        "id": "t1",
+        "type": "hammer",
+        "x": 20,
+        "y": -10,
+        "angle": 0,
+        "power": 3
+      },
+      {
+        "id": "t2",
+        "type": "plow",
+        "x": 20,
+        "y": 12,
+        "angle": 0,
+        "power": 1
+      }
+    ],
+    "lines": [],
+    "rules": [
+      {
+        "when": "hazard",
+        "do": "avoid"
+      },
+      {
+        "when": "repair",
+        "do": "repair"
+      },
+      {
+        "when": "near",
+        "do": "weapon"
+      },
+      {
+        "when": "edge",
+        "do": "center"
+      },
+      {
+        "when": "pickup",
+        "do": "collect"
+      },
+      {
+        "when": "far",
+        "do": "charge"
+      },
+      {
+        "when": "always",
+        "do": "push"
+      }
+    ]
+  }
+}

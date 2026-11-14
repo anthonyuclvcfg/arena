@@ -1,0 +1,18 @@
+Created: /mnt/data/cspire-arena-codex-work/cspire-arena/cspire-arena.html
+
+=== browser-ui.py ===
+{"passed": 65, "total": 65, "errors": []}
+
+=== browser-results.py ===
+{"passed": 42, "total": 42, "errors": []}
+
+=== browser-focus.py ===
+{"passed": 57, "total": 57, "errors": []}
+
+=== browser-editor-six.py ===
+61 editor, six-seat and pickup browser checks passed.
+
+=== browser-teams-camera.py ===
+{"passed": 99, "total": 99, "errors": []}
+
+UI verification: PASSED, 324 checks. See artifacts/qa/ui-summary.json.
