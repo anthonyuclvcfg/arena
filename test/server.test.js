@@ -25,11 +25,12 @@ async function withServer(fn){
   async function stream(code,cookie){
    const controller=new AbortController();controllers.push(controller);
    const res=await fetch(base+`/api/rooms/${code}/events`,{headers:{Cookie:cookie,Connection:'close'},signal:controller.signal});assert.equal(res.status,200);
-   const readFinal=async({until}={})=>{
+   const readFinal=async({until,onState}={})=>{
     const reader=res.body.getReader(),decoder=new TextDecoder();let buffer='',count=0,sawWallDamage=false,sawCooldown=false,sawPartDamage=false;
     try{while(true){const{value,done}=await reader.read();if(done)throw Error('Stream closed before final state');buffer+=decoder.decode(value,{stream:true});let cut;
      while((cut=buffer.indexOf('\n\n'))>=0){const part=buffer.slice(0,cut);buffer=buffer.slice(cut+2);const line=part.split('\n').find(x=>x.startsWith('data: '));if(!line)continue;
       const msg=JSON.parse(line.slice(6));if(msg.type==='state'){
+       onState?.(msg.state);
        count++;sawWallDamage ||= msg.state.walls.some(w=>w.health<w.maxHealth);sawCooldown ||= msg.state.robots.some(r=>r.tools.some(t=>t.cooldown>0));
        sawPartDamage ||= msg.state.robots.some(r=>r.parts.some(p=>p.health<p.maxHealth));
        if(msg.state.status==='finished'||until?.(msg.state))return{state:msg.state,count,sawWallDamage,sawCooldown,sawPartDamage};
@@ -124,7 +125,7 @@ test('Eight independent pilots share one authoritative match; a ninth is refused
   const streams=[];for(let i=0;i<8;i++)streams.push(await stream(code,users[i].cookie));
   const readings=streams.map(st=>st.readFinal({until:s=>s.tick>=8}));
   assert.equal((await api(`/api/rooms/${code}/start`,{},users[0].cookie)).status,200);
-  const snapshots=await Promise.all(readings);for(const d of snapshots){assert.deepEqual(d.state,snapshots[0].state);assert.equal(d.state.robots.length,8);assert.ok(d.state.robots.every(r=>r.health===250));
+  const snapshots=await Promise.all(readings);for(const d of snapshots){assert.deepEqual(d.state,snapshots[0].state);assert.equal(d.state.robots.length,8);assert.ok(d.state.robots.every(r=>r.health===300));
    assert.deepEqual(d.state.robots.map(r=>r.config),users.slice(0,8).map(u=>u.data.pilot.robot));}
   for(let i=0;i<6;i++){
    await api(`/api/rooms/${code}/leave`,{},users[i].cookie);
@@ -184,7 +185,7 @@ test('4v4 online: eight human blueprints, identical snapshots, full-team victory
   assert.equal((await api(`/api/rooms/${code}/settings`,{mode:'ffa'},users[0].cookie)).status,409);
   for(const i of [1,3,5]){await api(`/api/rooms/${code}/leave`,{},users[i].cookie);assert.equal((await api('/api/me',null,users[0].cookie,'GET')).data.room.status,'running');}
   await api(`/api/rooms/${code}/leave`,{},users[7].cookie);
-  const last=await stream(code,users[0].cookie),final=await last.readFinal();assert.equal(final.state.result.winnerTeam,0);assert.equal(final.state.result.draw,false);assert.deepEqual(final.state.result.winners,[0,2,4,6]);assert.equal(final.state.result.teamStandings[0].health,1000);
+  const last=await stream(code,users[0].cookie),final=await last.readFinal();assert.equal(final.state.result.winnerTeam,0);assert.equal(final.state.result.draw,false);assert.deepEqual(final.state.result.winners,[0,2,4,6]);assert.equal(final.state.result.teamStandings[0].health,4*E.CHASSIS_HP);
  });
 });
 test('Host can change waiting-room modes; invalid modes reject and balanced capacity is enforced', {timeout:10000},async()=>{
@@ -211,5 +212,33 @@ test('Three and four teams are supported by the authoritative server without rep
   const a=await stream(code,users[0].cookie),promise=a.readFinal({until:s=>s.tick>=4});await api(`/api/rooms/${code}/start`,{},users[0].cookie);const {state}=await promise;
   assert.equal(state.mode,mode);assert.equal(state.teamCount,m.teams);assert.deepEqual(state.robots.map(r=>r.config),users.map(u=>u.data.pilot.robot));
   for(let id=0;id<m.teams;id++)assert.equal(state.robots.filter(r=>r.team===id).length,2);
+ });
+});
+
+
+test('Online countdown lasts five seconds with frozen physics, then begins the full battle clock', {timeout:15000},async()=>{
+ await withServer(async({api,stream})=>{
+  const robot={motor:1,armor:1,tools:[],rules:[{when:'void',do:'charge'}]};
+  const a=await api('/api/session',{alias:'Countdown A',robot}),b=await api('/api/session',{alias:'Countdown B',robot});
+  const room=await api('/api/rooms',{},a.cookie),code=room.data.room.code;
+  await api(`/api/rooms/${code}/join`,{},b.cookie);
+  const feed=await stream(code,a.cookie);let initial=null,last=Infinity,snapshots=0;
+  const pending=feed.readFinal({until:s=>s.tick>=1,onState:s=>{
+   assert.ok(Number.isInteger(s.countdownTicks)&&s.countdownTicks>=0&&s.countdownTicks<=300);
+   assert.ok(s.countdownTicks<=last);last=s.countdownTicks;
+   if(s.countdownTicks>0){
+    snapshots++;assert.equal(s.tick,0);assert.equal(s.time,0);
+    const poses=s.robots.map(r=>[r.x,r.y,r.angle,r.health,r.energy]);
+    if(!initial)initial=poses;else assert.deepEqual(poses,initial);
+    assert.ok(s.robots.every(r=>r.health===300));
+    assert.ok(s.robots.every(r=>r.config.rules[0].when==='void'));
+   }
+  }});
+  const began=performance.now();assert.equal((await api(`/api/rooms/${code}/start`,{},a.cookie)).status,200);
+  const result=await pending;
+  assert.ok(performance.now()-began>=4900,'No physical step before the five-second countdown');
+  assert.ok(snapshots>=30);assert.equal(result.state.countdownTicks,0);
+  assert.ok(result.state.time>0&&result.state.time<.25,'Countdown does not consume battle time');
+  await api(`/api/rooms/${code}/leave`,{},a.cookie);await api(`/api/rooms/${code}/leave`,{},b.cookie);
  });
 });

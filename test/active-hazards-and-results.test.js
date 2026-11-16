@@ -12,7 +12,7 @@ test('Battle length is 120 seconds; supplies spawn at 0, 30, 60 and 90',()=>{
   assert.deepEqual([...new Set(s.pickups.map(p=>p.spawnAt))],[0,30,60,90]);assert.ok(s.pickups.every(p=>p.expiresAt<=120));}
 });
 test('Every pulsed trap is ignored when off, including its visual warning',()=>{
- for(const type of ['fire','spikes','electric']){const s=blank();s.hazards=[trap(type)];
+ for(const type of ['fire','grinder','spikes','electric']){const s=blank();s.hazards=[trap(type)];
   for(const time of [5,7,9.5]){s.time=time;assert.equal(E.hazardActive(s.hazards[0],time),false);
    assert.equal(E.sensors(s,s.robots[0],s.robots[1]).hazard,false);assert.equal(E.nearestHazard(s,s.robots[0]).hazard,null);}
   assert.equal(E.hazardWarning(s.hazards[0],9.5),true);
@@ -23,7 +23,7 @@ test('Inactive closer trap cannot mask a farther active trap',()=>{
  const s=blank();s.time=6;s.hazards=[trap('fire',195,400),{...trap('electric',240,400),id:1,phase:5}];
  assert.equal(E.nearestHazard(s,s.robots[0]).hazard.id,1);assert.equal(E.sensors(s,s.robots[0],s.robots[1]).hazard,true);
 });
-test('Permanent grinder and acid hazards remain detectable',()=>{
+test('Permanent acid and explicitly static legacy hazards remain detectable',()=>{
  for(const type of ['grinder','acid']){const s=blank();s.hazards=[{...trap(type),period:0}];
   for(const t of [0,6,19]){s.time=t;assert.equal(E.sensors(s,s.robots[0],s.robots[1]).hazard,true);}}
 });
@@ -39,8 +39,8 @@ test('Unconditional avoidance also falls through if every trap is inactive',()=>
  s.time=6;s.hazards=[trap()];E.step(s);assert.equal(s.robots[0].action,'brake');
 });
 test('Inactive traps do not inflict damage or drain energy',()=>{
- for(const type of ['fire','spikes','electric']){const s=blank();s.time=6;s.hazards=[trap(type,190,400)];const r=s.robots[0];
-  E.applyHazards(s,r,1);assert.equal(r.health,250);assert.equal(r.energy,100);assert.ok(r.parts.every(p=>p.health===p.maxHealth));}
+ for(const type of ['fire','grinder','spikes','electric']){const s=blank();s.time=6;s.hazards=[trap(type,190,400)];const r=s.robots[0];
+  E.applyHazards(s,r,1);assert.equal(r.health,300);assert.equal(r.energy,100);assert.ok(r.parts.every(p=>p.health===p.maxHealth));}
 });
 test('Highest surviving exact HP wins a timed match, not an automatic draw',()=>{
  const s=blank(4);[117.3,122.7,98,43].forEach((hp,i)=>s.robots[i].health=hp);const result=timeout(s);

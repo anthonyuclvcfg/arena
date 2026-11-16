@@ -144,7 +144,7 @@ const server=http.createServer(async(req,res)=>{
       await readBody(req);if(r.host!==p.id)throw problem(403,'Only the host can start the battle.');
       if(r.status!=='ready'||!readyRoom(r)||r.players.length>capacity(r))throw problem(409,E.modeInfo(r.mode).count?'This team mode requires exactly '+capacity(r)+' ready players.':'Two to eight ready robots are required.');
       r.seed=crypto.randomInt(1,1000000);
-      r.match=E.createBattle(r.players.map(p=>p.robot),r.seed,r.mode);r.status='running';r.updated=Date.now();r.accumulator=0;
+      r.match=E.createBattle(E.uniqueRobotConfigs(r.players.map(p=>p.robot)),r.seed,r.mode);r.match.countdownTicks=Math.round(E.START_COUNTDOWN_SECONDS/E.STEP);r.status='running';r.updated=Date.now();r.accumulator=0;
       snapshot(r);send(res,200,{room:publicRoom(r)});return;
     }
     if(action==='leave'&&req.method==='POST'){
@@ -180,7 +180,9 @@ const ticker=setInterval(()=>{
     r.accumulator+=delta;
     let publish=false;
     while(r.accumulator>=E.STEP&&r.match.status==='running'){
-      E.step(r.match);r.accumulator-=E.STEP;if(r.match.tick%4===0)publish=true;
+      if(r.match.countdownTicks>0){r.match.countdownTicks--;if(r.match.countdownTicks%4===0)publish=true;}
+      else {E.step(r.match);if(r.match.tick%4===0)publish=true;}
+      r.accumulator-=E.STEP;
     }
     if(r.match.status==='finished'){r.status='finished';r.updated=Date.now();publish=true;}
     if(publish)snapshot(r);

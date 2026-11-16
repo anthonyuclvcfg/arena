@@ -5,7 +5,7 @@ const passive={tools:[],rules:[{when:'always',do:'brake'}]};
 const close=(a,b,message='')=>assert.ok(Math.abs(a-b)<1e-6,`${message}: ${a} versus ${b}`);
 function blank(config=passive,n=2){const s=E.createBattle([config,...Array.from({length:n-1},()=>passive)],83);s.hazards=[];s.pickups=[];return s;}
 function run(s,seconds){for(let i=0;i<Math.ceil(seconds/E.STEP)&&s.status==='running';i++)E.step(s);return s;}
-function fly(s,dt=E.STEP){for(let i=0;i<600&&(s.projectiles.length||s.flames.length);i++){E.stepProjectiles(s,dt);E.stepFlames(s,dt);}assert.equal(s.projectiles.length,0);assert.equal(s.flames.length,0);}
+function fly(s,dt=E.STEP){for(let i=0;i<600&&(s.projectiles.length||s.flames.length||s.robots.some(r=>r.tools.some(t=>t.contactTime>0)));i++){E.stepProjectiles(s,dt);E.stepFlames(s,dt);E.stepContact(s,dt);}assert.equal(s.projectiles.length,0);assert.equal(s.flames.length,0);}
 function fired(type,power=1,side=1,yIndex=5.5){
  const s=blank({body:'box',tools:[{type,x:20,y:0,angle:0,power}],rules:[{when:'always',do:'wall'}]});
  const r=s.robots[0],along=E.BOUNDS.min+E.BOUNDS.size/E.SEGMENTS*yIndex;
@@ -17,7 +17,7 @@ function fired(type,power=1,side=1,yIndex=5.5){
 const wallLoss=s=>s.walls.reduce((sum,w)=>sum+w.maxHealth-w.health,0);
 
 test('Wall and chassis balance match v0.5.6; build budget remains unchanged',()=>{
- assert.equal(E.WALL_HP,180);assert.equal(E.CHASSIS_HP,250);assert.equal(E.BUDGET,200);
+ assert.equal(E.WALL_HP,150);assert.equal(E.CHASSIS_HP,300);assert.equal(E.BUDGET,200);
  assert.equal(E.MAX_IMPACT_DAMAGE,72);assert.equal(E.MAX_BOTS,8);
  assert.ok(E.MAX_IMPACT_DAMAGE*2<E.WALL_HP);assert.ok(E.MAX_IMPACT_DAMAGE*3>=E.WALL_HP);
 });
@@ -62,11 +62,11 @@ test('Projectiles pass through a breached segment without damaging invisible wal
 test('Projectiles above the wall height do not inflict phantom wall damage',()=>{
  for(const type of ['machinegun','rocket']){const {s}=fired(type);s.robots[0].z=E.WALL_HEIGHT+1;s.projectiles.forEach(p=>p.z=E.WALL_HEIGHT+1);fly(s);assert.equal(wallLoss(s),0);}
 });
-test('Four base rockets breach one wall, and the last hit is capped at remaining HP',()=>{
+test('Three base rockets breach one wall, and the last hit is capped at remaining HP',()=>{
  const {s,r,wall}=fired('rocket');fly(s);
- for(let i=1;i<4;i++){r.energy=100;r.tools[0].cooldown=0;E.resolveAttacks(s,E.collectAttacks(s,r));fly(s);if(i<3)assert.equal(wall.broken,false);}
- assert.equal(wall.health,0);assert.equal(wall.hits,4);assert.equal(wall.broken,true);
- close(s.events.filter(e=>e.wall===wall.side*E.SEGMENTS+wall.i).reduce((a,e)=>a+e.damage,0),180);
+ for(let i=1;i<3;i++){r.energy=100;r.tools[0].cooldown=0;E.resolveAttacks(s,E.collectAttacks(s,r));fly(s);if(i<2)assert.equal(wall.broken,false);}
+ assert.equal(wall.health,0);assert.equal(wall.hits,3);assert.equal(wall.broken,true);
+ close(s.events.filter(e=>e.wall===wall.side*E.SEGMENTS+wall.i).reduce((a,e)=>a+e.damage,0),150);
 });
 test('Every tool applies its own wall coefficient at all three power levels',()=>{
  for(const type of Object.keys(E.WEAPONS))for(const power of [1,2,3]){
@@ -84,7 +84,7 @@ test('Ranged robots recover from each corner with every chassis, including damag
   Object.assign(r,{x,y,angle:Math.atan2(-sy,-sx)});r.tools[0].cooldown=999;
   Object.assign(e,{x:x+50*sx,y:y+50*sy});r.parts.filter(p=>p.kind==='drive').slice(0,broken).forEach(p=>{p.broken=true;p.health=0});
   run(s,5);assert.ok(r.recoveries>=1,`${body}/${sx},${sy}/${broken} did not recover`);
-  assert.ok(Math.hypot(r.x-x,r.y-y)>18,`${body} did not move away`);assert.ok(r.alive);assert.equal(r.health,250);
+  assert.ok(Math.hypot(r.x-x,r.y-y)>18,`${body} did not move away`);assert.ok(r.alive);assert.equal(r.health,300);
   assert.ok(r.x>E.BOUNDS.min&&r.x<E.BOUNDS.max&&r.y>E.BOUNDS.min&&r.y<E.BOUNDS.max);
  }
 });
@@ -103,7 +103,7 @@ test('Retreat and avoidance cannot select unreachable targets outside corners',(
  for(const action of ['retreat','avoid','orbit']){
   const s=blank({tools:[],rules:[{when:'always',do:action}]});const r=s.robots[0];Object.assign(r,{x:690,y:690,angle:Math.PI/4});Object.assign(s.robots[1],{x:500,y:500});
   if(action==='avoid')s.hazards=[{id:0,type:'fire',x:610,y:650,r:24,phase:4,period:100,duty:1}];
-  run(s,4);assert.ok(r.alive);assert.ok(Math.hypot(r.x-690,r.y-690)>18);assert.equal(r.health,250);
+  run(s,4);assert.ok(r.alive);assert.ok(Math.hypot(r.x-690,r.y-690)>18);assert.equal(r.health,300);
  }
 });
 test('Deliberate braking and attacking a wall do not trigger recovery',()=>{

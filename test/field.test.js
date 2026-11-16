@@ -12,8 +12,8 @@ test('Balance allows 200 points, six built tools, twelve rules, plus two battle-
  const c=E.normalizeConfig(E.loadouts.arsenal);assert.equal(c.tools.length,6);assert.equal(E.cost(c),160);
  assert.ok(E.ACTIONS.tool5&&E.ACTIONS.tool6);
 });
-test('Chassis health is fixed at 250 at every armor level',()=>{
- for(let armor=1;armor<=5;armor++)assert.equal(E.stats(E.normalizeConfig({armor,tools:[]})).hp,250);
+test('Chassis health is fixed at 300 at every armor level',()=>{
+ for(let armor=1;armor<=5;armor++)assert.equal(E.stats(E.normalizeConfig({armor,tools:[]})).hp,300);
 });
 test('All tools, panels, and drive units double v0.3 durability after rounding',()=>{
  const s=match(),r=s.robots[0];
@@ -94,7 +94,7 @@ test('All five hazard types damage the chassis and components while active',()=>
  }
 });
 test('Pulsing hazards show a warning and do no damage while inactive',()=>{
- for(const type of ['fire','spikes','electric']){
+ for(const type of ['fire','grinder','spikes','electric']){
   const s=match(),r=s.robots[0],h={type,x:r.x,y:r.y,r:35,phase:0,period:6,duty:.3};s.hazards=[h];
   s.time=4;assert.equal(E.hazardActive(h,s.time),false);const before=r.health;E.applyHazards(s,r,.1);assert.equal(r.health,before);
   s.time=5.5;assert.equal(E.hazardWarning(h,s.time),true);s.time=6;assert.equal(E.hazardActive(h,s.time),true);

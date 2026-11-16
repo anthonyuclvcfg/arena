@@ -5,8 +5,8 @@ const passive={name:'HUMAN',tools:[],rules:[{when:'always',do:'brake'}]};
 const make=(mode='2v2',seed=12)=>E.createBattle(Array(E.BATTLE_MODES[mode].count||8).fill(passive),seed,mode);
 const empty=s=>{s.hazards=[];s.pickups=[];s.walls.forEach(w=>{w.broken=true;w.health=0;});return s;};
 
-test('Eight seats retain 250 HP, 200 budget, 120 seconds, 180 walls, and 10s pickup lock',()=>{
- assert.equal(E.MAX_BOTS,8);assert.equal(E.CHASSIS_HP,250);assert.equal(E.BUDGET,200);assert.equal(E.MAX_SECONDS,120);assert.equal(E.WALL_HP,180);assert.equal(E.PICKUP_COOLDOWN,10);
+test('Eight seats retain 300 HP, 200 budget, 120 seconds, 150 walls, and 10s pickup lock',()=>{
+ assert.equal(E.MAX_BOTS,8);assert.equal(E.CHASSIS_HP,300);assert.equal(E.BUDGET,200);assert.equal(E.MAX_SECONDS,120);assert.equal(E.WALL_HP,150);assert.equal(E.PICKUP_COOLDOWN,10);
  for(const n of [7,8]){const s=E.createPracticeBattle(passive,n,16);assert.equal(s.robots.length,n);assert.equal(s.robots.filter(r=>r.controller==='bot').length,n-1);assert.equal(s.hazards.length,4);assert.deepEqual(s.robots[0].config,E.normalizeConfig(passive));}
  for(const n of [0,1,9,1.5,NaN])assert.throws(()=>E.spawnsFor(n),RangeError);
 });
@@ -53,18 +53,18 @@ for(const type of Object.keys(E.WEAPONS))test(type+': no targeting, damage, or l
  Object.assign(r,{x:350,y:400,angle:0,action:'weapon'});Object.assign(e,{x:415,y:400});Object.assign(ally,{x:415,y:400});Object.assign(other,{x:640,y:640});
  const before=JSON.stringify(ally),attacks=E.collectAttacks(s,r);
  assert.ok(attacks.length>0,type+' has a target');assert.ok(attacks.every(a=>a.hit.target!==ally));E.resolveAttacks(s,attacks);
- for(let i=0;i<125;i++){E.stepProjectiles(s,E.STEP);E.stepFlames(s,E.STEP);}
- assert.equal(JSON.stringify(ally),before,type+' must not affect teammate');assert.ok(e.health<250||e.parts.some(p=>p.health<p.maxHealth),type+' hits enemy');
+ for(let i=0;i<125;i++){E.stepProjectiles(s,E.STEP);E.stepFlames(s,E.STEP);E.stepContact(s,E.STEP);}
+ assert.equal(JSON.stringify(ally),before,type+' must not affect teammate');assert.ok(e.health<300||e.parts.some(p=>p.health<p.maxHealth),type+' hits enemy');
 });
 test('Rocket splash protects nearby allies and shooter in teams, but damages enemies',()=>{
  const s=empty(E.createBattle([{tools:[{type:'rocket',x:20,y:0}],rules:[{when:'always',do:'weapon'}]},passive,passive,passive],9,'2v2'));
  const [r,e,ally,other]=s.robots;Object.assign(r,{x:350,y:400,angle:0,action:'weapon'});Object.assign(e,{x:418,y:400});Object.assign(ally,{x:410,y:420});Object.assign(other,{x:425,y:420});
  const a=JSON.stringify(ally),hp=r.health;E.resolveAttacks(s,E.collectAttacks(s,r));for(let i=0;i<50;i++)E.stepProjectiles(s,E.STEP);
- assert.equal(JSON.stringify(ally),a);assert.equal(r.health,hp);assert.ok(other.health<250);assert.ok(e.health<250);
+ assert.equal(JSON.stringify(ally),a);assert.equal(r.health,hp);assert.ok(other.health<300);assert.ok(e.health<300);
 });
 test('Allied bodies remain solid but their mutual collision does not deal HP damage',()=>{
  const s=empty(make());const a=s.robots[0],b=s.robots[2];Object.assign(a,{x:350,y:400,vx:300});Object.assign(b,{x:390,y:400,vx:-300});
- E.collideRobots(s);assert.equal(a.health,250);assert.equal(b.health,250);assert.ok(b.x-a.x>=a.stats.radius+b.stats.radius-1e-8);assert.ok(a.vx<300&&b.vx>-300);
+ E.collideRobots(s);assert.equal(a.health,300);assert.equal(b.health,300);assert.ok(b.x-a.x>=a.stats.radius+b.stats.radius-1e-8);assert.ok(a.vx<300&&b.vx>-300);
 });
 test('Hazards remain dangerous in team modes and pickup cooldowns remain individual',()=>{
  const s=make(),a=s.robots[0],b=s.robots[2];a.health=b.health=100;s.hazards=[{type:'grinder',x:a.x,y:a.y,r:35}];E.applyHazards(s,a,1);assert.ok(a.health<100);
@@ -77,7 +77,7 @@ test('Team victory waits for the whole opposing team, not one eliminated robot',
 });
 test('Winning teammates share victory even when one was eliminated earlier',()=>{
  const s=make();for(const i of [1,2,3]){s.robots[i].alive=false;s.robots[i].eliminatedAt=i;s.robots[i].reason='Out of the arena';}
- s.time=5;E.finishIfNeeded(s);assert.deepEqual(s.result.winners,[0,2]);assert.equal(s.result.teamStandings[0].health,250);assert.equal(s.result.teamStandings[0].aliveCount,1);
+ s.time=5;E.finishIfNeeded(s);assert.deepEqual(s.result.winners,[0,2]);assert.equal(s.result.teamStandings[0].health,300);assert.equal(s.result.teamStandings[0].aliveCount,1);
 });
 test('Time ranks teams by surviving total HP, not strongest robot or survivor count',()=>{
  const s=make('4v4');[250,120,1,120,1,120,1,120].forEach((hp,i)=>s.robots[i].health=hp);s.time=120;E.finishIfNeeded(s);
@@ -88,7 +88,7 @@ test('Exact team-health ties share first; no rounding can manufacture a tie',()=
  const b=make();[100,140.00000001,100,60].forEach((hp,i)=>b.robots[i].health=hp);b.time=120;E.finishIfNeeded(b);assert.equal(b.result.draw,false);assert.equal(b.result.winnerTeam,1);
 });
 test('Eliminated robots do not contribute surviving team HP',()=>{
- const s=make();s.robots[0].health=250;s.robots[0].alive=false;s.robots[0].eliminatedAt=50;s.robots[2].health=50;s.robots[1].health=60;s.robots[3].health=60;s.time=120;E.finishIfNeeded(s);
+ const s=make();s.robots[0].health=300;s.robots[0].alive=false;s.robots[0].eliminatedAt=50;s.robots[2].health=50;s.robots[1].health=60;s.robots[3].health=60;s.time=120;E.finishIfNeeded(s);
  assert.equal(s.result.winnerTeam,1);assert.equal(s.result.teamStandings.find(t=>t.id===0).health,50);
 });
 test('Three and four teams keep fighting until only one team remains',()=>{

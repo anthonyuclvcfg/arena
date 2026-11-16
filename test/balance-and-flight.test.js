@@ -15,10 +15,10 @@ function fixture(type='rocket',power=1){
 }
 function settle(s){for(let i=0;i<300&&s.status==='running';i++)E.step(s);assert.equal(s.status,'finished');}
 
-test('Requested balance: 120 seconds, 250 chassis HP, 180 wall HP, unchanged 200-point budget',()=>{
- assert.equal(E.MAX_SECONDS,120);assert.equal(E.CHASSIS_HP,250);assert.equal(E.WALL_HP,180);assert.equal(E.BUDGET,200);
+test('Requested balance: 120 seconds, 300 chassis HP, 150 wall HP, unchanged 200-point budget',()=>{
+ assert.equal(E.MAX_SECONDS,120);assert.equal(E.CHASSIS_HP,300);assert.equal(E.WALL_HP,150);assert.equal(E.BUDGET,200);
  for(const body of Object.keys(E.BODIES))for(const armor of [1,3,5]){
-  const s=E.createMatch({body,armor},passive);assert.equal(s.robots[0].health,250);assert.ok(s.walls.every(w=>w.health===180));
+  const s=E.createMatch({body,armor},passive);assert.equal(s.robots[0].health,300);assert.ok(s.walls.every(w=>w.health===150));
  }
 });
 test('Flamethrower streams last 1.6, 1.8 and 2.0 seconds with lower total damage and unchanged cooldown',()=>{
@@ -34,14 +34,14 @@ test('Twelve-round machine-gun activation spans 1.1 seconds and conserves total 
   assert.ok(t.cooldown>s.projectiles.at(-1).delay);
  }
 });
-test('Bullets and rockets travel their full tier range beyond a broken boundary, without early world culling',()=>{
+test('Missed bullets and rockets leave the whole visible apron before bounded cleanup',()=>{
  for(const type of ['machinegun','rocket'])for(const power of [1,2,3]){
   const s=fixture(type,power),p=s.projectiles[0];s.projectiles=[p];
   s.walls.forEach(w=>{w.broken=true;w.health=0});s.robots[1].y=600;
   p.x=720;p.y=300;const start=p.x;
   E.stepProjectiles(s,E.STEP);assert.equal(s.projectiles.length,1);
-  while(s.projectiles.length)E.stepProjectiles(s,E.STEP);
-  close(p.travel,E.toolStats({type,power}).reach);close(p.x-start,p.range);
+  for(let i=0;i<300&&s.projectiles.length;i++)E.stepProjectiles(s,E.STEP);
+  assert.equal(s.projectiles.length,0);assert.ok(p.x>E.PROJECTILE_BOUNDS.max);close(p.x-start,p.travel);
  }
 });
 test('Changing orders or destroying the shooter cannot delete an airborne bullet or rocket',()=>{
@@ -49,13 +49,13 @@ test('Changing orders or destroying the shooter cannot delete an airborne bullet
   r.action='brake';r.alive=false;r.health=0;r.eliminatedAt=0;r.tools[0].broken=true;
   E.stepProjectiles(s,E.STEP);assert.ok(s.projectiles.some(x=>x.id===p.id));assert.equal(s.projectiles.length,1);
   for(let i=0;i<120;i++)E.stepProjectiles(s,E.STEP);
-  assert.equal(s.projectiles.length,0);assert.ok(s.robots[1].health<250);
+  assert.equal(s.projectiles.length,0);assert.ok(s.robots[1].health<300);
  }
 });
 test('Last-survivor finish waits for launched shots, then includes their real damage',()=>{
  const s=fixture();Object.assign(s.robots[0],{alive:false,health:0,eliminatedAt:2,reason:'Robot destroyed'});s.time=2;
  E.finishIfNeeded(s);assert.equal(s.status,'running');assert.ok(s.pendingResult);assert.equal(s.result,null);
- settle(s);close(s.robots[1].health,250-48*1.2);assert.equal(s.result.standings[0].health,s.robots[1].health);
+ settle(s);close(s.robots[1].health,300-48*1.2);assert.equal(s.result.standings[0].health,s.robots[1].health);
  assert.equal(s.result.winner,1);assert.equal(s.projectiles.length,0);assert.equal(s.time,2);
 });
 test('Shots fired before the timeout can decide the winner; clock stays at 120 with no new firing',()=>{
@@ -70,7 +70,7 @@ test('Shots fired before the timeout can decide the winner; clock stays at 120 w
 test('End signal cancels only unlaunched queued rounds, not the first launched bullet',()=>{
  const s=fixture('machinegun');s.time=120;const p=s.projectiles[0];E.finishIfNeeded(s);
  assert.equal(s.projectiles.length,1);assert.equal(s.projectiles[0].id,p.id);settle(s);
- close(s.robots[1].health,250-1.25*.8);assert.equal(s.projectileCounter,12);
+ close(s.robots[1].health,300-1.25*.8);assert.equal(s.projectileCounter,12);
 });
 test('Settling projectile impacts stop at intact walls and apply exact wall damage once',()=>{
  for(const type of ['rocket','machinegun']){const s=fixture(type),p=s.projectiles[0];s.projectiles=[p];

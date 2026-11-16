@@ -45,7 +45,7 @@ test('All generated bots obey normal budget, health, mounting and tool-count con
  for(let seed=0;seed<400;seed++){
   const s=E.createPracticeBattle(player,4,seed);
   for(const r of s.robots.slice(1)){
-   const b=r.config;assert.ok(E.cost(b)<=200);assert.equal(r.health,250);assert.equal(r.stats.hp,250);
+   const b=r.config;assert.ok(E.cost(b)<=200);assert.equal(r.health,300);assert.equal(r.stats.hp,300);
    assert.ok(b.tools.length>=1&&b.tools.length<=6);assert.equal(b.name.length<=18,true);
    assert.deepEqual(E.normalizeConfig(b),b);assert.equal(r.tools.some(t=>t.bonus),false);
    for(const t of b.tools){assert.ok(Math.abs(t.x)<=E.BODIES[b.body].radius);assert.ok(Math.abs(t.y)<=E.BODIES[b.body].radius);}

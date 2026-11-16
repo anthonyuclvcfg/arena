@@ -23,7 +23,7 @@ test('All visual conditions, actions, chassis, and tools use English labels', ()
   assert.deepEqual(Object.values(E.CONDITIONS), [
     'An active hazard is nearby', 'Opponent is in tool range', 'Opponent is nearby', 'Opponent is in front',
     'I am near the edge', 'My integrity is low', 'I have enough energy',
-    'A tool is ready', 'A component is broken', 'Repair kit nearby', 'Useful bonus nearby', 'I have a bonus tool', 'Opponent is far away', 'Always'
+    'A tool is ready', 'A component is broken', 'Repair kit nearby', 'Useful bonus nearby', 'I have a bonus tool', 'Opponent is far away', 'Always', 'VOID · Skip this rule'
   ]);
   assert.deepEqual(Object.values(E.ACTIONS), [
     'Avoid the active hazard', 'Activate all tools', 'Use tool 1', 'Use tool 2', 'Use tool 3', 'Use tool 4', 'Use tool 5', 'Use tool 6',

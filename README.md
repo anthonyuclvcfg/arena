@@ -2,21 +2,25 @@
 
 > Project context: read `AGENTS.md` and `PROJECT_CONTEXT.md`. Spanish setup guide: `INICIO-CODEX.md`. Local changes are listed in `CHANGELOG.md`; `docs/CODEX-VERIFICATION.md` records the original 0.5.6 handoff validation.
 
-Local field tuning reduces clutter: duels have 4–6 hazards, larger fields have 4, and every supply wave has 2 repair kits plus 2 extra tools.
+Local balance tuning raises chassis health to 300 HP and reduces Flipper vertical and horizontal launch impulses by 25% from the preceding tuning. Damage, cooldown and build cost are unchanged. Field tuning reduces clutter: duels have 4–6 hazards, larger fields have 4, and every supply wave has 2 repair kits plus 2 extra tools.
 
-Version 0.5.6 adds teams and up to eight participants, replaces Diamond / Octagon / Capsule with Manta / Bastion / Twin Hull while preserving Cross, and fixes the camera during ring-outs. Only presentation geometry changes for those three bodies: their stored IDs, point costs, mass, turning, mounting grid and simplified collision envelopes remain compatible. Existing combat balance is unchanged: 250 chassis HP, 200 build points, 180 wall HP, 120 seconds, a 10-second shared pickup lock, 12-round machine-gun bursts and 1.6 / 1.8 / 2.0-second flame streams.
+Version 0.5.6 adds teams and up to eight participants, replaces Diamond / Octagon / Capsule with Manta / Bastion / Twin Hull while preserving Cross, and fixes the camera during ring-outs. Only presentation geometry changes for those three bodies: their stored IDs, point costs, mass, turning, mounting grid and simplified collision envelopes remain compatible. Current local combat balance: 300 chassis HP, 200 build points, 150 wall HP, 120 seconds, a 10-second shared pickup lock, 12-round machine-gun bursts and 1.6 / 1.8 / 2.0-second flame streams.
 
-**250 HP. Up to eight robots. Eight chassis. Nine tools. 120 seconds.**
+**300 HP. Up to eight robots. Eight chassis. Nine tools. 120 seconds.**
 
-Launched bullets and rockets complete their configured range (or impact first), including outside breached walls and after the shooter is destroyed or changes rules. At the end signal, the clock and AI stop, queued unlaunched rounds are cancelled, and already-launched shots resolve with their normal damage before the final standings are confirmed. This short settling phase is shown as **SHOTS IN FLIGHT**; no new shots, healing, hazard damage or driving occurs during it.
+Launched bullets and rockets continue to first impact or outside the visible world, including outside breached walls and after the shooter is destroyed or changes rules. At the end signal, the clock and AI stop, queued unlaunched rounds are cancelled, and already-launched shots resolve with their normal damage before the final standings are confirmed. This short settling phase is shown as **SHOTS IN FLIGHT**; no new shots, healing, hazard damage or driving occurs during it.
 
 A thin-line Canvas battle game written in plain JavaScript. Build one robot, set its IF → DO rules, and let it fight. Includes local practice, local replays, and private server-authoritative online battles for 2–8 pilots. No runtime packages, frameworks, fonts, CDNs, trackers or player-supplied executable code.
 
 ## Play locally
 
-Open `cspire-arena.html` in a modern desktop or mobile browser. This self-contained edition includes all CSS and JavaScript. Choose **Free-for-all** under **MODE** and **2–8** under **ROBOTS**, or select a fixed-size team mode. Open **Random AI bots** to inspect the generated opponents, and press **Test battle**. The initial roster contains four robots. You build one robot; the other local contestants are generated afresh for every battle. Only AI-controlled bots are randomized: your robot and every human player in online rooms keep their saved names, shapes, motor/armor settings, tools, drawing and programming. AI bots vary their name, chassis, motor, armor, weapon types, power, placement and behavior within the same 200-point budget and 250-HP cap. A replay reuses the original generated bots rather than drawing new ones.
+Open `cspire-arena.html` in a modern desktop or mobile browser. This self-contained edition includes all CSS and JavaScript. Choose **Free-for-all** under **MODE** and **2–8** under **ROBOTS**, or select a fixed-size team mode. Open **Random AI bots** to inspect the generated opponents, and press **Test battle**. A five-second countdown freezes movement and damage before the full 120-second battle clock starts. The initial roster contains four robots. You build one robot; the other local contestants are generated afresh for every battle. Only AI-controlled bots are randomized: your robot and every human player in online rooms keep their saved names, shapes, motor/armor settings, tools, drawing and programming. AI bots vary their name, chassis, motor, armor, weapon types, power, placement and behavior within the same 200-point budget and 300-HP cap. A replay reuses the original generated bots rather than drawing new ones.
 
 The browser stores one editable blueprint. Importing replaces that blueprint. Export creates `my-robot.json`. Storage is browser-dependent; when it is unavailable, the editor shows **NOT SAVED** and export still works. Blueprints from versions 0.1–0.5.5 remain importable, including user-entered names and decorative lines.
+
+Automatic names use the original **NAME-CODE-NN** format, with a two-digit final number: `RAVEN-6UBO-01`, `BOLT-6UBO-02`, etc. The twelve original prefixes are **NOVA, COBALT, TITAN, VIPER, QUARTZ, COMET, RAVEN, PULSE, VORTEX, SPARK, ECHO and BOLT**. Codes use uppercase base 36. New pilots get a random full identifier, saved locally; AI practice names retain their seeded generation and gain the leading zero. Loading the legacy `VECTOR-01` default assigns a full identifier once. Short names generated by the previous version keep their prefix and gain a code and `01`; existing catalog names ending in one digit gain only the leading zero. Already formatted names and other custom names stay unchanged.
+
+A match keeps the first occurrence of each name and assigns unused formatted names to later duplicates, ignoring case and surrounding whitespace. All original names are reserved before replacements, so a duplicate cannot take another player's unique name. Only the name changes; the robot's design and program remain intact. Assignment is stable for the same roster across rounds and reconnects, and the assigned human name is saved locally.
 
 To try the new weapons, choose **Fire support · gun + rockets + flame** from the tool-bay loadouts. Existing imports keep their rules; **Balanced logic** includes the new **Opponent is in tool range** condition.
 
@@ -38,19 +42,21 @@ The server binds to localhost by default. For trusted LAN testing:
 HOST=0.0.0.0 PORT=3000 node server.js
 ```
 
-Open the host's LAN address from the other devices and configure the host firewall appropriately. This archive does not deploy or publish the game on the Internet.
+Open the host's LAN address from the other devices and configure the host firewall appropriately. Publishing this source repository does not deploy a running game service.
 
 ### Online identity and authority
 
 Each opaque session identity owns one saved robot. Runtime state is rebuilt from a bounded blueprint; client-provided HP, tool damage, cooldowns and bonus inventories are not trusted. An identity can belong to one room at a time. Blueprints lock while in a room. A ninth entrant is refused; team-mode lobbies also enforce their own capacity. Team assignment is authoritative, not accepted from a client blueprint.
 
-The server runs physics at 60 Hz and sends shared snapshots via Server-Sent Events. All clients receive the same hazards, pickups, projectiles, component damage and result. Leaving a running battle forfeits only that robot; other survivors keep fighting. Leaving a waiting lobby removes that seat and transfers hosting when needed. A lost network connection alone does not forfeit the robot; it continues autonomously and the client can reconnect.
+The standalone room status **ready** means the required number of pilots has joined; it is not a per-player READY vote. The host starts the match. Room members can see submitted blueprints in the lobby. Online rooms use human seats only and do not offer a same-room rematch: leave the finished room and create or join another. Local practice provides AI bots and **Another battle**.
+
+The server runs physics at 60 Hz and sends shared snapshots via Server-Sent Events. All clients receive the same hazards, pickups, projectiles, component damage and result. Leaving a running battle forfeits only that robot; other survivors keep fighting. Leaving a waiting lobby removes that seat and transfers hosting when needed. A lost network connection alone does not forfeit the robot; it continues autonomously and the client can reconnect. Closing the host's browser does not pause the server simulation.
 
 Sessions are a prototype identity mechanism, not verified accounts or one-human enforcement. Pilot tokens and blueprints are stored in `data/pilots.json`; protect this file and keep it outside a publicly served directory. `DATA_DIR` changes the storage directory. Use HTTPS termination and `COOKIE_SECURE=1` when deployed behind a suitable proxy. Production authentication, abuse prevention, persistence, hosting and operational monitoring remain deployment work; do not expose this as a hardened public service without review.
 
 ## Battle rules
 
-The square never changes: its interior is 632 × 632 simulation units. Every robot starts with exactly **250 chassis HP** and **100 energy**, independent of armor level. Armor still improves its own panels. Individual tools, four armor panels, and two drive units retain version 0.4 durability.
+The square never changes: its interior is 632 × 632 simulation units. Every robot starts with exactly **300 chassis HP** and **100 energy**, independent of armor level. Armor still improves its own panels. Individual tools, four armor panels, and two drive units retain version 0.4 durability.
 
 **Last robot standing wins.** Destruction or crossing the square boundary eliminates a robot. Aerial ring-outs are valid above the wall's 42-unit height. The first elimination does not end a match with three or more robots. At the 120-second limit, the surviving robot with the highest exact remaining chassis HP wins. A draw occurs only when the top-ranking robots have exactly equal HP; no rounding or tolerance is used to declare a tie. Simultaneous final eliminations use remaining HP as their tiebreaker. Eliminated pilots can observe the remaining fight.
 
@@ -73,7 +79,7 @@ Seats alternate between teams in join order: A, B, A, B for two teams, or A, B, 
 
 Weapons never target or damage teammates, including rocket splash and self-splash in team modes. Allied bodies remain solid; terrain, wall impacts and ring-outs still threaten every robot. Teammates have separate energy, tools and pickup cooldowns; there is no shared resource pool.
 
-The last team with a surviving robot wins. If time expires, teams rank by the **sum of surviving members’ exact chassis HP**. Eliminated members add zero to that sum. Equal top sums share first place; no rounding is used. All members of a winning team share its victory, including previously eliminated members. Eliminated teams are ordered by survival time when their surviving HP is zero. The winner banner announces the team, and the right-hand scorecard shows both team totals and every individual robot. Free-for-all rankings remain individual.
+The last team with a surviving robot wins. If time expires, teams rank by the **sum of surviving members’ exact chassis HP**. Eliminated members add zero to that sum. Equal top sums share first place; no rounding is used. All members of a winning team share its victory, including previously eliminated members. Eliminated teams are ordered by survival time when their surviving HP is zero. The winner banner announces the team. Player cards are grouped by team rank, and the live team strip shows surviving HP totals and member counts. Free-for-all rankings remain individual.
 
 ## Replacement chassis
 
@@ -81,30 +87,42 @@ The last team with a surviving robot wins. If time expires, teams rank by the **
 
 ### HUD
 
-Health is the main large number. Energy is a smaller, explicitly labelled percentage with a thinner bar. Free-for-all seats use eight distinct colors: cyan, coral, lavender, mint, blue, pink, gold and silver. In team modes all members share their team color, and A/B/C/D plus seat labels identify them. Bodies, HUD cards and projectiles use the same identity color. The HUD stays visible while scrolling. Mobile layouts use two columns for up to four robots and three columns for five to eight, with energy smaller than health. A live team strip shows summed surviving HP and surviving-member counts. An eliminated robot is marked **OUT**.
+The controller appears beneath each robot name in both the lobby and battle: **YOU** for your robot, **BOT #** for AI, and the person's display name for other humans. Robot headings contain only the robot's real name, including in the lobby; the controller is never prepended. Names remain tied to robot seats when ranking cards move. Long names are truncated visually, with the complete label in the title and health/energy accessibility labels.
+
+Health is the main large number. Energy is a smaller, explicitly labelled percentage with a thinner bar. Free-for-all seats use eight distinct colors: cyan, coral, lavender, mint, blue, pink, gold and silver. In team modes all members share their team color, and A/B/C/D plus seat labels identify them. Bodies, player cards and projectiles keep the same identity color when places change. A live team strip shows summed surviving HP and surviving-member counts. An eliminated robot is marked **OUT**.
+
+In the workshop, the health cards stay above the editor. As the countdown starts, those same cards move into a vertical live ranking to the right of the field; the clock moves into the arena heading. The battle controls move above the cards in the same sidebar and remain visible while the cards scroll independently. The sidebar fits within the field's height, so eight players do not stretch the arena. Narrow layouts put it below the field and legend. Rank badges follow the shared engine's exact HP, elimination and team rules. Cards and controls stay in those locations during battle, final results and replay; stopping, leaving or returning to the lobby restores the workshop layout.
+
+The ranking uses shorter, two-column cards in a 320–420 pixel desktop sidebar with a 16-pixel gap from the field. Names and player slots sit on the left; health, energy and their thin bars sit on the right. Pickup and battle status share the bottom row. Cards slide into their new places over 260 milliseconds; another rank change continues from their current visible positions. Reduced-motion preferences turn this animation off. During countdown, battle, results and replay, the mode, field/supply counts and team totals sit in the dark canvas margin above the walls; all eight hazard/item legend entries sit in the margin below the walls. These overlays stay outside the playable square, use no extra layout height and restore their original workshop positions on stop/leave/lobby. Compact team labels retain full accessible names and counts. On a phone, the controls and ranking follow the canvas.
 
 ## Battle focus and collapsible panels
 
-Starting a local battle slides the builder to the left and the logic/telemetry column to the right during the countdown. The arena grows into the released space, keeps its square proportions and fits the available viewport below the sticky health HUD. Online battles enter this view when the first match snapshot arrives; replays also start expanded. The layout animation never changes the simulation clock, physics or robot programming.
+Starting a local battle slides the builder to the left and the logic/telemetry column to the right during the countdown. The arena grows into the released space, keeps its square proportions and uses the vertical space freed by moving the top health HUD beside the field. Online battles enter this view when the first match snapshot arrives; replays also use the ranking beside the field. The layout animation never changes the simulation clock, physics or robot programming.
 
-Each side panel has a **minimize panel** icon in its heading. Hide the builder and logic independently. The **Build** and **Logic** icons in the arena heading restore hidden panels, and the **expand/restore** icon toggles both. Restoring panels during a fight is view-only: the editor stays locked. The top navigation also reopens a hidden Build or Program panel before scrolling to it.
+Starting a battle or replay does not request an automatic page scroll. Moving the existing battle controls preserves keyboard focus without scrolling. The **CSPIRE//ARENA** bar stays visible during battle, and the field's viewport sizing reserves space for that header and the arena heading. Controls beside the field and information in its exterior margins free the former rows above and below the canvas. World dimensions, simulation rate and wall-height markings remain visible along the side margins.
 
-Stopping a local battle or leaving an online room restores the panel layout that was active before the battle. A completed match leaves the arena expanded and the compact standings beside it (below on narrow screens); no automatic reopening covers the final field. On mobile the stacked side sections collapse without leaving empty vertical space. Hidden panels are removed from keyboard navigation, focus is transferred to a visible restore control, and reduced-motion preferences disable the transition.
+Each side panel has a **minimize panel** icon in its heading. Hide the builder and logic independently. The **Build** and **Logic** icons in the arena heading restore hidden panels, and the **expand/restore** icon toggles both. Restoring panels during a fight is view-only: the editor stays locked and the ranking remains with the field. If opening panels leaves too little width, the cards move below the canvas. The top navigation also reopens a hidden Build or Program panel before scrolling to it.
+
+Stopping a local battle or leaving an online room restores the panel layout that was active before the battle. A completed match leaves the arena expanded and keeps the final ranking in the same player cards; no automatic reopening covers the final field. On mobile the stacked side sections collapse without leaving empty vertical space. Hidden panels are removed from keyboard navigation, focus is transferred to a visible restore control, and reduced-motion preferences disable the transition.
 
 ## Final standings
 
-A compact, non-modal standings panel appears to the right of the arena after every victory, timeout, local replay or online match. When the arena panel is narrower than 760 CSS pixels, the table stacks underneath so the field stays legible. It does not dim the screen, cover the canvas, move focus or automatically scroll the page. A small, pointer-transparent announcement shows the winner's name in their robot color over the board; exact ties list every shared winner. Closing the table leaves this announcement visible. Restarting or replaying clears both results before battle begins. It lists every robot's place, player slot, identity color, remaining chassis HP, survivor/elimination status, and elimination time. The table can be hidden and reopened without losing the final result; ranking details start collapsed.
+The live player cards keep their final order after every victory, timeout, local replay or online match. There is no separate **Battle decided** panel, result table or results shortcut. After final shots settle, animations finish for three real seconds before winner styling and final labels appear. The cards remain visible during that delay, while combat and the match clock stay frozen. Each card retains its rank, player slot, identity color and health, then shows its winner/survivor/elimination status, elimination time and precise remaining HP.
 
-Survivors rank ahead of all eliminated robots, even when a ringed-out robot retains more HP. Survivors are ordered by exact HP. Eliminated bots are ordered by survival time, then exact HP if eliminated at the same instant. Equal entries share their place (for example 1, 1, 3, 4); only a tie for first is a draw. Additional decimal places are displayed when necessary to avoid showing unequal HP as a visual tie. The full stored value is available in the HP cell tooltip. Results are generated by the shared engine, not selected independently by the clients.
+A small, pointer-transparent announcement shows the winner's name in their robot color over the board; exact ties list every shared winner. Revealing the result does not shrink or move the canvas, dim the screen, move focus or automatically scroll the page. Starting another battle or replay clears the previous winner styling.
+
+Local **Another battle** keeps the player's robot and programming, including custom/VOID rules and the selected behavior. Only explicit player edits change them; practice opponents and the field are regenerated. Online play uses a new room for the next match.
+
+In free-for-all, survivors rank ahead of all eliminated robots, even when a ringed-out robot retains more HP. Survivors are ordered by exact HP. Eliminated bots are ordered by survival time, then exact HP if eliminated at the same instant. Equal entries share their place (for example 1, 1, 3, 4); only a tie for first is a draw. Team modes group all members by the team's rank first, then use the same individual ordering within each team. Additional decimal places are displayed when necessary to avoid showing unequal HP as a visual tie. The full stored value is available in the health-number tooltip. Results are generated by the shared engine, not selected independently by the clients.
 
 ## Build budget and tools
 
 - 200 build points; one geometric chassis; motor and armor levels 1–5.
 - Up to six tools in the saved design, plus two temporary field-bonus slots.
 - Free XY placement within the mounting grid and rotation through 360°.
-- Up to twelve visual rules and 28 decorative lines.
+- Up to twelve visual rules and 28 decorative lines. Select **VOID · Skip this rule** in IF to ignore an unused slot. Its DO action is preserved but disabled; changing IF back restores it. If every rule is VOID, the robot brakes.
 
-Available chassis: **Wedge, Rectangle, Hexagon, Circle, Manta, Bastion, Twin Hull and Cross**. Each has its own mass, point cost, radius and turning factor. All retain 250 chassis HP. New shapes can be used by your own saved robot or generated AI rivals. The collision envelope remains simplified, not exact polygonal physics.
+Available chassis: **Wedge, Rectangle, Hexagon, Circle, Manta, Bastion, Twin Hull and Cross**. Each has its own mass, point cost, radius and turning factor. All retain 300 chassis HP. New shapes can be used by your own saved robot or generated AI rivals. Melee contact follows the visible outline; movement, projectile and hazard collisions retain their simplified envelopes. This is not a general polygonal physics simulation.
 
 Click any visible part of a mounted tool (including its barrel or head) to select that exact tool. Dragging preserves the grab offset: the mount does not jump to the cursor. Empty canvas does not move the previously selected tool. Overlapping tools prioritize the last-drawn silhouette; numbered slots select obscured tools individually. Scroll over a tool to rotate it; elsewhere on the builder canvas the selected tool rotates. One wheel step is 15 degrees (Shift: 5 degrees). Double-click the tool or its numbered slot to remove that specific tool. Delete/Backspace also removes the selected tool and arrow keys rotate it. Drawing mode, browser zoom (Ctrl+wheel), battle locking and touch dragging remain separate.
 
@@ -116,25 +134,35 @@ The nine catalog cards show base damage and base cooldown. The selected-tool pan
 | Flipper | 7 | 3.7 s | Launches an opponent |
 | Plow | 8 | 1.4 s | Wide, frequent pushes |
 | Hammer | 30 | 4.4 s | Heavy structural hit |
-| Saw | 12 | 0.85 s | Fast contact strikes |
-| Drill | 18 | 1.8 s | Narrow penetrating strike |
+| Saw | 12 | 0.85 s | Continuous contact cutting across one cooldown |
+| Drill | 18 | 1.8 s | Continuous penetrating contact across one cooldown |
 | Flamethrower | 22 | 3.2 s | Yellow line-particle stream; total damage for full exposure |
 | Machine gun | 15 | 1.25 s | Twelve dotted projectiles over 1.1 s, 1.25 nominal damage each |
 | Rocket launcher | 48 | 6 s | Direct projectile hit plus distance-based splash to other nearby robots |
 
-The gun and rocket use moving, swept-collision projectiles, not instant damage. They can miss moving opponents and strike walls or intervening robots. A flame stream can affect multiple opponents within its cone. Damage is distributed over a 1.6 / 1.8 / 2.0-second emission at Light / Standard / Heavy power. Leaving the cone early reduces damage received. Flame rays and their visual lanes are blocked by intact walls and pass through breaches. Rocket splash can also damage the shooter at close range. Gun rounds leave at 0 / 0.1 / 0.2 / 0.3 / 0.4 / 0.5 / 0.6 / 0.7 / 0.8 / 0.9 / 1.0 / 1.1 seconds from the current nozzle location and orientation. A firing rule repeats attacks as soon as cooldown and energy allow. A different active rule stops flames and cancels rounds that have not left the gun; already-fired bullets and rockets remain in flight. A destroyed tool, eliminated robot or airborne shooter cannot keep emitting.
+Saws and drills spend their nominal per-use damage and push budgets gradually across one cooldown, only while their real hit zone touches an enemy or wall. Losing contact stops damage immediately; missed contact time is never repaid on reacquisition. Changing to a different active tool/rule, component destruction, elimination or lifting cancels the ongoing contact cycle. Hammer, ram, plow and Flipper retain discrete contact impacts.
+
+Melee contact follows the working head's visible shape: the saw's rotating disk, drill point and the other tool heads can touch from the side as well as straight ahead. Receiving tools use their visible body and distal head, while chassis use their actual outline; a broken remnant does not block a strike. Light, Standard and Heavy keep the same tool size, builder zoom, selection area and contact shape. A gap between the pieces causes no melee damage at any power level. Power still affects the tool's performance and acquisition range; actual melee damage always requires physical contact. Activation requires the active rule, available energy, completed cooldown and compatible height; allies remain excluded.
+
+The gun and rocket use moving, swept-collision projectiles, not instant damage. They can miss moving opponents and strike walls or intervening robots. A flame stream can affect multiple opponents within its cone. Damage is applied on every 60-Hz simulation tick of actual flame contact over a 1.6 / 1.8 / 2.0-second emission at Light / Standard / Heavy power. A hull touching the edge burns even when its center is outside the cone. Leaving the cone early reduces damage received. Flame rays and their visual lanes are blocked by intact walls and pass through breaches. Rocket splash can also damage the shooter at close range. Gun rounds leave at 0 / 0.1 / 0.2 / 0.3 / 0.4 / 0.5 / 0.6 / 0.7 / 0.8 / 0.9 / 1.0 / 1.1 seconds from the current nozzle location and orientation. A firing rule repeats attacks as soon as cooldown and energy allow. A different active rule stops sustained tools and cancels rounds that have not left the gun; already-fired bullets and rockets remain in flight until their first robot or wall impact, even after their owner or tool is destroyed. Weapon range determines acquisition, not flight lifetime. A missed shot is retired only beyond the fixed visible world and apron (−32 to 832 on each axis), including room for its trail. The slowest diagonal escape takes less than 4.6 seconds, so final-shot settlement stays bounded. A destroyed tool, eliminated robot or airborne shooter cannot keep emitting.
 
 Increasing any tool from Light (1) to Standard (2) or Heavy (3) increases nominal damage by 50% or 100%, effective range by 25% or 50%, and cooldown by 40% or 80%. It also raises energy use, mass, tool HP and point cost. For example, rocket cooldowns are 6 / 8.4 / 10.8 seconds. Every tool has an independent cooldown; all share the robot's energy pool, which regenerates at 12 units per second.
 
-Tools physically intercept strikes. A broken tool stops working. Broken armor exposes that side; broken drive units reduce mobility to 65% with one failure and 30% with both. A detached component becomes a visual fragment, not a collidable object.
+All nine tools now use **another 10% less energy** at every power level before final rounding. The multiplier after power scaling is 0.855, down from 0.95, with costs rounded to two decimals. For example, a Light ram uses 17.1 energy, a Light machine gun 13.68, and a Heavy hammer 35.91. Built and collected tools use the same reduced costs. A gun burst, flame emission or saw/drill activation pays once when it starts. Damage, cooldowns, the 100-energy cap, regeneration and the 36-energy Charge cost are unchanged.
+
+With several active tools, firing priority rotates after each activation. Four machine guns can begin together while energy is plentiful; as it runs low, they take turns instead of the first gun using every recharge. Broken, cooling, inactive and non-contacting tools are skipped. A ready weapon with a valid target can save up its energy cost before a cheaper later weapon fires, so expensive tools remain usable too. Individual tool rules still activate only the selected slot. One cursor in each robot's simulation state preserves the ordering through local pause, replay snapshots and online updates.
+
+Tools physically intercept strikes. Intact armor and components reduce the damage reaching the chassis rather than absorbing it completely: armor transmits 22% plus half the attack's penetration fraction, tools 30%, and drives 35%. Armor still protects its sector when its strip sits inside the body outline. Small continuous losses update exact HP and the health bar each tick, even if the rounded HP number has not changed yet. A broken tool stops working. Broken armor exposes that side; broken drive units reduce mobility to 65% with one failure and 30% with both. A broken component becomes a visual fragment, not a collidable object.
+
+At zero chassis HP, recognizable sections of its actual chassis and its treaded wheels fly apart with the same explosion effect as a rocket, then fade out over three seconds. Surviving tools scatter for 0.9 seconds, then remain available for other robots to recover with their exact remaining health. They occupy the existing bonus slots and share the ten-second pickup cooldown; broken tools cannot be recovered. Recovered tools can be dropped again if their new owner is destroyed. Ring-outs keep the whole robot intact during its exit. Cosmetic fragments never cause damage, and the winner banner and final card labels wait three real seconds after final shots settle so the last animations finish, without extending the battle clock or changing HP and ranking.
 
 ## Walls
 
-All 48 wall segments start at 180 HP (down from 200 in v0.5.4, a 10% reduction). Damage persists until a segment reaches zero and leaves a permanent opening. Body-impact damage depends on mass and velocity towards the wall and is capped at 72 per impact. Tools and projectiles apply their own wall damage. Standing against a wall does not continually inflict impact damage.
+All 48 wall segments start at 150 HP (down from the preceding 180-HP tuning). Damage persists until a segment reaches zero and leaves a permanent opening. Body-impact damage depends on mass and velocity towards the wall and is capped at 72 per impact. Tools and projectiles apply their own wall damage. Standing against a wall does not continually inflict impact damage.
 
 Point at or tap a segment to inspect its HP, or focus the arena and use the arrow keys. **Auto** tracks the weakest surviving segment.
 
-A machine gun deals 7.5 / 11.25 / 15 wall damage per full twelve-round burst at power 1 / 2 / 3 (0.625 / 0.9375 / 1.25 per bullet). A full flame emission deals 8.5 / 12.75 / 17 to a wall. A rocket still deals 58 / 87 / 116 on a direct wall impact. These wall coefficients differ from nominal damage against robots. A rocket explosion can splash robots but does not apply a second wall hit or damage adjacent wall segments. The final hit is capped at remaining wall HP, and broken segments are no longer colliders. Three maximum 72-point body impacts, or four base-power rockets, breach a fresh segment.
+A machine gun deals 7.5 / 11.25 / 15 wall damage per full twelve-round burst at power 1 / 2 / 3 (0.625 / 0.9375 / 1.25 per bullet). A full flame emission deals 8.5 / 12.75 / 17 to a wall. A rocket still deals 58 / 87 / 116 on a direct wall impact. These wall coefficients differ from nominal damage against robots. A rocket explosion can splash robots but does not apply a second wall hit or damage adjacent wall segments. The final hit is capped at remaining wall HP, and broken segments are no longer colliders. Three maximum 72-point body impacts, or three base-power rockets, breach a fresh segment.
 
 Shots are swept along their flight path, stop at the first obstacle, and hit a wall only once per projectile—even at a segment seam. A diagonal mount protruding through a solid barrier has its firing origin moved just inside it; it cannot spawn shots past that barrier. A shot above wall height clears it, and a shot through a breach does not damage an invisible wall.
 
@@ -144,18 +172,18 @@ Retreat, orbit and hazard-avoidance destinations are kept inside the square. Mot
 
 When a robot's center crosses the square boundary through a breach, or above an intact wall, it is immediately eliminated and marked **OUT**. It can no longer steer, attack, collide, collect supplies or return. A deterministic 0.65-second exit animation continues until its full visible outline (including mounted tools and drawn lines) is at least eight world units beyond the crossed edge. Even a very slow exit gets this clearance. The camera remains fixed at the original 800 × 800 world-unit view throughout the exit; it never pans or zooms to follow a robot, projectile or fragment. The 632 × 632 playable square and pointer mapping stay fixed. Objects travelling beyond the visible apron are simply clipped by the canvas. Window resizing and manual panel controls can still resize the UI; ring-outs cannot.
 
-If multiple opponents remain, their battle continues during the exit animation. If a result is decided, combat and the match clock freeze while the final exit finishes; then the compact standings panel appears beside the arena (below on narrow screens). This presentation does not grant extra combat time after the 120-second limit.
+If multiple opponents remain, their battle continues during the exit animation. If a result is decided, combat and the match clock freeze while final effects finish; the same live cards retain the final order and reveal their winner labels after the three-second presentation delay. This does not grant extra combat time after the 120-second limit.
 
 
 ## Random terrain and bonuses
 
-Every new match rolls a fresh seed. The footprint stays fixed, while hazards, timing and supplies change. Replays keep the original layout. Duels generate 4–6 hazards in mirrored pairs; 3–4 robot matches use four hazards with four-way rotational symmetry. Starts are kept clear. A three-robot match uses three of the four reserved starts; identical distances between every pair are not claimed.
+Every new match rolls a fresh seed. The footprint stays fixed, while hazards, timing and supplies change. The arena heading and canvas select an English name from a fixed list using that seed, such as **Eagle's Nest**, **Burning Pit** or **Acid Bath**. Replays keep the original seed, layout and name; online players see the same name. Different seeds may select the same name. This decorative choice does not consume simulation randomness. Duels generate 4–6 hazards in mirrored pairs; 3–4 robot matches use four hazards with four-way rotational symmetry. Starts are kept clear. A three-robot match uses three of the four reserved starts; identical distances between every pair are not claimed.
 
-Hazards are fire vents, grinders, timed spikes, Tesla pads and acid pools. All can damage components; certain hazards also drain energy or slow movement. Pulse warnings and labels identify active areas. The programming sensor and avoidance action consider only active hazards. Inactive and warning-only traps are ignored, including when they are closer than an active trap. Trap activation changes immediately re-evaluate the brain. Grinders and acid pools are continuously active.
+Hazards are fire vents, grinders, timed spikes, Tesla pads and acid pools. All can damage components; certain hazards also drain energy or slow movement. Pulse warnings and labels identify active areas. The programming sensor and avoidance action consider only active hazards. Inactive and warning-only traps are ignored, including when they are closer than an active trap. Trap activation changes immediately re-evaluate the brain. Grinders run for 2 seconds and cool down for 3 seconds. Acid pools are continuously active.
 
 At 0, 30, 60 and 90 seconds, supply waves place two repair kits and two extra tools away from hazards in every mode. Each kind forms an opposite mirrored pair, including on fields with quarter-turn hazard layouts. At most four supplies are available at once; unclaimed supplies expire at the next wave. All tools, including the three new ranged types, may appear as drops.
 
-**Repair:** drive over a green kit to regain up to 30% of chassis HP (75 HP with the 250 cap) and 25% of each surviving component's maximum HP. Values never exceed their maximum; broken components stay broken. Completely healthy robots do not consume unnecessary kits.
+**Repair:** drive over a green kit to regain up to 30% of chassis HP (90 HP with the 300 cap) and 25% of each surviving component's maximum HP. Values never exceed their maximum; broken components stay broken. Completely healthy robots do not consume unnecessary kits.
 
 **Extra tool:** drive over a yellow tool to mount it in a free bonus slot. It has independent HP and cooldown, uses shared energy, and adds mass without costing build points. A broken bonus slot can be replaced. Base tools are never overwritten. Loot does not change the saved design and is removed for the next match.
 
@@ -199,7 +227,7 @@ python test/browser-editor-six.py
 python test/browser-teams-camera.py
 ```
 
-See `TESTING.md` for actual verification and boundaries. The simulation is 2.5D with simplified circular collision zones, not a general rigid-body construction engine. Drawn lines are decorative. Replay snapshots are local to the current page session; verified accounts, persistent leaderboards, matchmaking, saved online replays and spectators outside the room are not implemented.
+See `TESTING.md` for actual verification and boundaries. The simulation is 2.5D: movement and ranged hit zones remain simplified, while melee uses compact tool shapes and the visible chassis outline. It is not a general rigid-body construction engine. Drawn lines are decorative. Replay snapshots are local to the current page session; verified accounts, persistent leaderboards, matchmaking, saved online replays and spectators outside the room are not implemented.
 
 ## Crowded arenas and starting positions
 
@@ -211,10 +239,16 @@ Collecting either a repair kit or a bonus tool starts a **10-second cooldown on 
 
 The HUD shows **BONUS IN 10s** counting down independently for each robot, and live telemetry shows your exact remaining time. Programming sensors ignore bonuses the robot currently cannot collect. The timer advances in simulation time, pauses with a local match, is reset for each new match, and is shared by authoritative online state and replays. It does not modify weapon cooldowns or the supply refresh schedule.
 
-## Codex development handoff
+## Optional construction renderer
 
-The project instructions and current decision record now travel with the source.
-No game mechanic or runtime dependency was changed by this packaging step.
+`public/app.js` also contains a reusable construction scene for a hosting interface. It is included in the standalone bundle but is **not activated by the shipped local-practice or Node/SSE room flows**. Those flows do not implement individual READY voting or hidden-design lobbies.
+
+A host can opt in with UI-only `state.lobbyConstruction` and occupied-seat `robot.construction={ready,phase}` metadata. Eight cached catalog examples use two eyeless workers sharing six components. Each worker performs six jobs in a 72-second loop, offset by six seconds; parts are carried, installed, cut free and returned without duplicates or a loop jump. Individual READY changes the centered label; all crews park when every occupied seat is ready. Reduced motion is static and hidden tabs skip scene painting. The renderer adds no combat state or network messages. Its caller must supply lobby metadata and keep actual private designs separate from decorative previews.
+
+## Development
+
+Project instructions, current decisions and verification guidance are included
+with the source. Rebuild the self-contained HTML after changing runtime files.
 
 ```sh
 npm run doctor   # Read-only local setup check
@@ -229,6 +263,12 @@ the tests use system Chromium when available, then Playwright's managed browser.
 Install optional test dependencies in a virtual environment, not as game runtime
 dependencies. The runner makes no installations or network requests itself.
 
-This archive contains files and durable guidance, not desktop-app registration,
-GitHub hosting, a synchronized conversation, or the user's browser-saved robot.
-Attach the extracted project folder in the desktop app to work on it locally.
+The repository contains source and development guidance. Browser-saved robots
+and server session data are not included; use robot export/import to move a
+design between browsers or origins.
+
+### Trap contact and start timing
+
+Every trap applies its damage rate gradually at the simulation step, only while active and touching the chassis or a component. Leaving contact, lifting above its height, cooldown and warning-only periods cause no damage and never create deferred damage. A grinder rotates for 2 seconds and stops for a 3-second cooldown; its seeded phase stays shared by all players. Its warning appears in the final 0.8 seconds before activation.
+
+Local practice and online battles wait five seconds before physics begins. The countdown does not consume the 120-second battle clock. The Node server includes the remaining countdown ticks in its shared state snapshots.

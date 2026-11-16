@@ -4,12 +4,12 @@ const E=require('../public/engine');
 const passive={tools:[],rules:[{when:'always',do:'brake'}]};
 const near=(a,b)=>assert.ok(Math.abs(a-b)<1e-7,`${a} != ${b}`);
 
-test('All eight chassis are distinct and retain 250 HP and a 200-point budget',()=>{
+test('All eight chassis are distinct and retain 300 HP and a 200-point budget',()=>{
  assert.equal(Object.keys(E.BODIES).length,8);
  const profiles=new Set();
  for(const body of Object.keys(E.BODIES)){
   const c=E.normalizeConfig({...passive,name:'CUSTOM',body,motor:3,armor:3});
-  assert.equal(c.body,body);assert.equal(E.stats(c).hp,250);assert.ok(E.cost(c)<=200);
+  assert.equal(c.body,body);assert.equal(E.stats(c).hp,300);assert.ok(E.cost(c)<=200);
   profiles.add(JSON.stringify(E.BODIES[body]));
   const s=E.createBattle([c,c]);assert.equal(s.robots[0].config.body,body);
   assert.ok(Number.isFinite(E.stats(c).turn));
@@ -55,7 +55,7 @@ test('All six human blueprints survive normalization; practice only randomizes t
   const p=E.createPracticeBattle(users[0],6,seed);
   assert.deepEqual(p.robots[0].config,users[0]);assert.equal(p.robots.filter(r=>r.controller==='bot').length,5);
   assert.equal(new Set(p.robots.map(r=>r.config.name)).size,6);
-  assert.ok(p.robots.every(r=>r.health===250&&E.cost(r.config)<=200));
+  assert.ok(p.robots.every(r=>r.health===300&&E.cost(r.config)<=200));
  }
  assert.equal(JSON.stringify(users),before);
 });
@@ -89,7 +89,7 @@ test('Complete 5–6 player randomized battles finish with finite state and dete
  }
 });
 test('Reduced lift and longer streams preserve cooldown, range and capped total damage',()=>{
- near(E.FLIPPER_LIFT_MULTIPLIER,.85);assert.equal(E.WALL_HP,180);
+ near(E.FLIPPER_LIFT_MULTIPLIER,.6375);assert.equal(E.WALL_HP,150);
  assert.equal(E.MAX_SECONDS,120);assert.equal(E.MACHINEGUN_ROUNDS,12);near(E.MACHINEGUN_INTERVAL,.1);
  for(const power of [1,2,3]){
   const flame=E.toolStats({type:'flamethrower',power}),gun=E.toolStats({type:'machinegun',power});

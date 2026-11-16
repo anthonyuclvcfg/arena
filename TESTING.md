@@ -1,3 +1,49 @@
+# Portable publication verification — 2026-11-16
+
+This repository contains the standalone JavaScript game, its Node HTTP/SSE
+server, self-contained HTML, examples and portable tests. Application-specific
+Scala modules, embedding adapters, authentication, navigation, deployment
+configuration, session data and local recordings are not part of this update.
+
+## Current publication checks
+
+Using Node **22.23.3** and npm **10.9.9**, `npm run verify` rebuilt the standalone
+HTML, passed all JavaScript syntax checks and passed **386 Node tests**, with
+zero failures, skips or cancellations. These checks were executed for this
+publication against the same runtime files copied into the repository.
+
+The optional browser tests require Python Playwright and Chromium. Production
+files contain no test hooks; observation is injected only into test HTML copies.
+The focused ranking suite was rerun against the publication copy after replacing
+a personal test fixture name with a fictitious controller name. It passed **447 checks** with zero JavaScript errors. Desktop controller labels
+and mobile FFA/team captures were inspected. Its result is recorded in
+`docs/verification/portable-20261116.json`.
+
+The preceding renderer validation passed **408 construction checks** with zero
+JavaScript errors on the unchanged runtime. That earlier run verified eight
+catalog models, centered READY banners, six-second worker staggering, exact
+72-second repetition, consecutive-job separation, continuous wrap transitions,
+reduced motion and hidden-tab behavior. It sampled equivalent phases as far as
+8400 cycles (seven days); this was not a seven-day wall-clock test. This suite was
+not rerun for packaging. The publication manifest records the runtime hashes.
+
+The construction renderer is shared game code and is covered through in-memory
+lobby fixtures. The standalone Node room flow does not activate that renderer,
+implement individual READY votes or provide an invitation directory. Those
+hosting features require a separate integration and are not claimed by these
+portable checks.
+
+An unused test hook for a separate embedded transport was removed from
+`test/browser-finale.py`; Python syntax was checked. This does not change runtime
+code or the standalone test path. The broader browser suites were not rerun for
+this publication; the reports below remain historical.
+
+## Historical baseline verification
+
+The remaining sections and files under `docs/verification/` without the
+`portable-20261116` name describe the original 0.5.6 handoff. Their older counts,
+paths and runtime hashes are historical evidence, not current test executions.
+
 # Delivery verification — CSPIRE//ARENA 0.5.6
 
 > This file describes the original 0.5.6 delivery. For checks rerun during the Codex handoff, see `docs/CODEX-VERIFICATION.md`; do not treat historic reports as new executions.

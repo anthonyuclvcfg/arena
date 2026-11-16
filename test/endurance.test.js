@@ -5,13 +5,13 @@ const fs = require('node:fs');
 const path = require('node:path');
 const E = require('../public/engine');
 
-test('Every chassis starts at exactly 250 HP for all shapes and armor levels', () => {
+test('Every chassis starts at exactly 300 HP for all shapes and armor levels', () => {
   assert.equal(E.DURABILITY_MULTIPLIER, 2);
   for (const body of Object.keys(E.BODIES)) for (let armor=1; armor<=5; armor++) {
     const config = {body, armor, motor:1, tools:[]};
     const match = E.createMatch(config, config, 1);
     for (const robot of match.robots) {
-      assert.equal(robot.stats.hp, 250);
+      assert.equal(robot.stats.hp, 300);
       assert.equal(robot.health, robot.stats.hp);
       assert.equal(robot.energy, 100);
     }
@@ -34,12 +34,12 @@ test('Component doubling retains v0.3 integer rounding including odd values', ()
   assert.equal(E.toolStats({type:'saw',power:1}).hp, 78);
 });
 
-test('Build budget is 200; other limits, melee stats, energy and cooldowns stay unchanged', () => {
+test('Build budget is 200; other limits and melee stats retain their balance with reduced tool energy', () => {
   assert.equal(E.BUDGET,200);assert.equal(E.MAX_TOOLS,6);assert.equal(E.MAX_BONUS_TOOLS,2);assert.equal(E.MAX_RULES,12);
-  assert.equal(E.WALL_HP,180);assert.equal(E.MAX_IMPACT_DAMAGE,72);assert.equal(E.MAX_SECONDS,120);
+  assert.equal(E.WALL_HP,150);assert.equal(E.MAX_IMPACT_DAMAGE,72);assert.equal(E.MAX_SECONDS,120);
   assert.equal(E.REPAIR_FRACTION,.30);assert.equal(E.PART_REPAIR_FRACTION,.25);
   const s=E.toolStats({type:'hammer',power:3});
-  assert.equal(s.damage,60);assert.equal(s.wallDamage,92);assert.equal(s.energy,42);assert.equal(s.cooldown,7.92);
+  assert.equal(s.damage,60);assert.equal(s.wallDamage,92);assert.equal(s.energy,35.91);assert.equal(s.cooldown,7.92);
 });
 
 test('Exported blueprints keep their existing format and do not persist runtime health', () => {

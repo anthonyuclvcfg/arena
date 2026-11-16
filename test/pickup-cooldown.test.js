@@ -42,7 +42,7 @@ test('A useless repair kit does not start cooldown or stop useful tool collectio
 });
 test('Component-only repairs start the shared cooldown without increasing chassis HP',()=>{
  const s=fixture(),r=s.robots[0];r.parts[0].health--;const p=drop(s,r);E.collectPickups(s);
- assert.equal(p.collectedBy,r.id);assert.equal(r.health,250);assert.equal(r.pickupCooldown,10);
+ assert.equal(p.collectedBy,r.id);assert.equal(r.health,300);assert.equal(r.pickupCooldown,10);
 });
 test('Full bonus slots do not start a delay or consume the loose tool',()=>{
  const s=fixture(),r=s.robots[0];drop(s,r,'tool');E.collectPickups(s);ticks(s,600);

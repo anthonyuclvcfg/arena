@@ -1,0 +1,77 @@
+{
+  "date": "2026-11-16",
+  "scope": "Standalone game publication; excludes host-application integration and local recordings.",
+  "node": "22.23.3",
+  "npm": "10.9.9",
+  "freshChecks": [
+    {
+      "command": "npm run verify",
+      "build": "passed",
+      "syntax": "passed",
+      "tests": 386,
+      "passed": 386,
+      "failed": 0,
+      "skipped": 0,
+      "cancelled": 0
+    },
+    {
+      "command": "python test/browser-ranking.py",
+      "checks": 447,
+      "passed": 447,
+      "javascriptErrors": 0,
+      "visualInspection": [
+        "desktop ranking",
+        "fictitious controller labels",
+        "mobile free-for-all",
+        "mobile teams"
+      ]
+    }
+  ],
+  "previousSameRuntimeChecks": {
+    "command": "python test/browser-construction.py",
+    "checks": 408,
+    "passed": 408,
+    "javascriptErrors": 0,
+    "rerunForPublication": false
+  },
+  "packagingEdits": [
+    "Portable documentation only",
+    "Replace personal controller fixture with fictitious Alex Rivera",
+    "Remove unused embedded-transport hooks from browser-finale.py"
+  ],
+  "runtimeMatchesWorkingSource": true,
+  "runtimeFiles": {
+    "public/engine.js": {
+      "bytes": 81606,
+      "sha256": "6f968cc3f7e9ba5339428b2b4bf9f619a65d868251981cbee2c7f45de39afb12"
+    },
+    "public/app.js": {
+      "bytes": 110616,
+      "sha256": "85b73c1b9f534698de5792e4fe0a4c2ed42a7a898dbb247983725deaa4c5f6d8"
+    },
+    "public/index.html": {
+      "bytes": 37826,
+      "sha256": "afbd8dd936f166436a30467926cf200e778ad27c2b14fdf8cd4a015c7aa06d4f"
+    },
+    "public/style.css": {
+      "bytes": 63283,
+      "sha256": "59ac56d2418a72c9016d67847e7eae69f884655dd7e0a9932817f538189edcf5"
+    },
+    "server.js": {
+      "bytes": 13755,
+      "sha256": "d81a0a85dda2b1bd5cdf797d20a4fb964f39ee586f63399810da4d88a8eeb210"
+    },
+    "build.js": {
+      "bytes": 727,
+      "sha256": "891bf837465ae5ed03648722fb10fed1b04feec903ee2a02dfb0b1f9628ffb5f"
+    },
+    "package.json": {
+      "bytes": 682,
+      "sha256": "60fe51ce4d45e06bf3d7242a4ef6e79ff45dc314eff9b85f6c8ef91af372d311"
+    },
+    "cspire-arena.html": {
+      "bytes": 293283,
+      "sha256": "23a1d0477f76773561303df21012337eadfc2ccd6426126eaf1de7abf622627f"
+    }
+  }
+}

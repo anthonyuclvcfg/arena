@@ -117,6 +117,9 @@ test('Broken tools stop attacking but do not destroy an otherwise healthy robot'
 });
 test('A mounted enemy tool physically intercepts a hit and can be destroyed',()=>{
  const s=duel([tool('hammer',3)],[tool('saw')]),[a,b]=s.robots;
+ // Fixed-size active hammer head: x417..426. The receiver's visible saw disk
+ // is centered at424 with radius10, ahead of its hull; power adds no reach.
+ b.x=460;
  const hits=E.collectAttacks(s,a,b);assert.equal(hits[0].hit.component.kind,'tool');E.resolveAttacks(s,hits);
  assert.equal(b.tools[0].broken,false,'Doubled tool HP survives the first heavy hit');
  assert.ok(b.tools[0].health<b.tools[0].maxHealth);a.tools[0].cooldown=0;a.energy=100;
@@ -141,7 +144,7 @@ test('Simultaneous collected attacks both land even if a weapon breaks that tick
 });
 test('The flipper still launches an opponent and has its own cooldown',()=>{
  const s=duel([tool('flipper')]),[a,b]=s.robots;E.resolveAttacks(s,E.collectAttacks(s,a,b));
- assert.ok(b.vz>250);assert.ok(b.z>0);assert.equal(a.tools[0].cooldown,3.7);assert.ok(s.events.some(e=>e.type==='launch'));
+ assert.ok(b.vz>200&&b.vz<250);assert.ok(b.z>0);assert.equal(a.tools[0].cooldown,3.7);assert.ok(s.events.some(e=>e.type==='launch'));
 });
 test('Intact walls stop low-speed contact without taking continuous contact damage',()=>{
  const s=match(),r=s.robots[0];r.x=E.BOUNDS.min+r.stats.radius+1;r.y=400;r.vx=-70;
@@ -164,7 +167,7 @@ test('Tools damage walls according to tool type and power, not collision velocit
  for(const type of ['hammer','saw','ram']){
   const s=duel([tool(type,1)]),[a,b]=s.robots;Object.assign(a,{x:110,y:373,angle:Math.PI,action:'wall'});b.x=600;
   const hits=E.collectAttacks(s,a,b);assert.equal(hits.length,1);assert.equal(hits[0].hit.kind,'wall');
-  E.resolveAttacks(s,hits);assert.equal(hits[0].hit.wall.health,E.WALL_HP-E.toolStats(tool(type)).wallDamage);
+  E.resolveAttacks(s,hits);if(type==='saw')E.stepContact(s,a.tools[0].stats.cooldown);assert.equal(hits[0].hit.wall.health,E.WALL_HP-E.toolStats(tool(type)).wallDamage);
  }
  assert.ok(E.toolStats(tool('hammer',3)).wallDamage>E.toolStats(tool('hammer',1)).wallDamage);
 });
@@ -189,7 +192,7 @@ test('An open gap allows a ground ring-out',()=>{
  r.x=E.BOUNDS.min+1;r.vx=-300;E.step(s);for(let i=0;i<60&&s.status==='running';i++)E.step(s);assert.equal(s.result.winner,1);assert.equal(s.robots[0].reason,'Out of the arena');
 });
 test('Grinders damage mounted tools as well as the core',()=>{
- const s=match(),r=s.robots[0],h=s.hazards.find(h=>h.type==='grinder');r.x=h.x;r.y=h.y;const hp=r.tools[0].health;E.step(s);
+ const s=match(),r=s.robots[0],h=s.hazards.find(h=>h.type==='grinder');h.phase=0;r.x=h.x;r.y=h.y;const hp=r.tools[0].health;E.step(s);
  assert.ok(r.health<r.stats.hp);assert.ok(r.tools[0].health<hp);r.health=1;for(let i=0;i<3;i++)E.step(s);assert.equal(s.robots[0].reason,'Robot destroyed');
 });
 test('Airborne robots and tools clear grinders',()=>{

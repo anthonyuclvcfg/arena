@@ -17,6 +17,6 @@ test('200-point budget still clamps over-budget imports deterministically',()=>{
 });
 test('200-point build keeps 300 HP, four bot seats and the same tool limits',()=>{
  const s=E.createBattle([full,full,full,full],12345);
- assert.equal(s.robots.length,4);assert.ok(s.robots.every(r=>r.health===250&&r.stats.hp===250&&E.cost(r.config)===200));
+ assert.equal(s.robots.length,4);assert.ok(s.robots.every(r=>r.health===300&&r.stats.hp===300&&E.cost(r.config)===200));
  assert.equal(E.MAX_TOOLS,6);assert.equal(E.MAX_BONUS_TOOLS,2);assert.equal(E.MAX_SECONDS,120);
 });

@@ -82,7 +82,7 @@ with sync_playwright() as pw:
     check('Eight distinct chassis choices are offered',page.locator('#body-options button').count()==8)
     for name in ['diamond','octagon','capsule','cross']:
         page.locator(f'[data-body="{name}"]').click()
-        check(f'{name} can be selected without changing HP or tool inventory',config()['body']==name and page.evaluate('__editQA.state().robots[0].health')==250 and len(config()['tools'])==3)
+        check(f'{name} can be selected without changing HP or tool inventory',config()['body']==name and page.evaluate('__editQA.state().robots[0].health')==300 and len(config()['tools'])==3)
     # Six-seat rendering and density / controls.
     for count,traps in [(5,4),(6,4)]:
         page.locator('#bot-count').select_option(str(count));page.wait_for_timeout(80)
